@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1日で5体のAIエージェントチームを作った話</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap');
+
+  :root {
+    --color-bg: #fafafa;
+    --color-text: #333333;
+    --color-text-light: #666666;
+    --color-accent: #e63946;
+    --color-border: #e8e8e8;
+    --color-card-bg: #ffffff;
+    --color-code-bg: #f5f5f5;
+    --font-main: 'Noto Sans JP', sans-serif;
+    --max-width: 780px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-main);
+    color: var(--color-text);
+    background: var(--color-bg);
+    line-height: 1.9;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== ヒーロー ===== */
+  .hero {
+    width: 100%;
+    background: #fff;
+    border-bottom: 4px solid #e63946;
+  }
+  .hero img {
+    width: 100%;
+    aspect-ratio: 1280 / 670;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* ===== メインコンテンツ ===== */
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ===== 記事ヘッダー ===== */
+  .article-header {
+    padding: 48px 0 32px;
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: 48px;
+  }
+  .article-header .tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+  }
+  .article-header h1 {
+    font-size: 32px;
+    font-weight: 900;
+    line-height: 1.4;
+    margin-bottom: 16px;
+  }
+  .article-header .meta {
+    font-size: 14px;
+    color: var(--color-text-light);
+  }
+
+  /* ===== 本文 ===== */
+  article p {
+    margin-bottom: 1.8em;
+    font-size: 16px;
+  }
+
+  /* ===== 見出し h2: 左線＋背景 ===== */
+  article h2 {
+    position: relative;
+    font-size: 22px;
+    font-weight: 900;
+    padding: 16px 20px;
+    margin: 56px 0 28px;
+    background: #fff;
+    border-left: 5px solid var(--color-accent);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    border-radius: 0 4px 4px 0;
+  }
+  article h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 5px;
+    width: 60px;
+    height: 3px;
+    background: var(--color-accent);
+    border-radius: 2px;
+  }
+
+  /* ===== 見出し h3: 下線アクセント ===== */
+  article h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 36px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--color-border);
+    position: relative;
+  }
+  article h3::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: var(--color-accent);
+  }
+
+  /* ===== エージェントカード ===== */
+  .agent-card {
+    background: var(--color-card-bg);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin: 20px 0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border-top: 3px solid var(--color-border);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .agent-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  }
+  .agent-card.main {
+    border-top-color: var(--color-accent);
+  }
+  .agent-card .agent-name {
+    font-size: 18px;
+    font-weight: 900;
+    margin-bottom: 4px;
+  }
+  .agent-card .agent-role {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-accent);
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+  }
+  .agent-card p {
+    margin-bottom: 0.8em;
+    font-size: 15px;
+    color: var(--color-text-light);
+  }
+  .agent-card p:last-child { margin-bottom: 0; }
+
+  /* ===== 吹き出しボックス（ポイント）===== */
+  .point-box {
+    position: relative;
+    background: #fff;
+    border: 2px solid var(--color-accent);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 28px 0;
+  }
+  .point-box::before {
+    content: 'POINT';
+    position: absolute;
+    top: -13px;
+    left: 20px;
+    background: var(--color-accent);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 900;
+    padding: 2px 12px;
+    border-radius: 3px;
+    letter-spacing: 0.1em;
+  }
+
+  /* ===== フローチャート ===== */
+  .flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 28px 0;
+    flex-wrap: wrap;
+  }
+  .flow-step {
+    background: var(--color-card-bg);
+    border-radius: 6px;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 700;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    text-align: center;
+    min-width: 120px;
+  }
+  .flow-step.highlight {
+    background: var(--color-accent);
+    color: #fff;
+  }
+  .flow-arrow {
+    color: #ccc;
+    font-size: 20px;
+    font-weight: 900;
+  }
+
+  /* ===== コードブロック ===== */
+  .code-block {
+    background: #1a1a2e;
+    color: #e0e0e0;
+    border-radius: 8px;
+    padding: 24px;
+    margin: 24px 0;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.7;
+    overflow-x: auto;
+    position: relative;
+  }
+  .code-block::before {
+    content: '';
+    position: absolute;
+    top: 12px;
+    left: 16px;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: #e63946;
+    box-shadow: 16px 0 0 #f5a623, 32px 0 0 #4cd964;
+  }
+  .code-block pre {
+    margin-top: 12px;
+    white-space: pre-wrap;
+  }
+  .code-block .hl { color: #e63946; }
+  .code-block .cm { color: #666; }
+  .code-block .str { color: #4cd964; }
+
+  /* ===== モデル比較テーブル ===== */
+  .model-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-size: 14px;
+  }
+  .model-table th {
+    background: var(--color-text);
+    color: #fff;
+    font-weight: 700;
+    padding: 12px 16px;
+    text-align: left;
+  }
+  .model-table th:first-child { border-radius: 6px 0 0 0; }
+  .model-table th:last-child { border-radius: 0 6px 0 0; }
+  .model-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .model-table tr:hover td {
+    background: #fef2f2;
+  }
+  .model-table .badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 3px;
+    color: #fff;
+  }
+  .badge-opus { background: var(--color-accent); }
+  .badge-sonnet { background: #2589d0; }
+  .badge-gemini { background: #4cd964; }
+
+  /* ===== ブリーフィング風カード ===== */
+  .briefing {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: #e0e0e0;
+    border-radius: 10px;
+    padding: 28px 32px;
+    margin: 28px 0;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+  .briefing .title {
+    color: var(--color-accent);
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+  .briefing .item { margin-bottom: 4px; }
+  .briefing .label { color: #999; }
+  .briefing .value { color: #fff; font-weight: 700; }
+  .briefing .positive { color: #4cd964; }
+
+  /* ===== 引用ボックス ===== */
+  .quote-box {
+    position: relative;
+    padding: 28px 28px 28px 48px;
+    margin: 32px 0;
+    background: #fff;
+    border-left: 4px solid var(--color-accent);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    border-radius: 0 6px 6px 0;
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.7;
+  }
+  .quote-box::before {
+    content: '"';
+    position: absolute;
+    top: 8px;
+    left: 16px;
+    font-size: 40px;
+    color: var(--color-accent);
+    font-family: Georgia, serif;
+    line-height: 1;
+  }
+
+  /* ===== 次回予告 ===== */
+  .next-box {
+    background: var(--color-text);
+    color: #fff;
+    border-radius: 10px;
+    padding: 32px;
+    margin: 40px 0;
+  }
+  .next-box h3 {
+    color: #fff;
+    border-bottom: none;
+    font-size: 20px;
+    margin: 0 0 16px;
+    padding: 0;
+  }
+  .next-box h3::after { display: none; }
+  .next-box ul {
+    list-style: none;
+    padding: 0;
+  }
+  .next-box li {
+    padding: 8px 0 8px 24px;
+    position: relative;
+    font-size: 15px;
+  }
+  .next-box li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    font-weight: 900;
+  }
+
+  /* ===== リスト ===== */
+  article ul {
+    margin: 16px 0 24px 0;
+    padding: 0;
+    list-style: none;
+  }
+  article ul li {
+    padding: 6px 0 6px 20px;
+    position: relative;
+    font-size: 15px;
+  }
+  article ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 14px;
+    width: 8px;
+    height: 8px;
+    background: var(--color-accent);
+    border-radius: 50%;
+  }
+
+  /* ===== 区切り線 ===== */
+  .divider {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--color-border), transparent);
+    margin: 48px 0;
+  }
+
+  /* ===== フッター ===== */
+  .footer {
+    text-align: center;
+    padding: 48px 0;
+    font-size: 13px;
+    color: #aaa;
+    border-top: 1px solid var(--color-border);
+    margin-top: 64px;
+  }
+  .footer .brand {
+    font-weight: 900;
+    color: var(--color-accent);
+    letter-spacing: 0.05em;
+  }
+
+  /* ===== マーカー ===== */
+  .marker {
+    background: linear-gradient(transparent 60%, rgba(230,57,70,0.15) 60%);
+  }
+
+  /* ===== アニメーション ===== */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- ヒーロー -->
+<div class="hero">
+  <img src="eyecatch_blog.png" alt="1日で5体のAIエージェントチームを作った話" id="hero-img"
+       onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1280 670%22><rect fill=%22%23fafafa%22 width=%221280%22 height=%22670%22/></svg>'">
+</div>
+
+<div class="container">
+
+  <!-- 記事ヘッダー -->
+  <header class="article-header fade-in">
+    <span class="tag">BUILD IN PUBLIC</span>
+    <div class="meta" style="font-size:18px; color:#333; font-weight:700;">OpenClawでやったこと全部書く</div>
+  </header>
+
+  <article>
+
+    <!-- イントロ -->
+    <p class="fade-in">AIエージェントを自分のPC上で動かして、チームのように連携させる。この記事では、OpenClawというツールを使って1日でやったことを、そのまま書いていきます。</p>
+
+    <hr class="divider">
+
+    <!-- セクション1 -->
+    <h2 class="fade-in">1. 5体のエージェント、それぞれの役割</h2>
+
+    <p class="fade-in">この1日で作ったのは、5体のエージェントです。それぞれに名前と役目があって、何をお願いするかで使い分けています。</p>
+
+    <!-- エージェントカード -->
+    <div class="agent-card main fade-in">
+      <div class="agent-name">⚡ Jarvis</div>
+      <div class="agent-role">司令塔</div>
+      <p>全体を見渡す存在。依頼を受けて、どのエージェントに何を任せるかを判断します。「今日の株価と天気を調べて」と言えば、Analystに株の情報を、Cloudに天気のデータを取りに行かせる。そういう采配をする役です。</p>
+    </div>
+
+    <div class="agent-card fade-in">
+      <div class="agent-name">📊 Analyst</div>
+      <div class="agent-role">株分析</div>
+      <p>株や市場に関する情報を集めて、整理するのが仕事。データを取ってくるだけではなく、読み取れることを言葉にして返してくれます。「この銘柄は昨日から何%上がった」「今日はこの業種が強い」といった補足を添えて。</p>
+    </div>
+
+    <div class="agent-card fade-in">
+      <div class="agent-name">✍️ Scribe</div>
+      <div class="agent-role">文章</div>
+      <p>文章を書く係。note記事、Xの投稿、レポートの整形。言葉を扱う仕事は全部ここ。下書きを整えてもらうこともあれば、構成だけ渡して本文を任せることも。今この記事を書いているのも、Scribeです。</p>
+    </div>
+
+    <div class="agent-card fade-in">
+      <div class="agent-name">🔧 Cloud</div>
+      <div class="agent-role">技術</div>
+      <p>データの取得や、APIを使った処理を担当。天気の情報を気象庁から取ってきたり、スクリーニング用のスクリプトを動かしたり。技術的な作業を任せる相手です。</p>
+    </div>
+
+    <div class="agent-card fade-in">
+      <div class="agent-name">🎨 Pixel</div>
+      <div class="agent-role">画像</div>
+      <p>画像の加工や生成を扱います。将来的にはグラフの作成や、SNS用のサムネイル作りを任せる予定。今は補助的な役割ですが、これから使い方を考えていきます。</p>
+    </div>
+
+    <h3 class="fade-in">どう連携するか</h3>
+
+    <p class="fade-in">この5体は、それぞれが独立して動きつつ、Jarvisが全体を見渡す構造になっています。例えば「朝のブリーフィングを作って」と言ったとき：</p>
+
+    <div class="flow fade-in">
+      <div class="flow-step highlight">Jarvis<br><small>采配</small></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step">Analyst<br><small>株データ</small></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step">Cloud<br><small>天気取得</small></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step">Scribe<br><small>整形</small></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step highlight">📱<br><small>Telegram</small></div>
+    </div>
+
+    <p class="fade-in">それぞれが自分の得意なことだけをやる。結果を持ち寄って、最終的にひとつのアウトプットにする。</p>
+
+    <hr class="divider">
+
+    <!-- セクション2 -->
+    <h2 class="fade-in">2. SOUL.mdという仕組み</h2>
+
+    <p class="fade-in">エージェントを作るとき、一番時間をかけたのは「SOUL.md」というファイルです。これは、エージェントが<span class="marker">自分をどう捉えて、どう動くかを決める設計図</span>のようなものです。</p>
+
+    <h3 class="fade-in">あるかないかで、出力がかなり変わる</h3>
+
+    <p class="fade-in">最初、SOUL.mdを書かずに動かしたときは、返ってくる答えが毎回ぶれていました。同じ質問をしても、語尾が違ったり、説明の深さが違ったり。一貫性がなかったんです。</p>
+
+    <p class="fade-in">そこで、「このエージェントはどうあってほしいか」を言葉にして書いてみました。すると、返ってくる文章のトーンが安定しました。</p>
+
+    <h3 class="fade-in">実際に書いた内容の一部</h3>
+
+    <p class="fade-in">例えば、Scribeにはこんなことを書いています：</p>
+
+    <div class="code-block fade-in">
+      <pre><span class="cm"># Scribe SOUL.md（抜粋）</span>
+
+<span class="hl">役割:</span> <span class="str">文章作成・レポート整形・SNS投稿の下書き</span>
+<span class="hl">基本:</span> <span class="str">読みやすく簡潔に。冗長な表現を避ける</span>
+<span class="hl">トーン:</span> <span class="str">カジュアルだが信頼感のある文体</span>
+       <span class="str">専門用語は必要最小限</span></pre>
+    </div>
+
+    <div class="point-box fade-in">
+      <p>SOUL.mdは、エージェントに人格を与えるというより、「このエージェントはこういう仕事をする存在です」という<strong>共通認識を作る</strong>ためのもの。それがあるかないかで、やり取りの質が変わります。</p>
+    </div>
+
+    <hr class="divider">
+
+    <!-- セクション3 -->
+    <h2 class="fade-in">3. モデルの使い分け</h2>
+
+    <p class="fade-in">OpenClawでは、複数のAIモデルを使い分けられます。場面ごとに割り当てています。</p>
+
+    <table class="model-table fade-in">
+      <tr>
+        <th>エージェント</th>
+        <th>モデル</th>
+        <th>理由</th>
+      </tr>
+      <tr>
+        <td><strong>Jarvis</strong>（司令塔）</td>
+        <td><span class="badge badge-opus">Opus</span></td>
+        <td>判断の深さを優先。的確な指示を出す</td>
+      </tr>
+      <tr>
+        <td><strong>Scribe</strong>（文章）</td>
+        <td><span class="badge badge-sonnet">Sonnet</span></td>
+        <td>速度と品質のバランス。何度もやり取りする</td>
+      </tr>
+      <tr>
+        <td><strong>Analyst</strong>（分析）</td>
+        <td><span class="badge badge-sonnet">Sonnet</span></td>
+        <td>データ整形中心、スピード重視</td>
+      </tr>
+      <tr>
+        <td><strong>Cloud</strong>（技術）</td>
+        <td><span class="badge badge-gemini">Gemini</span></td>
+        <td>軽快な処理。技術タスク向き</td>
+      </tr>
+      <tr>
+        <td><strong>Pixel</strong>（画像）</td>
+        <td><span class="badge badge-gemini">Gemini</span></td>
+        <td>画像関連の処理（検証中）</td>
+      </tr>
+    </table>
+
+    <p class="fade-in">「ここは考えてほしい」という場面だけOpusを使って、それ以外は軽いモデルに任せる。全部Opusにしていたら、たぶん<span class="marker">5倍くらい</span>かかっていたと思います。</p>
+
+    <hr class="divider">
+
+    <!-- セクション4 -->
+    <h2 class="fade-in">4. 朝7時に届く自動ブリーフィング</h2>
+
+    <p class="fade-in">毎朝7時に、Telegramで自動ブリーフィングが届くようにしています。</p>
+
+    <div class="briefing fade-in">
+      <div class="title">【朝のブリーフィング】</div>
+      <div class="item"><span class="label">■ 日経平均:</span> <span class="value">28,500円</span>（前日比 <span class="positive">+0.5%</span>）</div>
+      <div class="item"><span class="label">■ 天気:</span> <span class="value">晴れ</span>、最高気温 12℃</div>
+      <div class="item"><span class="label">■ 注目銘柄:</span></div>
+      <div class="item" style="padding-left:20px">- トヨタ自動車（7203）: 前日比 <span class="positive">+2.1%</span>、出来高 平均比 1.5倍</div>
+      <div class="item" style="padding-left:20px">- ソニーG（6758）: 前日比 <span class="positive">+1.8%</span>、PER 15.2倍</div>
+    </div>
+
+    <p class="fade-in">毎朝これが届くようになって、市場を見る習慣が定着しました。自分で調べに行かなくても、向こうから来てくれる。<span class="marker">この仕組みを作れたのが、今回の一番の収穫</span>かもしれません。</p>
+
+    <hr class="divider">
+
+    <!-- セクション5 -->
+    <h2 class="fade-in">5. 1日やってみて思ったこと</h2>
+
+    <div class="quote-box fade-in">
+      この1日で一番時間をかけたのは、「AIに何をさせるか」ではなく、「AIにどうあってほしいか」を考えることだった。
+    </div>
+
+    <p class="fade-in">最初は「株価を取得して」「記事を書いて」といった命令を繰り返していました。でもそれだと毎回同じことを言わないといけない。しかも、返ってくる結果が期待と少しずれる。</p>
+
+    <p class="fade-in">そこで、「このエージェントはどういう存在か」をSOUL.mdに書いて、読み込ませるようにしました。すると、こちらが細かく指示しなくても、エージェント自身がどう動くべきかを判断してくれるようになりました。</p>
+
+    <p class="fade-in">これは、人に仕事を頼むときと似ています。「これやって」だけではなく、「こういう目的で、こういうふうにやってほしい」と伝えたほうが、相手は動きやすい。AIも同じでした。</p>
+
+    <div class="point-box fade-in">
+      <p>AIを「道具」として使うのではなく、<strong>「チーム」として扱う</strong>ほうがうまくいく。役割を分けて、それぞれに任せて、結果を持ち寄る。そのほうが自然だし、スケールする。</p>
+    </div>
+
+    <hr class="divider">
+
+    <!-- 次回予告 -->
+    <div class="next-box fade-in">
+      <h3>📌 次にやること</h3>
+      <ul>
+        <li>X投稿の自動下書き — 朝のブリーフィングをもとに、そのまま投稿できる文章を作る</li>
+        <li>note有料記事の準備 — この構成をテンプレート化して量産できるようにする</li>
+      </ul>
+    </div>
+
+  </article>
+
+  <!-- フッター -->
+  <footer class="footer">
+    <span class="brand">BUILD IN PUBLIC</span> — OpenClaw × Claude<br>
+    <small>AIエージェントチーム構築の記録</small>
+  </footer>
+
+</div>
+
+<!-- スクロールフェードインアニメーション -->
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
