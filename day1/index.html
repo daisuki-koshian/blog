@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1日で5体のエージェントチームを作った話 — 設定ファイルから失敗例まで全部書く</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap');
+
+  :root {
+    --color-bg: #fafafa;
+    --color-text: #333333;
+    --color-text-light: #666666;
+    --color-accent: #e63946;
+    --color-border: #e8e8e8;
+    --color-card-bg: #ffffff;
+    --font-main: 'Noto Sans JP', sans-serif;
+    --max-width: 780px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-main);
+    color: var(--color-text);
+    background: var(--color-bg);
+    line-height: 1.9;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .header {
+    background: #fff;
+    border-bottom: 2px solid var(--color-accent);
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo {
+    font-size: 18px;
+    font-weight: 900;
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+  .breadcrumb {
+    font-size: 13px;
+    color: var(--color-text-light);
+  }
+  .breadcrumb a {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .article-header {
+    padding: 48px 0 32px;
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: 48px;
+  }
+  .article-header .tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+  }
+  .article-header h1 {
+    font-size: 32px;
+    font-weight: 900;
+    line-height: 1.4;
+    margin-bottom: 16px;
+  }
+  .article-header .meta {
+    font-size: 14px;
+    color: var(--color-text-light);
+  }
+
+  article p {
+    margin-bottom: 1.8em;
+    font-size: 16px;
+  }
+
+  article h2 {
+    position: relative;
+    font-size: 22px;
+    font-weight: 900;
+    padding: 16px 20px;
+    margin: 56px 0 28px;
+    background: #fff;
+    border-left: 5px solid var(--color-accent);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    border-radius: 0 4px 4px 0;
+  }
+  article h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 5px;
+    width: 60px;
+    height: 3px;
+    background: var(--color-accent);
+    border-radius: 2px;
+  }
+
+  article h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 36px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--color-border);
+    position: relative;
+  }
+  article h3::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: var(--color-accent);
+  }
+
+  article ul {
+    margin: 16px 0 24px 0;
+    padding: 0;
+    list-style: none;
+  }
+  article ul li {
+    padding: 6px 0 6px 20px;
+    position: relative;
+    font-size: 15px;
+  }
+  article ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 14px;
+    width: 8px;
+    height: 8px;
+    background: var(--color-accent);
+    border-radius: 50%;
+  }
+
+  article strong {
+    font-weight: 900;
+    color: var(--color-accent);
+  }
+
+  .code-block {
+    background: #1a1a2e;
+    color: #e0e0e0;
+    border-radius: 8px;
+    padding: 24px;
+    margin: 24px 0;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    overflow-x: auto;
+    position: relative;
+  }
+  .code-block::before {
+    content: '';
+    position: absolute;
+    top: 12px;
+    left: 16px;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: #e63946;
+    box-shadow: 16px 0 0 #f5a623, 32px 0 0 #4cd964;
+  }
+  .code-block pre {
+    margin-top: 12px;
+    white-space: pre-wrap;
+  }
+
+  .divider {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--color-border), transparent);
+    margin: 48px 0;
+  }
+
+  .marker {
+    background: linear-gradient(transparent 60%, rgba(230,57,70,0.15) 60%);
+  }
+
+  .footer {
+    text-align: center;
+    padding: 48px 0;
+    font-size: 13px;
+    color: #aaa;
+    border-top: 1px solid var(--color-border);
+    margin-top: 64px;
+  }
+  .footer .brand {
+    font-weight: 900;
+    color: var(--color-accent);
+    letter-spacing: 0.05em;
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <a href="../" class="logo">BUILD IN PUBLIC</a>
+    <div class="breadcrumb"><a href="../">ホーム</a> / Day1: エージェントチーム構築</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <header class="article-header fade-in">
+    <span class="tag">OpenClaw実践</span>
+    <h1>1日で5体のエージェントチームを作った話<br>設定ファイルから失敗例まで全部書く</h1>
+    <div class="meta">2026年2月 • 約8,100字</div>
+  </header>
+
+  <article>
+
+    <p class="fade-in">エージェントを5体立ち上げて、それぞれに役割を持たせて、チームとして動かす。1日でやったことを、設定ファイルの中身から失敗したポイントまで、実践レベルで全部書いていきます。</p>
+
+    <p class="fade-in">この記事のターゲットは<strong>OpenClawを既に使っている人</strong>です。「どうやって複数エージェントを運用するのか」「設定ファイルはどう書くのか」「トークンはどう節約するのか」。そういう実践的な話を、コピペできるレベルで書きます。</p>
+
+    <hr class="divider">
+
+    <h2 class="fade-in">なぜ5体のチーム構成にしたのか</h2>
+
+    <p class="fade-in">最初は1体でよくない？と思っていました。でも実際に運用してみると、<span class="marker">タスクごとに人格を分けたほうが管理しやすい</span>ことに気づきました。</p>
+
+    <h3 class="fade-in">単一エージェントの限界</h3>
+
+    <p class="fade-in">1体のエージェントに「株も調べて、記事も書いて、APIも叩いて」と頼むと、コンテキストがごちゃ混ぜになります。今は株の話をしているのか、記事を書いているのか、エージェント自身も混乱します。</p>
+
+    <p class="fade-in">しかも、会話履歴が長くなると、「前に何を話したか」を参照するコストが跳ね上がります。毎回全履歴を読み込んでいたら、トークンが無駄に消費されます。</p>
+
+    <h3 class="fade-in">役割で分けると何が変わるか</h3>
+
+    <p class="fade-in">エージェントごとに役割を明確にすると、次のメリットがあります：</p>
+
+    <ul class="fade-in">
+      <li><strong>コンテキストが純粋になる</strong> — Analystは株の話だけ、Scribeは文章の話だけ</li>
+      <li><strong>モデルを使い分けられる</strong> — 深い思考が必要な場面だけOpus、それ以外はSonnetやGemini</li>
+      <li><strong>並列実行できる</strong> — Analystが株価を取得している間に、Cloudが天気を取得する</li>
+      <li><strong>トークン効率が上がる</strong> — 必要な履歴だけ読み込めばいい</li>
+    </ul>
+
+    <p class="fade-in">結論として、<span class="marker">タスクが複数ある時点で、エージェントも複数立てたほうが効率的</span>です。</p>
+
+    <hr class="divider">
+
+    <h2 class="fade-in">5体のエージェントと設定ファイル</h2>
+
+    <p class="fade-in">実際に作った5体のエージェントと、それぞれの<code>openclaw.json</code>の中身を公開します。</p>
+
+    <h3 class="fade-in">1. Jarvis（司令塔）</h3>
+
+    <p class="fade-in">全体を見渡して、どのエージェントに何を任せるかを判断する役です。ユーザーからの依頼を受けて、Analystに株価を調べさせたり、Scribeに記事を書かせたりします。</p>
+
+    <div class="code-block fade-in">
+      <pre>{
+  "id": "jarvis",
+  "workspace": "~/.openclaw/agents/jarvis",
+  "model": {
+    "primary": "anthropic/claude-sonnet-4-5"
+  },
+  "identity": {
+    "name": "Jarvis",
+    "emoji": "🧠"
+  },
+  "subagents": {
+    "allowAgents": ["analyst", "scribe", "cloud", "pixel"]
+  }
+}</pre>
+    </div>
+
+    <p class="fade-in"><strong>ポイント</strong>：</p>
+    <ul class="fade-in">
+      <li>モデルはSonnet（トークン効率化後。元はOpus）</li>
+      <li>subagents設定で4つのエージェントに委任可能</li>
+    </ul>
+
+    <h3 class="fade-in">2. Analyst（株分析）</h3>
+
+    <p class="fade-in">株価データの取得、スクリーニング、レポート作成を担当します。</p>
+
+    <div class="code-block fade-in">
+      <pre>{
+  "id": "analyst",
+  "workspace": "~/.openclaw/agents/analyst",
+  "model": {
+    "primary": "anthropic/claude-sonnet-4-5"
+  },
+  "identity": {
+    "name": "Analyst",
+    "emoji": "📈"
+  }
+}</pre>
+    </div>
+
+    <p class="fade-in"><strong>ポイント</strong>：</p>
+    <ul class="fade-in">
+      <li>モデルはSonnet — データ整形中心、スピード重視</li>
+      <li>MEMORY.md読み込まない — 株価データは毎日リセット</li>
+    </ul>
+
+    <h3 class="fade-in">3. Scribe（文章）</h3>
+
+    <p class="fade-in">文章作成、レポート整形、SNS投稿の下書きを担当します。今この記事を書いているのもScribeです。</p>
+
+    <div class="code-block fade-in">
+      <pre>{
+  "id": "scribe",
+  "workspace": "~/.openclaw/agents/scribe",
+  "model": {
+    "primary": "anthropic/claude-sonnet-4-5"
+  },
+  "identity": {
+    "name": "Scribe",
+    "emoji": "✍️"
+  }
+}</pre>
+    </div>
+
+    <p class="fade-in"><strong>ポイント</strong>：</p>
+    <ul class="fade-in">
+      <li>SOUL.mdに文体ルールを詳細記載（NGワード集含む）</li>
+      <li>output/*.mdをoffset/limitで部分読み込み（トークン節約）</li>
+    </ul>
+
+    <hr class="divider">
+
+    <h2 class="fade-in">トークン効率化の3つの手</h2>
+
+    <p class="fade-in">運用開始後、トークン消費が激しくなって、3つの対策を実施しました。</p>
+
+    <h3 class="fade-in">1. AGENTS.mdの大幅スリム化</h3>
+
+    <p class="fade-in">毎セッション起動時に読み込まれるファイルを、4,800字 → 823字（83%削減）に圧縮。XMLタグで構造化して、冗長な説明をカット。</p>
+
+    <div class="code-block fade-in">
+      <pre>&lt;boot&gt;
+毎セッション: SOUL.md → USER.md → IDENTITY.md を読む。
+MEMORY.md の丸読みはしない。
+&lt;/boot&gt;
+
+&lt;token_efficiency&gt;
+ファイルはoffset/limitで部分読み。丸読みしない。
+MEMORY.mdはmemory_searchで引く（丸読み禁止）。
+&lt;/token_efficiency&gt;</pre>
+    </div>
+
+    <h3 class="fade-in">2. ファイル部分読み（offset/limit）</h3>
+
+    <p class="fade-in">長いファイルを丸ごと読むのではなく、必要な部分だけ読み込む。</p>
+
+    <div class="code-block fade-in">
+      <pre># 悪い例
+Read ~/.openclaw/agents/scribe/output/article.md
+
+# 良い例
+Read ~/.openclaw/agents/scribe/output/article.md offset=0 limit=100</pre>
+    </div>
+
+    <h3 class="fade-in">3. memory_searchで必要な部分だけ引く</h3>
+
+    <p class="fade-in">MEMORY.mdを毎回丸読みせず、memory_searchで必要な情報だけ検索。</p>
+
+    <div class="code-block fade-in">
+      <pre># 悪い例（旧運用）
+毎セッション起動時にMEMORY.md全文読み込み（数千トークン消費）
+
+# 良い例（現運用）
+memory_search("天気API") → 該当箇所だけ取得</pre>
+    </div>
+
+    <p class="fade-in">この3つで、<span class="marker">1セッションあたりのトークン消費が約50%削減</span>されました。</p>
+
+    <hr class="divider">
+
+    <h2 class="fade-in">ハマったポイント・失敗例</h2>
+
+    <h3 class="fade-in">失敗1: ComfyUIのサイズ指定ミス</h3>
+
+    <p class="fade-in">Flux2 Devで1280x672の画像を生成しようとしたら、ComfyUIがフリーズ。重すぎた。</p>
+
+    <p class="fade-in"><strong>対策</strong>：1024x1024で生成してから、リサイズする運用に変更。</p>
+
+    <h3 class="fade-in">失敗2: SOUL.mdなしで運用</h3>
+
+    <p class="fade-in">最初はSOUL.mdを書かずに運用。結果、毎回エージェントの口調がバラバラ。同じ質問をしても答え方が違う。</p>
+
+    <p class="fade-in"><strong>対策</strong>：SOUL.mdに役割・トーン・NGルールを明記。一貫性が劇的に改善。</p>
+
+    <h3 class="fade-in">失敗3: モデルを全部Opusに</h3>
+
+    <p class="fade-in">最初は全エージェントをOpusで動かしていた。トークン単価が高すぎて、1日で数千円消費。</p>
+
+    <p class="fade-in"><strong>対策</strong>：タスクに応じてモデルを使い分け。データ整形系はSonnet、技術処理はGemini Flashに変更。コスト約1/5に削減。</p>
+
+    <hr class="divider">
+
+    <h2 class="fade-in">まとめ</h2>
+
+    <p class="fade-in">1日で5体のエージェントチームを作って、実際に運用してみた結果：</p>
+
+    <ul class="fade-in">
+      <li>タスクごとにエージェントを分けると、コンテキストが純粋になる</li>
+      <li>SOUL.mdは必須。書くか書かないかで一貫性が段違い</li>
+      <li>トークン効率化は運用後に必ず必要になる（部分読み・memory_search・モデル使い分け）</li>
+      <li>失敗しながら調整していく前提で作る</li>
+    </ul>
+
+    <p class="fade-in">OpenClawは柔軟性が高い分、設定の自由度も高いです。この記事の設定ファイルをコピペして、自分の環境に合わせて調整してみてください。</p>
+
+  </article>
+
+  <footer class="footer">
+    <span class="brand">BUILD IN PUBLIC</span> — OpenClaw実践記録<br>
+    <small><a href="../" style="color: #e63946; text-decoration: none;">記事一覧に戻る</a></small>
+  </footer>
+
+</div>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
