@@ -321,21 +321,21 @@
 
   <article>
 
-    <p class="fade-in">AI画像生成、楽しいよな。</p>
+    <p class="fade-in">AI画像生成、楽しいですよね。</p>
 
-    <p class="fade-in">Midjourney、DALL-E、いろいろ触った。でも毎月の請求書見て目が覚めた。月3000円、5000円、気づいたら年間5万超え。しかも生成枚数に上限あったり、NSFWフィルターで弾かれたり、サーバー混んでて待たされたり。金払ってるのに自由じゃない。</p>
+    <p class="fade-in">Midjourney、DALL-E、いろいろ触りました。でも毎月の請求書を見て現実に戻されました。月3000円、5000円、気づいたら年間5万超え。しかも生成枚数に上限があったり、NSFWフィルターで弾かれたり、サーバーが混んでいて待たされたり。お金を払っているのに自由ではない。</p>
 
-    <p class="fade-in"><span class="marker">ローカルで動かせば全部解決する。</span></p>
+    <p class="fade-in"><span class="marker">ローカルで動かせば全部解決します。</span></p>
 
-    <p class="fade-in">電気代以外タダ。何枚でも生成し放題。フィルターなし。モデルも好きに入れ替えられる。しかもComfyUIならノードベースでワークフロー組めるから、一度セットアップすれば完全自動化できる。Telegramからメッセージ送るだけで画像が返ってくる、みたいなことが普通にできる。</p>
+    <p class="fade-in">電気代以外は無料。何枚でも生成し放題。フィルターなし。モデルも好きに入れ替えられます。しかもComfyUIならノードベースでワークフローを組めるので、一度セットアップすれば完全自動化できます。Telegramからメッセージを送るだけで画像が返ってくる、みたいなことが普通にできます。</p>
 
-    <p class="fade-in">俺はここ半年くらいComfyUIをローカルで回してる。最初はつまずきまくったけど、今は完全に安定稼働してる。Flux2モデルの導入からAPI経由の自動化まで、全部書く。</p>
+    <p class="fade-in">私はここ半年くらいComfyUIをローカルで動かしています。最初はつまずきましたが、今は完全に安定稼働しています。Flux2モデルの導入からAPI経由の自動化まで、全部書いていきます。</p>
 
     <hr class="divider">
 
     <h2 class="fade-in">必要なスペック</h2>
 
-    <p class="fade-in">まず現実的な話をする。</p>
+    <p class="fade-in">まず現実的な話をします。</p>
 
     <h3 class="fade-in">最低ライン</h3>
 
@@ -353,11 +353,11 @@
       <li><strong>ストレージ</strong>: NVMe SSD 500GB以上の空き</li>
     </ul>
 
-    <p class="fade-in">VRAMが全て。これだけは妥協するな。8GBだとFlux2はまともに動かない。12GBが現実的なスタートライン。16GB以上あれば余裕。</p>
+    <p class="fade-in">VRAMが最重要です。ここは妥協しない方がいいです。8GBだとFlux2はまともに動きません。12GBが現実的なスタートライン。16GB以上あれば余裕です。</p>
 
-    <p class="fade-in">AMDのGPU？動くけどイバラの道。CUDAが使えないからROCmで頑張ることになる。正直おすすめしない。素直にNVIDIA買え。</p>
+    <p class="fade-in">AMDのGPU？動きますがかなり大変です。CUDAが使えないのでROCmで頑張ることになります。正直おすすめしません。素直にNVIDIAをおすすめします。</p>
 
-    <p class="fade-in">俺はRTX 4090で回してる。Flux2のtxt2imgが1枚5〜8秒。3060だと30〜40秒くらいかかるけど、クラウドの待ち時間考えたら全然マシ。</p>
+    <p class="fade-in">私はRTX 4090で動かしています。Flux2のtxt2imgが1枚5〜8秒。3060だと30〜40秒くらいかかりますが、クラウドの待ち時間を考えたら全然マシです。</p>
 
     <hr class="divider">
 
@@ -371,14 +371,14 @@
       <li>NVIDIA Driver + CUDA Toolkit</li>
     </ul>
 
-    <p class="fade-in">Windowsの人はCUDA Toolkitを先に入れろ。ここサボると後で泣く。</p>
+    <p class="fade-in">WindowsならCUDA Toolkitを先にインストールしましょう。ここを飛ばすと後で苦労します。</p>
 
     <div class="code-block fade-in">
       <pre># リポジトリをクローン
 git clone https://github.com/comfyanonymous/ComfyUI.git
 cd ComfyUI
 
-# venv作成（グローバルに入れるな、絶対）
+# venv作成（グローバルには入れない方がいいです）
 python -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
 
@@ -389,19 +389,19 @@ pip install torch torchvision torchaudio --index-url https://download.pytorch.or
 pip install -r requirements.txt</pre>
     </div>
 
-    <p class="fade-in">これで <code>python main.py</code> すれば <code>http://127.0.0.1:8188</code> で起動する。</p>
+    <p class="fade-in">これで <code>python main.py</code> を実行すれば <code>http://127.0.0.1:8188</code> で起動します。</p>
 
-    <p class="fade-in"><strong>ハマりポイント</strong>：PyTorchのバージョンとCUDAのバージョンが合ってないとGPU使えない。<code>python -c "import torch; print(torch.cuda.is_available())"</code> で <code>True</code> 出なかったらそこからやり直し。</p>
+    <p class="fade-in"><strong>ハマりポイント</strong>：PyTorchのバージョンとCUDAのバージョンが合っていないとGPUが使えません。<code>python -c "import torch; print(torch.cuda.is_available())"</code> で <code>True</code> が出なかったらそこからやり直しです。</p>
 
     <hr class="divider">
 
     <h2 class="fade-in">Flux2モデルの導入</h2>
 
-    <p class="fade-in">Flux2はBlack Forest Labsが出してるモデル。プロンプトの理解力が段違いに高い。SDXLから乗り換えたら戻れなくなった。</p>
+    <p class="fade-in">Flux2はBlack Forest Labsが出しているモデルです。プロンプトの理解力が段違いに高いです。SDXLから乗り換えたら戻れなくなりました。</p>
 
     <h3 class="fade-in">ダウンロード</h3>
 
-    <p class="fade-in">HuggingFaceから落として、以下のように配置：</p>
+    <p class="fade-in">HuggingFaceからダウンロードして、以下のように配置します：</p>
 
     <ul class="fade-in">
       <li><code>models/unet/</code> に <code>flux1-dev.safetensors</code></li>
@@ -409,15 +409,15 @@ pip install -r requirements.txt</pre>
       <li><code>models/vae/</code> に <code>ae.safetensors</code></li>
     </ul>
 
-    <p class="fade-in">t5xxlがクソでかい。fp8版もあるけど品質落ちる。VRAM 12GBならfp16でギリギリ。メモリ不足で落ちたらfp8に変えろ。</p>
+    <p class="fade-in">t5xxlがかなり大きいです（約9.5GB）。fp8版もありますが品質は落ちます。VRAM 12GBならfp16でギリギリです。メモリ不足で落ちたらfp8に変えましょう。</p>
 
     <hr class="divider">
 
     <h2 class="fade-in">API経由で外部から叩く</h2>
 
-    <p class="fade-in">ここが本題。ComfyUIにはREST APIがある。</p>
+    <p class="fade-in">ここが本題です。ComfyUIにはREST APIがあります。</p>
 
-    <p class="fade-in"><code>python main.py</code> で起動すると、自動的にAPIも立ち上がる。ポートは8188。</p>
+    <p class="fade-in"><code>python main.py</code> で起動すると、自動的にAPIも立ち上がります。ポートは8188です。</p>
 
     <h3 class="fade-in">基本的な流れ</h3>
 
@@ -448,11 +448,11 @@ req.add_header("Content-Type", "application/json")
 response = urllib.request.urlopen(req)</pre>
     </div>
 
-    <p class="fade-in">ここで重要なのが「workflow_api.json」の取得方法。ComfyUIの画面で「Save (API Format)」を押せば出力される。通常のSaveと違ってノードIDベースのフラットなJSONになる。これを使わないとAPI経由では動かない。</p>
+    <p class="fade-in">ここで重要なのが「workflow_api.json」の取得方法です。ComfyUIの画面で「Save (API Format)」を押せば出力されます。通常のSaveと違ってノードIDベースのフラットなJSONになります。これを使わないとAPI経由では動きません。</p>
 
     <h3 class="fade-in">Telegramボットとの連携</h3>
 
-    <p class="fade-in">俺は実際にTelegramボットを作って運用してる。仕組みはシンプル。</p>
+    <p class="fade-in">私は実際にTelegramボットを作って運用しています。仕組みはシンプルです。</p>
 
     <ul class="fade-in">
       <li>Telegramでメッセージ送信（プロンプト）</li>
@@ -461,25 +461,25 @@ response = urllib.request.urlopen(req)</pre>
       <li>生成された画像をTelegramに返す</li>
     </ul>
 
-    <p class="fade-in">python-telegram-botライブラリとComfyUI APIの橋渡しを書くだけ。100行くらいで収まる。</p>
+    <p class="fade-in">python-telegram-botライブラリとComfyUI APIの橋渡しを書くだけです。100行くらいで収まります。</p>
 
-    <p class="fade-in">外出先からスマホでプロンプト送って、自宅PCで生成して、結果がスマホに返ってくる。これがローカル最大の旨味。クラウドいらない。</p>
+    <p class="fade-in">外出先からスマホでプロンプトを送って、自宅PCで生成して、結果がスマホに返ってくる。これがローカル最大の旨味です。クラウド不要になります。</p>
 
     <hr class="divider">
 
     <h2 class="fade-in">実際の運用例</h2>
 
-    <p class="fade-in">俺の環境：</p>
+    <p class="fade-in">私の環境：</p>
 
     <ul class="fade-in">
       <li><strong>GPU</strong>: RTX 5090（VRAM 32GB）</li>
       <li><strong>OS</strong>: Windows 11（ComfyUI） + WSL2（Pythonスクリプト）</li>
-      <li><strong>連携</strong>: WSL2からWindows側のComfyUI APIを叩く（<code>http://172.20.240.1:8188</code>）</li>
+      <li><strong>連携</strong>: WSL2からWindows側のComfyUI APIを叩く（<code>http://&lt;Windows側IP&gt;:8188</code>）</li>
     </ul>
 
-    <p class="fade-in">WSL2とWindows間の通信は、Windowsの仮想NICのIPを使えば普通に繋がる。Tailscaleでネットワーク繋げば、外からでもアクセスできる。ポート開放は絶対にやるな。セキュリティ的に終わる。</p>
+    <p class="fade-in">WSL2とWindows間の通信は、Windowsの仮想NICのIPを使えば普通に繋がります。Tailscaleでネットワークを繋げば、外からでもアクセスできます。ポート開放は絶対に避けましょう。セキュリティリスクが高すぎます。</p>
 
-    <p class="fade-in">生成速度：Flux2 Dev 1024x1024、20steps で約5秒。1日100枚生成してもクラウドなら数千円かかるところ、電気代だけで済む。</p>
+    <p class="fade-in">生成速度：Flux2 Dev 1024x1024、20steps で約5秒。1日100枚生成してもクラウドなら数千円かかるところ、電気代だけで済みます。</p>
 
     <hr class="divider">
 
@@ -488,15 +488,15 @@ response = urllib.request.urlopen(req)</pre>
     <p class="fade-in">ComfyUIローカル環境の利点：</p>
 
     <ul class="fade-in">
-      <li>電気代以外タダ。生成し放題</li>
+      <li>電気代以外は無料。生成し放題</li>
       <li>フィルターなし。好きなモデル使い放題</li>
       <li>API自動化で外出先からも生成可能</li>
       <li>一度セットアップすれば、ずっと使える</li>
     </ul>
 
-    <p class="fade-in">初期投資はかかる（GPU代）。でも半年使えば余裕でペイする。年間5万のサブスク払うなら、RTX 4070 Ti買ったほうが長期的にコスパいい。</p>
+    <p class="fade-in">初期投資はかかります（GPU代）。でも半年使えば余裕でペイします。年間5万のサブスクを払うなら、RTX 4070 Tiを買った方が長期的にコスパがいいです。</p>
 
-    <p class="fade-in"><span class="marker">クラウド課金から卒業して、生成の自由を手に入れろ。</span></p>
+    <p class="fade-in"><span class="marker">クラウド課金から卒業して、生成の自由を手に入れましょう。</span></p>
 
   </article>
 
