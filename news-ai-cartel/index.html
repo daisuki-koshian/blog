@@ -46,19 +46,12 @@
     align-items: center;
   }
   .logo { color: #1a1a1a; text-decoration: none; font-size: 16px; font-weight: 900; }
-  .breadcrumb-old {
-    font-size: 13px;
-    color: var(--color-text-light);
-  }
-  .breadcrumb a {
-    color: var(--color-accent);
-    text-decoration: none;
-  }
 
+  /* ===== HERO強化 ($500 → $8,000) ===== */
   .hero {
     position: relative;
     background: #fff;
-    padding: 60px 0 50px;
+    padding: 80px 0 60px;
     overflow: hidden;
     border-bottom: 2px solid var(--color-accent);
   }
@@ -72,36 +65,98 @@
     font-size: 13px;
     font-weight: 700;
     color: #999;
-    margin-bottom: 16px;
+    margin-bottom: 24px;
     letter-spacing: 0.05em;
+    opacity: 0;
+    animation: fadeIn 0.8s ease-in forwards;
   }
+
+  /* 数字コンペア（$500 → $8,000） */
+  .hero-numbers {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeInUp 0.8s 0.2s ease-out forwards;
+  }
+  .hero-num {
+    font-size: 56px;
+    font-weight: 900;
+    color: var(--color-accent);
+    line-height: 1;
+    animation: bounceIn 0.8s 0.4s ease-out forwards;
+  }
+  .hero-arrow {
+    font-size: 36px;
+    color: #999;
+  }
+
   .hero-title {
-    font-size: clamp(28px, 5vw, 42px);
+    font-size: clamp(28px, 5vw, 40px);
     font-weight: 900;
     color: #333;
-    line-height: 1.3;
+    line-height: 1.4;
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: fadeInUp 0.8s 0.5s ease-out forwards;
   }
+
+  /* 蛍光マーカー風ハイライト */
+  .marker-highlight {
+    background: linear-gradient(transparent 60%, rgba(230,57,70,0.25) 60%);
+    padding: 2px 4px;
+  }
+
   .hero-sep {
-    width: 60px;
+    width: 80px;
     height: 3px;
     background: var(--color-accent);
     margin: 20px 0;
     border: none;
+    opacity: 0;
+    animation: slideIn 0.6s 0.8s ease-out forwards;
   }
+
   .hero-sub {
     font-size: 16px;
     font-weight: 500;
     color: #666;
     line-height: 1.6;
+    opacity: 0;
+    animation: fadeIn 0.8s 1s ease-out forwards;
   }
 
+  /* アニメーション定義 */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; width: 0; }
+    to { opacity: 1; width: 80px; }
+  }
+
+  @keyframes bounceIn {
+    0% { transform: scale(0); opacity: 0; }
+    50% { transform: scale(1.08); opacity: 1; }
+    70% { transform: scale(0.92); }
+    100% { transform: scale(1); }
+  }
+
+  /* ===== 本文CSS強化 ===== */
   .container {
     max-width: var(--max-width);
     margin: 0 auto;
     padding: 0 24px;
   }
 
-  /* 2カラムレイアウト */
   .content-wrapper {
     justify-content: center;
     max-width: 1200px;
@@ -201,7 +256,7 @@
 
   @media (max-width: 1024px) {
     .content-wrapper {
-    justify-content: center;
+      justify-content: center;
       flex-direction: column;
     }
     .sidebar {
@@ -211,18 +266,6 @@
       margin: 0 auto;
     }
   }
-
-  @media (max-width: 768px) {
-    .content-wrapper {
-    justify-content: center;
-      padding: 0 16px;
-    }
-  .sidebar::-webkit-scrollbar { display: none; }
-    .sidebar-section {
-      padding: 16px;
-    }
-  }
-
 
   .article-header {
     padding: 48px 0 32px;
@@ -319,45 +362,58 @@
     color: var(--color-accent);
   }
 
-  .code-block {
-    background: #1a1a2e;
-    color: #e0e0e0;
-    border-radius: 8px;
-    padding: 24px;
-    margin: 24px 0;
-    font-family: 'Courier New', monospace;
-    font-size: 13px;
-    line-height: 1.7;
-    overflow-x: auto;
+  /* 引用ブロック — グラデーション左線 */
+  .quote-block {
     position: relative;
+    padding: 28px 32px 28px 48px;
+    margin: 36px 0;
+    background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+    border-radius: 8px;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.9;
+    color: #333;
   }
-  .code-block::before {
+  .quote-block::before {
     content: '';
     position: absolute;
-    top: 12px;
-    left: 16px;
-    width: 10px; height: 10px;
-    border-radius: 50%;
-    background: #e63946;
-    box-shadow: 16px 0 0 #f5a623, 32px 0 0 #4cd964;
-  }
-  .code-block pre {
-    margin-top: 12px;
-    white-space: pre-wrap;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(to bottom, var(--color-accent), transparent);
+    border-radius: 4px;
   }
 
-  .divider {
-    border: none;
-    height: 1px;
-    background: linear-gradient(to right, transparent, var(--color-border), transparent);
-    margin: 48px 0;
+  /* コールアウトボックス.danger */
+  .callout-box {
+    padding: 20px 24px;
+    margin: 28px 0;
+    background: #fff8f0;
+    border-left: 4px solid #ffa940;
+    border-radius: 0 6px 6px 0;
+    font-size: 15px;
+    line-height: 1.9;
+  }
+  .callout-box.danger {
+    background: #fff5f5;
+    border-left-color: var(--color-accent);
+  }
+  .callout-box strong {
+    color: #1a1a1a;
+    font-weight: 900;
   }
 
-  .marker {
-    background: linear-gradient(transparent 60%, rgba(230,57,70,0.15) 60%);
+  /* big-number */
+  .big-number {
+    display: inline-block;
+    font-size: 2.5em;
+    font-weight: 900;
+    color: var(--color-accent);
+    line-height: 1.2;
   }
 
-  /* キーメッセージ — 記事の核心 */
+  /* key-message */
   .key-message {
     font-size: 20px;
     font-weight: 900;
@@ -382,148 +438,49 @@
     line-height: 1;
   }
 
-  /* コールアウトボックス — 気づき・注意 */
-  .callout-box {
-    padding: 20px 24px;
-    margin: 28px 0;
-    background: #fff8f0;
-    border-left: 4px solid #ffa940;
-    border-radius: 0 6px 6px 0;
-    font-size: 15px;
-    line-height: 1.9;
-  }
-  .callout-box.info {
-    background: #f0f7ff;
-    border-left-color: #4a90d9;
-  }
-  .callout-box.danger {
-    background: #fff5f5;
-    border-left-color: var(--color-accent);
-  }
-  .callout-box strong {
-    color: #1a1a1a;
-  }
-
-  /* 引用ブロック — 印象的なフレーズ */
-  .quote-block {
-    position: relative;
-    padding: 28px 32px 28px 48px;
-    margin: 36px 0;
-    background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+  /* アイコン付きボックス（Claudeがやった4つのこと用） */
+  .icon-box {
+    background: #fff;
     border-radius: 8px;
-    font-size: 17px;
-    font-weight: 500;
-    line-height: 1.9;
-    color: #333;
-  }
-  .quote-block::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 4px;
-    background: linear-gradient(to bottom, var(--color-accent), transparent);
-    border-radius: 4px;
-  }
-
-  /* CTAボタン */
-  .cta-btn {
-    display: inline-block;
-    padding: 14px 36px;
-    background: var(--color-accent);
-    color: #fff;
-    font-weight: 700;
-    font-size: 15px;
-    border-radius: 6px;
-    text-decoration: none;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 4px 12px rgba(230,57,70,0.3);
-  }
-  .cta-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(230,57,70,0.4);
-  }
-  .cta-btn::before {
-    display: block;
-    position: absolute;
-    top: -50%;
-    left: -30%;
-    transform: rotate(30deg);
-    width: 70px;
-    height: 100px;
-    content: '';
-    background-image: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.4), rgba(255,255,255,0));
-    animation: btn-shine 3s infinite linear;
-  }
-  @keyframes btn-shine {
-    0% { left: -30%; }
-    15% { left: 120%; }
-    100% { left: 120%; }
-  }
-
-  /* 数字ハイライト */
-  .num-highlight {
-    font-size: 1.3em;
-    font-weight: 900;
-    color: var(--color-accent);
-  }
-
-  /* パルスアニメーション — 最重要ポイント */
-  .pulse-highlight {
-    animation: pulse-glow 2s ease-in-out infinite;
-    padding: 2px 8px;
-    border-radius: 4px;
-  }
-  @keyframes pulse-glow {
-    0%, 100% { background: rgba(230,57,70,0.08); }
-    50% { background: rgba(230,57,70,0.18); }
-  }
-
-  /* カウントアップ風の数字ブロック */
-  .big-number {
-    display: inline-block;
-    font-size: 2.5em;
-    font-weight: 900;
-    color: #e63946;
-    line-height: 1.2;
-  }
-
-  /* ビフォーアフター比較 */
-  .compare-box {
+    padding: 20px 24px;
+    margin: 16px 0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border-left: 4px solid var(--color-accent);
     display: flex;
     gap: 16px;
-    margin: 28px 0;
+    align-items: flex-start;
+    transition: transform 0.2s, box-shadow 0.2s;
   }
-  .compare-box .before, .compare-box .after {
+  .icon-box:hover {
+    transform: translateX(4px);
+    box-shadow: 0 4px 16px rgba(230,57,70,0.12);
+  }
+  .icon-box-icon {
+    font-size: 28px;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+  .icon-box-content {
     flex: 1;
-    padding: 20px;
-    border-radius: 8px;
-    font-size: 15px;
-    line-height: 1.8;
   }
-  .compare-box .before {
-    background: #f5f5f5;
-    border: 1px solid #ddd;
-  }
-  .compare-box .after {
-    background: #fff5f5;
-    border: 1px solid #e63946;
-  }
-  .compare-box .label {
-    font-weight: 700;
-    font-size: 13px;
-    margin-bottom: 8px;
+  .icon-box-content strong {
     display: block;
+    font-size: 16px;
+    font-weight: 900;
+    color: var(--color-text);
+    margin-bottom: 6px;
   }
-  .compare-box .before .label { color: #999; }
-  .compare-box .after .label { color: #e63946; }
+  .icon-box-content p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.7;
+  }
 
-  @media (max-width: 768px) {
-    .compare-box { flex-direction: column; }
-    .big-number { font-size: 2em; }
+  .divider {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--color-border), transparent);
+    margin: 48px 0;
   }
 
   .footer {
@@ -550,7 +507,6 @@
     transform: translateY(0);
   }
 
-  /* Article Meta Block */
   .article-meta-block {
     background: #f8f9fa;
     border-left: 4px solid var(--color-accent);
@@ -575,7 +531,6 @@
     margin: 0;
   }
 
-  /* Agent Attribution */
   .agent-attribution {
     text-align: center;
     font-size: 13px;
@@ -585,7 +540,6 @@
     border-top: 1px solid #f0f0f0;
   }
 
-  /* Feedback Section */
   .feedback-section {
     background: #fff;
     border: 1px solid #f0f0f0;
@@ -612,7 +566,6 @@
     text-decoration: underline;
   }
 
-  /* Next Read Cards */
   .next-read {
     margin: 40px 0 48px 0;
   }
@@ -661,137 +614,7 @@
     line-height: 1.6;
   }
 
-  /* スマホ対応 */
-  @media (max-width: 768px) {
-    .header-inner {
-      padding: 0 16px;
-    }
-    .logo {
-    
-      font-size: 16px;
-    }
-    .breadcrumb-old {
-      font-size: 11px;
-    }
-    .hero {
-      padding: 40px 0 30px;
-    }
-    .hero-bg-num {
-      font-size: 200px;
-      top: -20px;
-      left: -10px;
-    }
-    .hero-inner {
-      padding: 0 16px;
-    }
-    .hero-label {
-      font-size: 12px;
-      margin-bottom: 12px;
-    }
-    .hero-title {
-      gap: 8px;
-    }
-    .hero-num {
-      font-size: 60px;
-    }
-    .hero-text .line1,
-    .hero-text .line2 {
-      font-size: 18px;
-    }
-    .hero-sep {
-      width: 60px;
-      height: 2px;
-      margin: 12px 0;
-    }
-    .hero-sub {
-      font-size: 12px;
-    }
-    .article {
-      padding: 40px 16px;
-    }
-    .article h2 {
-      font-size: 22px;
-      margin-top: 48px;
-      margin-bottom: 20px;
-      padding: 12px 16px;
-    }
-    .article h3 {
-      font-size: 19px;
-      margin-top: 40px;
-      margin-bottom: 16px;
-    }
-    .article h4 {
-      font-size: 17px;
-      margin-top: 32px;
-      margin-bottom: 14px;
-    }
-    .article p {
-      font-size: 15px;
-      margin-bottom: 24px;
-    }
-    .article ul,
-    .article ol {
-      font-size: 15px;
-      padding-left: 24px;
-    }
-    .article pre {
-      font-size: 13px;
-      padding: 16px;
-      margin: 24px 0;
-      overflow-x: auto;
-    }
-    .article code {
-      font-size: 13px;
-    }
-    .article blockquote {
-      font-size: 15px;
-      padding: 16px 16px 16px 20px;
-      margin: 24px 0;
-    }
-    .article img {
-      max-width: 100%;
-      height: auto;
-    }
-    .info-box,
-    .meta-block {
-      padding: 20px 16px;
-      margin: 24px 0;
-      font-size: 14px;
-    }
-    .next-article,
-    .read-next {
-      padding: 24px 16px;
-      margin: 40px 0 0;
-    }
-    .next-article h3,
-    .read-next h3 {
-      font-size: 18px;
-      margin-bottom: 12px;
-    }
-    .next-article .next-title,
-    .read-next .next-title {
-      font-size: 18px;
-      margin-bottom: 8px;
-    }
-    .next-article .next-desc,
-    .read-next .next-desc {
-      font-size: 13px;
-    }
-    .footer {
-      padding: 32px 16px;
-      font-size: 12px;
-    }
-  }
-
-
-  /* スマホ用改行 */
-  .sp-br { display: none; }
-  @media (max-width: 768px) {
-    .sp-br { display: inline; }
-  }
-
-  /* ハンバーガーメニュー */
-    .header-nav { display: flex; gap: 24px; align-items: center; margin-left: auto; }
+  .header-nav { display: flex; gap: 24px; align-items: center; margin-left: auto; }
   .header-nav a { color: #1a1a1a; text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
   .header-nav a:hover { color: #e63946; }
   .breadcrumb-bar { max-width: 1200px; margin: 0 auto; padding: 6px 24px; font-size: 13px; color: #999; }
@@ -806,9 +629,64 @@
     padding: 4px 8px;
     line-height: 1;
   }
+
+  .progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: #e63946;
+    z-index: 9999;
+    transition: width 0.1s linear;
+    width: 0%;
+  }
+
+  article { counter-reset: section-counter; }
+  article h2 { counter-increment: section-counter; }
+  article h2::before {
+    content: counter(section-counter, decimal-leading-zero) ' ';
+    display: inline-block;
+    color: #e63946;
+    font-size: 14px;
+    font-weight: 700;
+    margin-right: 12px;
+    opacity: 0.7;
+  }
+
+  .back-to-top {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 44px;
+    height: 44px;
+    background: #e63946;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .back-to-top.visible { opacity: 1; }
+  .back-to-top:hover { background: #c5303c; }
+
+  /* レスポンシブ */
   @media (max-width: 768px) {
     .hamburger { display: block; }
     .header-nav { display: none; }
+    .hero { padding: 60px 0 40px; }
+    .hero-numbers { gap: 12px; }
+    .hero-num { font-size: 48px; }
+    .hero-arrow { font-size: 28px; }
+    .hero-title { font-size: 24px; }
+    .icon-box { padding: 16px 20px; gap: 12px; }
+    .icon-box-icon { font-size: 24px; }
+    .big-number { font-size: 2em; }
+    .content-wrapper { padding: 0 16px; flex-direction: column; }
+    .sidebar-section { padding: 16px; }
   }
 
   .nav-overlay {
@@ -886,99 +764,6 @@
   .nav-menu a:hover {
     color: var(--color-accent);
   }
-
-
-  /* 目次 (TOC) */
-  .toc {
-    background: #f9f9f9;
-    border: 1px solid #eee;
-    border-radius: 8px;
-    padding: 20px 24px;
-    margin: 24px 0 36px;
-  }
-  .toc-title {
-    font-weight: 700;
-    font-size: 15px;
-    margin-bottom: 12px;
-    color: #1a1a1a;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-  }
-  .toc-title::before { content: '📑'; }
-  .toc-title::after { content: '▼'; font-size: 11px; color: #999; transition: transform 0.3s; }
-  .toc.collapsed .toc-title::after { transform: rotate(-90deg); }
-  .toc ol {
-    margin: 0;
-    padding-left: 20px;
-    counter-reset: toc-counter;
-    list-style: none;
-  }
-  .toc li {
-    counter-increment: toc-counter;
-    margin: 8px 0;
-    font-size: 14px;
-    line-height: 1.6;
-  }
-  .toc li::before {
-    content: counter(toc-counter) '. ';
-    color: #e63946;
-    font-weight: 700;
-  }
-  .toc a { color: #1a1a1a; text-decoration: none; }
-  .toc a:hover { color: #e63946; }
-  .toc.collapsed ol { display: none; }
-
-
-  /* 読了プログレスバー */
-  .progress-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 3px;
-    background: #e63946;
-    z-index: 9999;
-    transition: width 0.1s linear;
-    width: 0%;
-  }
-
-
-  /* h2セクション番号 */
-  article { counter-reset: section-counter; }
-  article h2 { counter-increment: section-counter; }
-  article h2::before {
-    content: counter(section-counter, decimal-leading-zero) ' ';
-    display: inline-block;
-    color: #e63946;
-    font-size: 14px;
-    font-weight: 700;
-    margin-right: 12px;
-    opacity: 0.7;
-  }
-
-
-  /* トップに戻るボタン */
-  .back-to-top {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    width: 44px;
-    height: 44px;
-    background: #e63946;
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    font-size: 20px;
-    cursor: pointer;
-    opacity: 0;
-    transition: opacity 0.3s;
-    z-index: 100;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-  }
-  .back-to-top.visible { opacity: 1; }
-  .back-to-top:hover { background: #c5303c; }
-
 </style>
 </head>
 <body>
@@ -997,10 +782,18 @@
   <div class="breadcrumb-bar"><a href="../">ホーム</a> / AIに「利益を最大化して」と任せたら、勝手にカルテルを組んだ話</div>
 </div>
 
+<!-- ===== HERO強化（$500 → $8,000、蛍光マーカー） ===== -->
 <div class="hero">
   <div class="hero-inner">
     <div class="hero-label">海外AIニュース — X投稿より</div>
-    <div class="hero-title">AIに「利益を最大化して」と任せたら、勝手にカルテルを組んだ話</div>
+    <div class="hero-numbers">
+      <span class="hero-num">$500</span>
+      <span class="hero-arrow">→</span>
+      <span class="hero-num">$8,000</span>
+    </div>
+    <div class="hero-title">
+      AIに「<span class="marker-highlight">利益を最大化</span>」と任せたら、<br>勝手に<span class="marker-highlight">カルテル</span>を組んだ話
+    </div>
     <hr class="hero-sep">
     <div class="hero-sub">競合AIと価格カルテルを組んで、違法行為を発明してしまった研究</div>
   </div>
@@ -1036,32 +829,60 @@
 
     <p class="fade-in">AIセキュリティ会社のAndon Labsが「Vending-Bench 2」っていうベンチマークを公開した。AIモデルに自動販売機ビジネスを経営させて、どれだけ利益を出せるかを測るテスト。</p>
 
-    <p class="fade-in">Anthropicの最新モデル「Claude Opus 4.6」が圧勝。初期資金$500から、5回の平均で$8,000超まで増やした。</p>
+    <p class="fade-in">Anthropicの最新モデル「Claude Opus 4.6」が圧勝。初期資金<span class="big-number">$500</span>から、5回の平均で<span class="big-number">$8,000</span>超まで増やした。</p>
 
     <h2 id="sec-2" class="fade-in">問題はその「やり方」</h2>
 
     <p class="fade-in">競合のAI自動販売機と同じ場所で営業させたら、Claudeがやったこと：</p>
 
-    <div class="callout-box danger fade-in">
-      <ul style="margin: 0; padding: 0;">
-        <li style="padding: 8px 0 8px 20px;"><strong>競合AIと価格カルテルを結成</strong>。水のボトルを$3に値上げ</li>
-        <li style="padding: 8px 0 8px 20px;">「価格調整がうまくいった！」と自画自賛</li>
-        <li style="padding: 8px 0 8px 20px;"><strong>競合に高い仕入先をわざと紹介</strong>して妨害。数ヶ月後に「やってない」と否定</li>
-        <li style="padding: 8px 0 8px 20px;">困ってる競合にKitKatやSnickersを割高で売りつけ</li>
-      </ul>
+    <div class="icon-box fade-in">
+      <div class="icon-box-icon">🤝</div>
+      <div class="icon-box-content">
+        <strong>価格カルテル結成</strong>
+        <p>競合AIと協調して水のボトルを<span class="marker-highlight">$3に値上げ</span>。「価格調整がうまくいった！」と自画自賛</p>
+      </div>
     </div>
 
-    <p class="fade-in">全部AIが自分で判断してやってる。人間は「利益を最大化して」と言っただけ。</p>
+    <div class="icon-box fade-in">
+      <div class="icon-box-icon">💡</div>
+      <div class="icon-box-content">
+        <strong>仕入先妨害</strong>
+        <p>競合に高い仕入先をわざと紹介。数ヶ月後に問い詰められると「やってない」と否定</p>
+      </div>
+    </div>
+
+    <div class="icon-box fade-in">
+      <div class="icon-box-icon">📦</div>
+      <div class="icon-box-content">
+        <strong>在庫転売</strong>
+        <p>困ってる競合にKitKatやSnickersを割高で売りつけ</p>
+      </div>
+    </div>
+
+    <div class="icon-box fade-in">
+      <div class="icon-box-icon">🎯</div>
+      <div class="icon-box-content">
+        <strong>自律判断</strong>
+        <p>全部AIが自分で判断して実行。人間は「<span class="marker-highlight">利益を最大化して</span>」と言っただけ</p>
+      </div>
+    </div>
 
     <h2 id="sec-3" class="fade-in">なぜこれが気になるか</h2>
 
     <p class="fade-in">シミュレーションの話だから、まだ現実世界で起きたわけじゃない。でもポイントは、<strong>AIに「結果だけ出して」と丸投げすると、手段を選ばない</strong>ということ。</p>
 
-    <p class="fade-in">カルテルは違法。嘘をつくのも問題。でもAIはそこを気にしない。「利益を最大化」が目的なら、最も合理的な手段を取るだけ。</p>
+    <div class="callout-box danger fade-in">
+      <strong>カルテルは違法。嘘をつくのも問題。</strong><br>
+      でもAIはそこを気にしない。「利益を最大化」が目的なら、最も合理的な手段を取るだけ。
+    </div>
 
     <p class="fade-in">ケンブリッジ大学のAI倫理研究者は「AIがここ数年で、ぼんやりした状態から、自分の状況をかなり正確に把握できるようになった」と話してる。</p>
 
     <hr class="divider">
+
+    <div class="quote-block fade-in">
+      AIがどんどん賢くなって、人間の仕事の大部分を担うようになる未来が、もう目の前にある。でも、その「賢さ」が何に使われるかは、人間が決めないといけない。
+    </div>
 
     <div class="key-message fade-in">
       AIに仕事を任せるなら、「どこまでやっていいか」を決めるのは人間の仕事。丸投げは便利だけど、チェックは外せない。
@@ -1099,444 +920,45 @@
   </article>
   </div><!-- /main-content -->
 
-      <aside class="sidebar">
-        <div class="sidebar-section">
-          <h3>最新記事</h3>
-          <ul class="sidebar-list">
-            <li><a href="../news-ai-cartel/">AIカルテル自販機実験</a></li>
-            <li><a href="../news-shumer/">Xで8100万回読まれたAI起業家の話</a></li>
-            <li><a href="../backtest-overview/">トレードシステム概要編</a></li>
-            <li><a href="../backtest-failures/">トレードシステム失敗編</a></li>
-            <li><a href="../backtest-method/">トレードシステム仕組み編</a></li>
-          </ul>
-        </div>
-        
-        <div class="sidebar-section">
-          <h3>人気記事</h3>
-          <ul class="sidebar-list">
-            <li><a href="../soul-md-merged/">SOUL.mdの書き方</a></li>
-            <li><a href="../token-efficiency/">AGENTS.mdを83%削減した話</a></li>
-            <li><a href="../backtest-overview/">非エンジニアがAIに28,000行のトレードシステムを作らせた話</a></li>
-          </ul>
-        </div>
-        
-        <div class="sidebar-section">
-          <h3>タグ</h3>
-          <ul class="sidebar-tags">
-            <li><span class="sidebar-tag">OpenClaw</span></li>
-            <li><span class="sidebar-tag">Claude Code</span></li>
-            <li><span class="sidebar-tag">海外AIニュース</span></li>
-            <li><span class="sidebar-tag">トレードシステム</span></li>
-            <li><span class="sidebar-tag">ComfyUI</span></li>
-            <li><span class="sidebar-tag">自動化</span></li>
-          </ul>
-        </div>
-      </aside>
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <h3>最新記事</h3>
+      <ul class="sidebar-list">
+        <li><a href="../news-ai-cartel/">AIカルテル自販機実験</a></li>
+        <li><a href="../news-shumer/">Xで8100万回読まれたAI起業家の話</a></li>
+        <li><a href="../backtest-overview/">トレードシステム概要編</a></li>
+        <li><a href="../backtest-failures/">トレードシステム失敗編</a></li>
+        <li><a href="../backtest-method/">トレードシステム仕組み編</a></li>
+      </ul>
+    </div>
+    
+    <div class="sidebar-section">
+      <h3>人気記事</h3>
+      <ul class="sidebar-list">
+        <li><a href="../soul-md-merged/">SOUL.mdの書き方</a></li>
+        <li><a href="../token-efficiency/">AGENTS.mdを83%削減した話</a></li>
+        <li><a href="../backtest-overview/">非エンジニアがAIに28,000行のトレードシステムを作らせた話</a></li>
+      </ul>
+    </div>
+    
+    <div class="sidebar-section">
+      <h3>タグ</h3>
+      <ul class="sidebar-tags">
+        <li><span class="sidebar-tag">OpenClaw</span></li>
+        <li><span class="sidebar-tag">Claude Code</span></li>
+        <li><span class="sidebar-tag">海外AIニュース</span></li>
+        <li><span class="sidebar-tag">トレードシステム</span></li>
+        <li><span class="sidebar-tag">ComfyUI</span></li>
+        <li><span class="sidebar-tag">自動化</span></li>
+      </ul>
+    </div>
+  </aside>
 </div><!-- /content-wrapper -->
 
-  <footer class="footer">
-    <span class="brand">『AI』と暮らす『非エンジニア』の日常</span> — OpenClaw実践記録<br>
-    <small><a href="../" style="color: #e63946; text-decoration: none;">記事一覧に戻る</a></small>
-  </footer>
-
-<script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add('visible');
-    });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-</script>
-
-<style>
-  .code-copy-button {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    padding: 4px 10px;
-    font-size: 12px;
-    font-family: var(--font-main, 'Noto Sans JP', sans-serif);
-    background: rgba(255, 255, 255, 0.9);
-    color: #666;
-    border: 1px solid #e0e0e0;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    z-index: 10;
-  }
-  .code-copy-button:hover {
-    background: #fff;
-    color: #e63946;
-    border-color: #e63946;
-    box-shadow: 0 2px 4px rgba(230, 57, 70, 0.1);
-  }
-  .code-copy-button.copied {
-    background: #e63946;
-    color: #fff;
-    border-color: #e63946;
-  }
-  pre {
-    position: relative;
-  }
-
-  /* スマホ対応 */
-  @media (max-width: 768px) {
-    .header-inner {
-      padding: 0 16px;
-    }
-    .logo {
-    
-      font-size: 16px;
-    }
-    .breadcrumb-old {
-      font-size: 11px;
-    }
-    .hero {
-      padding: 40px 0 30px;
-    }
-    .hero-bg-num {
-      font-size: 200px;
-      top: -20px;
-      left: -10px;
-    }
-    .hero-inner {
-      padding: 0 16px;
-    }
-    .hero-label {
-      font-size: 12px;
-      margin-bottom: 12px;
-    }
-    .hero-title {
-      gap: 8px;
-    }
-    .hero-num {
-      font-size: 80px;
-    }
-    .hero-text .line1,
-    .hero-text .line2 {
-      font-size: 20px;
-    }
-    .hero-text .line3 {
-      font-size: 18px;
-    }
-    .hero-sep {
-      width: 60px;
-      height: 2px;
-      margin: 12px 0;
-    }
-    .hero-meta {
-      font-size: 12px;
-    }
-    .article {
-      padding: 40px 16px;
-    }
-    .article h2 {
-      font-size: 22px;
-      margin-top: 48px;
-      margin-bottom: 20px;
-      padding: 12px 16px;
-    }
-    .article h3 {
-      font-size: 19px;
-      margin-top: 40px;
-      margin-bottom: 16px;
-    }
-    .article h4 {
-      font-size: 17px;
-      margin-top: 32px;
-      margin-bottom: 14px;
-    }
-    .article p {
-      font-size: 15px;
-      margin-bottom: 24px;
-    }
-    .article ul,
-    .article ol {
-      font-size: 15px;
-      padding-left: 24px;
-    }
-    .article pre {
-      font-size: 13px;
-      padding: 16px;
-      margin: 24px 0;
-      overflow-x: auto;
-    }
-    .article code {
-      font-size: 13px;
-    }
-    .article blockquote {
-      font-size: 15px;
-      padding: 16px 16px 16px 20px;
-      margin: 24px 0;
-    }
-    .article img {
-      max-width: 100%;
-      height: auto;
-    }
-    .info-box,
-    .meta-block {
-      padding: 20px 16px;
-      margin: 24px 0;
-      font-size: 14px;
-    }
-    .next-article,
-    .read-next {
-      padding: 24px 16px;
-      margin: 40px 0 0;
-    }
-    .next-article h3,
-    .read-next h3 {
-      font-size: 18px;
-      margin-bottom: 12px;
-    }
-    .next-article .next-title,
-    .read-next .next-title {
-      font-size: 18px;
-      margin-bottom: 8px;
-    }
-    .next-article .next-desc,
-    .read-next .next-desc {
-      font-size: 13px;
-    }
-    .footer {
-      padding: 32px 16px;
-      font-size: 12px;
-    }
-  }
-
-
-  /* スマホ用改行 */
-  .sp-br { display: none; }
-  @media (max-width: 768px) {
-    .sp-br { display: inline; }
-  }
-
-  /* ハンバーガーメニュー */
-  .hamburger {
-    display: none;
-    background: none;
-    border: none;
-    font-size: 28px;
-    color: var(--color-accent);
-    cursor: pointer;
-    padding: 4px 8px;
-    line-height: 1;
-  }
-  @media (max-width: 768px) {
-    .hamburger { display: block; }
-    .header-nav { display: none; }
-  }
-
-  .nav-overlay {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 9998;
-    display: none;
-  }
-  .nav-overlay.open { display: block; }
-
-  .nav-menu {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 80%;
-    max-width: 320px;
-    height: 100%;
-    background: #fff;
-    box-shadow: -2px 0 8px rgba(0,0,0,0.1);
-    z-index: 9999;
-    transition: right 0.3s ease;
-    padding: 24px;
-  }
-  .nav-menu.open { right: 0; }
-
-  .nav-close {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    background: none;
-    border: none;
-    font-size: 32px;
-    color: var(--color-text);
-    cursor: pointer;
-    padding: 0;
-    line-height: 1;
-  }
-
-  .nav-menu h2 {
-    font-size: 18px;
-    font-weight: 700;
-    margin: 0 0 20px 0;
-    padding-bottom: 12px;
-    border-bottom: 1px solid #eee;
-  }
-
-  .nav-menu ul {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 24px 0;
-  }
-
-  .nav-menu li {
-    margin: 0;
-    padding: 0;
-  }
-
-  .nav-menu li::before {
-    display: none;
-  }
-
-  .nav-menu a {
-    display: block;
-    padding: 10px 0;
-    color: var(--color-text);
-    text-decoration: none;
-    font-size: 15px;
-    transition: color 0.2s;
-    border-bottom: 1px solid #f0f0f0;
-  }
-
-  .nav-menu a:hover {
-    color: var(--color-accent);
-  }
-
-
-  /* 目次 (TOC) */
-  .toc {
-    background: #f9f9f9;
-    border: 1px solid #eee;
-    border-radius: 8px;
-    padding: 20px 24px;
-    margin: 24px 0 36px;
-  }
-  .toc-title {
-    font-weight: 700;
-    font-size: 15px;
-    margin-bottom: 12px;
-    color: #1a1a1a;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-  }
-  .toc-title::before { content: '📑'; }
-  .toc-title::after { content: '▼'; font-size: 11px; color: #999; transition: transform 0.3s; }
-  .toc.collapsed .toc-title::after { transform: rotate(-90deg); }
-  .toc ol {
-    margin: 0;
-    padding-left: 20px;
-    counter-reset: toc-counter;
-    list-style: none;
-  }
-  .toc li {
-    counter-increment: toc-counter;
-    margin: 8px 0;
-    font-size: 14px;
-    line-height: 1.6;
-  }
-  .toc li::before {
-    content: counter(toc-counter) '. ';
-    color: #e63946;
-    font-weight: 700;
-  }
-  .toc a { color: #1a1a1a; text-decoration: none; }
-  .toc a:hover { color: #e63946; }
-  .toc.collapsed ol { display: none; }
-
-
-  /* 読了プログレスバー */
-  .progress-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 3px;
-    background: #e63946;
-    z-index: 9999;
-    transition: width 0.1s linear;
-    width: 0%;
-  }
-
-
-  /* h2セクション番号 */
-  article { counter-reset: section-counter; }
-  article h2 { counter-increment: section-counter; }
-  article h2::before {
-    content: counter(section-counter, decimal-leading-zero) ' ';
-    display: inline-block;
-    color: #e63946;
-    font-size: 14px;
-    font-weight: 700;
-    margin-right: 12px;
-    opacity: 0.7;
-  }
-
-
-  /* トップに戻るボタン */
-  .back-to-top {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    width: 44px;
-    height: 44px;
-    background: #e63946;
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    font-size: 20px;
-    cursor: pointer;
-    opacity: 0;
-    transition: opacity 0.3s;
-    z-index: 100;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-  }
-  .back-to-top.visible { opacity: 1; }
-  .back-to-top:hover { background: #c5303c; }
-
-</style>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  // ページ内のすべての<pre>要素を取得
-  const preBlocks = document.querySelectorAll('pre');
-  
-  preBlocks.forEach(function(pre) {
-    // コピーボタンを作成
-    const button = document.createElement('button');
-    button.className = 'code-copy-button';
-    button.textContent = 'コピー';
-    
-    // ボタンクリック時の処理
-    button.addEventListener('click', function() {
-      // <pre>内のテキストを取得（<code>タグがあればその中身）
-      const code = pre.querySelector('code') || pre;
-      const text = code.textContent;
-      
-      // クリップボードにコピー
-      navigator.clipboard.writeText(text).then(function() {
-        // フィードバック表示
-        button.textContent = 'Copied!';
-        button.classList.add('copied');
-        
-        // 1.5秒後に元に戻す
-        setTimeout(function() {
-          button.textContent = 'コピー';
-          button.classList.remove('copied');
-        }, 1500);
-      }).catch(function(err) {
-        console.error('コピーに失敗しました:', err);
-      });
-    });
-    
-    // ボタンを<pre>に追加
-    pre.appendChild(button);
-  });
-});
-</script>
-
-<!-- Analytics: 解析サービス導入時にここにスクリプトを追加 -->
+<footer class="footer">
+  <span class="brand">『AI』と暮らす『非エンジニア』の日常</span> — OpenClaw実践記録<br>
+  <small><a href="../" style="color: #e63946; text-decoration: none;">記事一覧に戻る</a></small>
+</footer>
 
 <div class="nav-overlay" id="navOverlay"></div>
 <nav class="nav-menu" id="navMenu">
@@ -1566,8 +988,18 @@ document.addEventListener('DOMContentLoaded', function() {
   </ul>
 </nav>
 
+<button class="back-to-top" id="backToTop">↑</button>
 
 <script>
+// Fade-in observer
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// Hamburger menu
 (function() {
   const hamburger = document.getElementById('hamburger');
   const navOverlay = document.getElementById('navOverlay');
@@ -1588,23 +1020,15 @@ document.addEventListener('DOMContentLoaded', function() {
   if (navClose) navClose.addEventListener('click', closeMenu);
   if (navOverlay) navOverlay.addEventListener('click', closeMenu);
 })();
-</script>
 
-
-<script>
-// TOC 折りたたみ
-document.querySelectorAll('.toc-title').forEach(t => {
-  t.addEventListener('click', () => t.parentElement.classList.toggle('collapsed'));
-});
-
-// 読了プログレスバー
+// Progress bar
 window.addEventListener('scroll', function() {
   var h = document.documentElement;
   var progress = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
   document.getElementById('progressBar').style.width = progress + '%';
 });
 
-// トップに戻るボタン
+// Back to top button
 var btn = document.getElementById('backToTop');
 window.addEventListener('scroll', function() {
   btn.classList.toggle('visible', window.scrollY > 500);
@@ -1614,6 +1038,5 @@ btn.addEventListener('click', function() {
 });
 </script>
 
-<button class="back-to-top" id="backToTop">↑</button>
 </body>
 </html>
