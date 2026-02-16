@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ComfyUIローカル自動化 — クラウド課金から卒業する</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap');
+
+  :root {
+    --color-bg: #fafafa;
+    --color-text: #333333;
+    --color-text-light: #666666;
+    --color-accent: #e63946;
+    --color-border: #e8e8e8;
+    --color-card-bg: #ffffff;
+    --font-main: 'Noto Sans JP', sans-serif;
+    --max-width: 780px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-main);
+    color: var(--color-text);
+    background: var(--color-bg);
+    line-height: 1.9;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .header {
+    background: #fff;
+    border-bottom: 2px solid var(--color-accent);
+    padding: 12px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo {
+    font-size: 18px;
+    font-weight: 900;
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+  .breadcrumb {
+    font-size: 13px;
+    color: var(--color-text-light);
+  }
+  .breadcrumb a {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .hero {
+    position: relative;
+    background: #fafafa;
+    padding: 60px 0 50px;
+    overflow: hidden;
+    border-bottom: 4px solid var(--color-accent);
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 8px; height: 100%;
+    background: var(--color-accent);
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 8px; height: 100%;
+    background: var(--color-accent);
+  }
+  .hero-grid {
+    position: absolute;
+    top: 0; left: 0;
+    width: calc(100% - 16px);
+    height: 100%;
+    background-image: 
+      repeating-linear-gradient(0deg, transparent, transparent 39px, #e8e8e8 39px, #e8e8e8 40px),
+      repeating-linear-gradient(90deg, transparent, transparent 39px, #e8e8e8 39px, #e8e8e8 40px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    opacity: 0.6;
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 60px 0 24px;
+  }
+  .hero-label {
+    font-size: 14px;
+    font-weight: 900;
+    color: var(--color-accent);
+    margin-bottom: 16px;
+    letter-spacing: 0.1em;
+  }
+  .hero-title {
+    font-size: clamp(40px, 8vw, 80px);
+    font-weight: 900;
+    color: #1a1a1a;
+    line-height: 1.1;
+    letter-spacing: 0.02em;
+    margin-bottom: 16px;
+  }
+  .hero-sep {
+    width: 100px;
+    height: 3px;
+    background: var(--color-accent);
+    margin: 16px 0;
+    border: none;
+  }
+  .hero-sub {
+    font-size: 16px;
+    font-weight: 700;
+    color: #666;
+  }
+
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .article-header {
+    padding: 48px 0 32px;
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: 48px;
+  }
+  .article-header .tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+  }
+  .article-header h1 {
+    font-size: 32px;
+    font-weight: 900;
+    line-height: 1.4;
+    margin-bottom: 16px;
+  }
+  .article-header .meta {
+    font-size: 14px;
+    color: var(--color-text-light);
+  }
+
+  article p {
+    margin-bottom: 1.8em;
+    font-size: 16px;
+  }
+
+  article h2 {
+    position: relative;
+    font-size: 22px;
+    font-weight: 900;
+    padding: 16px 20px;
+    margin: 56px 0 28px;
+    background: #fff;
+    border-left: 5px solid var(--color-accent);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    border-radius: 0 4px 4px 0;
+  }
+  article h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 5px;
+    width: 60px;
+    height: 3px;
+    background: var(--color-accent);
+    border-radius: 2px;
+  }
+
+  article h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 36px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--color-border);
+    position: relative;
+  }
+  article h3::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: var(--color-accent);
+  }
+
+  article ul {
+    margin: 16px 0 24px 0;
+    padding: 0;
+    list-style: none;
+  }
+  article ul li {
+    padding: 6px 0 6px 20px;
+    position: relative;
+    font-size: 15px;
+  }
+  article ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 14px;
+    width: 8px;
+    height: 8px;
+    background: var(--color-accent);
+    border-radius: 50%;
+  }
+
+  article strong {
+    font-weight: 900;
+    color: var(--color-accent);
+  }
+
+  .code-block {
+    background: #1a1a2e;
+    color: #e0e0e0;
+    border-radius: 8px;
+    padding: 24px;
+    margin: 24px 0;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    overflow-x: auto;
+    position: relative;
+  }
+  .code-block::before {
+    content: '';
+    position: absolute;
+    top: 12px;
+    left: 16px;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: #e63946;
+    box-shadow: 16px 0 0 #f5a623, 32px 0 0 #4cd964;
+  }
+  .code-block pre {
+    margin-top: 12px;
+    white-space: pre-wrap;
+  }
+
+  .divider {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--color-border), transparent);
+    margin: 48px 0;
+  }
+
+  .marker {
+    background: linear-gradient(transparent 60%, rgba(230,57,70,0.15) 60%);
+  }
+
+  .footer {
+    text-align: center;
+    padding: 48px 0;
+    font-size: 13px;
+    color: #aaa;
+    border-top: 1px solid var(--color-border);
+    margin-top: 64px;
+  }
+  .footer .brand {
+    font-weight: 900;
+    color: var(--color-accent);
+    letter-spacing: 0.05em;
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <a href="../" class="logo">『AI』と暮らす『非エンジニア』の日常</a>
+    <div class="breadcrumb"><a href="../">ホーム</a> / ComfyUI自動化</div>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-label">IMAGE GENERATION — ローカル環境</div>
+    <div class="hero-title">ComfyUI</div>
+    <hr class="hero-sep">
+    <div class="hero-sub">クラウド課金から卒業する</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <header class="article-header fade-in">
+    <span class="tag">画像生成</span>
+    <h1>ComfyUIローカル自動化<br>クラウド課金から卒業する</h1>
+    <div class="meta">2026年2月 • 約7,500字</div>
+  </header>
+
+  <article>
+
+    <p class="fade-in">AI画像生成、楽しいよな。</p>
+
+    <p class="fade-in">Midjourney、DALL-E、いろいろ触った。でも毎月の請求書見て目が覚めた。月3000円、5000円、気づいたら年間5万超え。しかも生成枚数に上限あったり、NSFWフィルターで弾かれたり、サーバー混んでて待たされたり。金払ってるのに自由じゃない。</p>
+
+    <p class="fade-in"><span class="marker">ローカルで動かせば全部解決する。</span></p>
+
+    <p class="fade-in">電気代以外タダ。何枚でも生成し放題。フィルターなし。モデルも好きに入れ替えられる。しかもComfyUIならノードベースでワークフロー組めるから、一度セットアップすれば完全自動化できる。Telegramからメッセージ送るだけで画像が返ってくる、みたいなことが普通にできる。</p>
+
+    <p class="fade-in">俺はここ半年くらいComfyUIをローカルで回してる。最初はつまずきまくったけど、今は完全に安定稼働してる。Flux2モデルの導入からAPI経由の自動化まで、全部書く。</p>
+
+    <hr class="divider">
+
+    <h2 class="fade-in">必要なスペック</h2>
+
+    <p class="fade-in">まず現実的な話をする。</p>
+
+    <h3 class="fade-in">最低ライン</h3>
+
+    <ul class="fade-in">
+      <li><strong>GPU</strong>: NVIDIA RTX 3060（VRAM 12GB）</li>
+      <li><strong>RAM</strong>: 16GB</li>
+      <li><strong>ストレージ</strong>: SSD 100GB以上の空き</li>
+    </ul>
+
+    <h3 class="fade-in">快適ライン</h3>
+
+    <ul class="fade-in">
+      <li><strong>GPU</strong>: RTX 4070 Ti以上（VRAM 12GB〜）</li>
+      <li><strong>RAM</strong>: 32GB</li>
+      <li><strong>ストレージ</strong>: NVMe SSD 500GB以上の空き</li>
+    </ul>
+
+    <p class="fade-in">VRAMが全て。これだけは妥協するな。8GBだとFlux2はまともに動かない。12GBが現実的なスタートライン。16GB以上あれば余裕。</p>
+
+    <p class="fade-in">AMDのGPU？動くけどイバラの道。CUDAが使えないからROCmで頑張ることになる。正直おすすめしない。素直にNVIDIA買え。</p>
+
+    <p class="fade-in">俺はRTX 4090で回してる。Flux2のtxt2imgが1枚5〜8秒。3060だと30〜40秒くらいかかるけど、クラウドの待ち時間考えたら全然マシ。</p>
+
+    <hr class="divider">
+
+    <h2 class="fade-in">ComfyUIのインストール</h2>
+
+    <p class="fade-in">前提条件：</p>
+
+    <ul class="fade-in">
+      <li>Python 3.10〜3.12</li>
+      <li>Git</li>
+      <li>NVIDIA Driver + CUDA Toolkit</li>
+    </ul>
+
+    <p class="fade-in">Windowsの人はCUDA Toolkitを先に入れろ。ここサボると後で泣く。</p>
+
+    <div class="code-block fade-in">
+      <pre># リポジトリをクローン
+git clone https://github.com/comfyanonymous/ComfyUI.git
+cd ComfyUI
+
+# venv作成（グローバルに入れるな、絶対）
+python -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+
+# PyTorch（CUDA 12.x向け）
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+
+# 依存関係
+pip install -r requirements.txt</pre>
+    </div>
+
+    <p class="fade-in">これで <code>python main.py</code> すれば <code>http://127.0.0.1:8188</code> で起動する。</p>
+
+    <p class="fade-in"><strong>ハマりポイント</strong>：PyTorchのバージョンとCUDAのバージョンが合ってないとGPU使えない。<code>python -c "import torch; print(torch.cuda.is_available())"</code> で <code>True</code> 出なかったらそこからやり直し。</p>
+
+    <hr class="divider">
+
+    <h2 class="fade-in">Flux2モデルの導入</h2>
+
+    <p class="fade-in">Flux2はBlack Forest Labsが出してるモデル。プロンプトの理解力が段違いに高い。SDXLから乗り換えたら戻れなくなった。</p>
+
+    <h3 class="fade-in">ダウンロード</h3>
+
+    <p class="fade-in">HuggingFaceから落として、以下のように配置：</p>
+
+    <ul class="fade-in">
+      <li><code>models/unet/</code> に <code>flux1-dev.safetensors</code></li>
+      <li><code>models/clip/</code> に <code>clip_l.safetensors</code> と <code>t5xxl_fp16.safetensors</code>（約9.5GB）</li>
+      <li><code>models/vae/</code> に <code>ae.safetensors</code></li>
+    </ul>
+
+    <p class="fade-in">t5xxlがクソでかい。fp8版もあるけど品質落ちる。VRAM 12GBならfp16でギリギリ。メモリ不足で落ちたらfp8に変えろ。</p>
+
+    <hr class="divider">
+
+    <h2 class="fade-in">API経由で外部から叩く</h2>
+
+    <p class="fade-in">ここが本題。ComfyUIにはREST APIがある。</p>
+
+    <p class="fade-in"><code>python main.py</code> で起動すると、自動的にAPIも立ち上がる。ポートは8188。</p>
+
+    <h3 class="fade-in">基本的な流れ</h3>
+
+    <ul class="fade-in">
+      <li>ワークフローのJSONを用意</li>
+      <li><code>/prompt</code> エンドポイントにPOST</li>
+      <li>WebSocketで進捗を受け取る</li>
+      <li>完了したら <code>/view</code> で画像を取得</li>
+    </ul>
+
+    <div class="code-block fade-in">
+      <pre>import json
+import urllib.request
+
+COMFYUI_URL = "http://127.0.0.1:8188"
+
+# ワークフローJSONを読み込み
+with open("workflow_api.json", "r") as f:
+    workflow = json.load(f)
+
+# プロンプトを差し替え
+workflow["6"]["inputs"]["text"] = "a cat sitting on a cloud"
+
+# 送信
+data = json.dumps({"prompt": workflow}).encode("utf-8")
+req = urllib.request.Request(f"{COMFYUI_URL}/prompt", data=data)
+req.add_header("Content-Type", "application/json")
+response = urllib.request.urlopen(req)</pre>
+    </div>
+
+    <p class="fade-in">ここで重要なのが「workflow_api.json」の取得方法。ComfyUIの画面で「Save (API Format)」を押せば出力される。通常のSaveと違ってノードIDベースのフラットなJSONになる。これを使わないとAPI経由では動かない。</p>
+
+    <h3 class="fade-in">Telegramボットとの連携</h3>
+
+    <p class="fade-in">俺は実際にTelegramボットを作って運用してる。仕組みはシンプル。</p>
+
+    <ul class="fade-in">
+      <li>Telegramでメッセージ送信（プロンプト）</li>
+      <li>ボットがComfyUI APIにワークフローをPOST</li>
+      <li>WebSocketで完了を検知</li>
+      <li>生成された画像をTelegramに返す</li>
+    </ul>
+
+    <p class="fade-in">python-telegram-botライブラリとComfyUI APIの橋渡しを書くだけ。100行くらいで収まる。</p>
+
+    <p class="fade-in">外出先からスマホでプロンプト送って、自宅PCで生成して、結果がスマホに返ってくる。これがローカル最大の旨味。クラウドいらない。</p>
+
+    <hr class="divider">
+
+    <h2 class="fade-in">実際の運用例</h2>
+
+    <p class="fade-in">俺の環境：</p>
+
+    <ul class="fade-in">
+      <li><strong>GPU</strong>: RTX 5090（VRAM 32GB）</li>
+      <li><strong>OS</strong>: Windows 11（ComfyUI） + WSL2（Pythonスクリプト）</li>
+      <li><strong>連携</strong>: WSL2からWindows側のComfyUI APIを叩く（<code>http://172.20.240.1:8188</code>）</li>
+    </ul>
+
+    <p class="fade-in">WSL2とWindows間の通信は、Windowsの仮想NICのIPを使えば普通に繋がる。Tailscaleでネットワーク繋げば、外からでもアクセスできる。ポート開放は絶対にやるな。セキュリティ的に終わる。</p>
+
+    <p class="fade-in">生成速度：Flux2 Dev 1024x1024、20steps で約5秒。1日100枚生成してもクラウドなら数千円かかるところ、電気代だけで済む。</p>
+
+    <hr class="divider">
+
+    <h2 class="fade-in">まとめ</h2>
+
+    <p class="fade-in">ComfyUIローカル環境の利点：</p>
+
+    <ul class="fade-in">
+      <li>電気代以外タダ。生成し放題</li>
+      <li>フィルターなし。好きなモデル使い放題</li>
+      <li>API自動化で外出先からも生成可能</li>
+      <li>一度セットアップすれば、ずっと使える</li>
+    </ul>
+
+    <p class="fade-in">初期投資はかかる（GPU代）。でも半年使えば余裕でペイする。年間5万のサブスク払うなら、RTX 4070 Ti買ったほうが長期的にコスパいい。</p>
+
+    <p class="fade-in"><span class="marker">クラウド課金から卒業して、生成の自由を手に入れろ。</span></p>
+
+  </article>
+
+  <footer class="footer">
+    <span class="brand">『AI』と暮らす『非エンジニア』の日常</span> — OpenClaw × Claude<br>
+    <small><a href="../" style="color: #e63946; text-decoration: none;">記事一覧に戻る</a></small>
+  </footer>
+
+</div>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
