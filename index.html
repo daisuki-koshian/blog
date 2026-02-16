@@ -81,17 +81,66 @@
   .article-card {
     background: #fff;
     border-radius: 12px;
-    padding: 32px;
     box-shadow: 0 2px 12px rgba(0,0,0,0.06);
     border-top: 3px solid var(--color-accent);
     transition: transform 0.2s, box-shadow 0.2s;
     text-decoration: none;
     color: inherit;
-    display: block;
+    display: flex;
+    gap: 24px;
+    overflow: hidden;
   }
   .article-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  }
+  .article-card-thumb {
+    position: relative;
+    width: 160px;
+    flex-shrink: 0;
+    background: #fafafa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .article-card-thumb::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: var(--color-accent);
+  }
+  /* Day1のサムネ */
+  .thumb-day1::after {
+    content: '5';
+    font-size: 100px;
+    font-weight: 900;
+    color: #e0e0e0;
+    line-height: 1;
+  }
+  .thumb-day1 {
+    background-image: radial-gradient(circle, #e8e8e8 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+  /* SOUL.mdのサムネ */
+  .thumb-soul::after {
+    content: 'SOUL';
+    font-size: 32px;
+    font-weight: 900;
+    color: #1a1a1a;
+    line-height: 1;
+    letter-spacing: 0.05em;
+  }
+  .thumb-soul {
+    background-image: 
+      linear-gradient(0deg, #f0f0f0 1px, transparent 1px),
+      linear-gradient(90deg, #f0f0f0 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  .article-card-content {
+    flex: 1;
+    padding: 32px 32px 32px 0;
   }
   .article-card .tag {
     display: inline-block;
@@ -155,21 +204,27 @@
   <div class="articles">
 
     <a href="day1/" class="article-card fade-in">
-      <span class="tag">OpenClaw実践</span>
-      <h2>1日で5体のエージェントチームを作った話 — 設定ファイルから失敗例まで全部書く</h2>
-      <div class="desc">
-        Jarvis、Analyst、Scribe、Cloud、Pixelの5体構成。openclaw.jsonの実例、SOUL.mdの書き方、トークン効率化の3つの手、ハマったポイントまで実践レベルで全公開。
+      <div class="article-card-thumb thumb-day1"></div>
+      <div class="article-card-content">
+        <span class="tag">OpenClaw実践</span>
+        <h2>1日で5体のエージェントチームを作った話 — 設定ファイルから失敗例まで全部書く</h2>
+        <div class="desc">
+          Jarvis、Analyst、Scribe、Cloud、Pixelの5体構成。openclaw.jsonの実例、SOUL.mdの書き方、トークン効率化の3つの手、ハマったポイントまで実践レベルで全公開。
+        </div>
+        <div class="meta">2026年2月 • 約8,100字</div>
       </div>
-      <div class="meta">2026年2月 • 約8,100字</div>
     </a>
 
     <a href="soul-md/" class="article-card fade-in">
-      <span class="tag">OpenClaw実践</span>
-      <h2>SOUL.mdの書き方 — OpenClawエージェントに「らしさ」を与える実践ガイド</h2>
-      <div class="desc">
-        エージェントを作ったけど、毎回答え方がブレる。文体が統一されない。AI臭い文章が出てくる。そんな悩みを解決する「SOUL.md」の実践ガイド。実際の設定例、NGワード集、AI臭さを消すテクニックまで全公開。
+      <div class="article-card-thumb thumb-soul"></div>
+      <div class="article-card-content">
+        <span class="tag">OpenClaw実践</span>
+        <h2>SOUL.mdの書き方 — OpenClawエージェントに「らしさ」を与える実践ガイド</h2>
+        <div class="desc">
+          エージェントを作ったけど、毎回答え方がブレる。文体が統一されない。AI臭い文章が出てくる。そんな悩みを解決する「SOUL.md」の実践ガイド。実際の設定例、NGワード集、AI臭さを消すテクニックまで全公開。
+        </div>
+        <div class="meta">2026年2月 • 約12,000字</div>
       </div>
-      <div class="meta">2026年2月 • 約12,000字</div>
     </a>
 
   </div>
