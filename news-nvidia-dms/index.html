@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>「もう自分の仕事、いらなくなった」— Xで8100万回読まれたAI起業家の話 | 『AI』と暮らす『非エンジニア』の日常</title>
+<title>NvidiaがAIのコストを8分の1にした — 精度はそのまま | 『AI』と暮らす『非エンジニア』の日常</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap');
 
@@ -47,7 +47,6 @@
   }
   .logo { color: #1a1a1a; text-decoration: none; font-size: 16px; font-weight: 900; }
 
-  /* ===== HERO強化 ===== */
   .hero {
     position: relative;
     background: #fff;
@@ -71,18 +70,16 @@
     animation: fadeIn 0.8s ease-in forwards;
   }
 
-  /* カウントアップ数字「81M」 */
   .hero-big-number {
     display: inline-block;
-    font-size: 96px;
+    font-size: 112px;
     font-weight: 900;
     color: var(--color-accent);
     line-height: 1;
-    margin-bottom: 16px;
-    animation: bounceIn 1s ease-out forwards, pulse 2s ease-in-out 1.2s infinite;
+    margin-bottom: 20px;
+    animation: bounceIn 1s ease-out forwards;
   }
 
-  /* タイトル部分 */
   .hero-title {
     font-size: clamp(28px, 5vw, 40px);
     font-weight: 900;
@@ -91,9 +88,19 @@
     margin-bottom: 16px;
     opacity: 0;
     animation: fadeInUp 0.8s 0.3s ease-out forwards;
+    position: relative;
+  }
+  .hero-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(to right, var(--color-accent), transparent);
+    display: block;
   }
 
-  /* 蛍光マーカー風ハイライト */
   .marker-highlight {
     background: linear-gradient(transparent 60%, rgba(230,57,70,0.25) 60%);
     padding: 2px 4px;
@@ -103,7 +110,7 @@
     width: 80px;
     height: 3px;
     background: var(--color-accent);
-    margin: 20px 0;
+    margin: 28px 0 20px 0;
     border: none;
     opacity: 0;
     animation: slideIn 0.6s 0.6s ease-out forwards;
@@ -118,7 +125,6 @@
     animation: fadeIn 0.8s 0.9s ease-out forwards;
   }
 
-  /* アニメーション定義 */
   @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -141,12 +147,6 @@
     100% { transform: scale(1); }
   }
 
-  @keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.03); }
-  }
-
-  /* ===== 本文CSS強化 ===== */
   .container {
     max-width: var(--max-width);
     margin: 0 auto;
@@ -358,7 +358,6 @@
     color: var(--color-accent);
   }
 
-  /* 引用ブロック — グラデーション左線 */
   .quote-block {
     position: relative;
     padding: 28px 32px 28px 48px;
@@ -381,135 +380,26 @@
     border-radius: 4px;
   }
 
-  /* コールアウトボックス.danger */
-  .callout-box {
-    padding: 20px 24px;
-    margin: 28px 0;
-    background: #fff8f0;
-    border-left: 4px solid #ffa940;
-    border-radius: 0 6px 6px 0;
-    font-size: 15px;
-    line-height: 1.9;
-  }
-  .callout-box.danger {
-    background: #fff5f5;
-    border-left-color: var(--color-accent);
-  }
-  .callout-box strong {
-    color: #1a1a1a;
-    font-weight: 900;
-  }
-
-  /* big-number */
   .big-number {
     display: inline-block;
-    font-size: 2.5em;
+    font-size: 2.8em;
     font-weight: 900;
     color: var(--color-accent);
     line-height: 1.2;
+    animation: bounceIn 0.8s ease-out;
   }
 
-  /* pulse-highlight */
-  .pulse-highlight {
-    animation: pulseGlow 2s ease-in-out infinite;
-    padding: 2px 8px;
-    border-radius: 4px;
-  }
-  @keyframes pulseGlow {
-    0%, 100% { background: rgba(230,57,70,0.08); }
-    50% { background: rgba(230,57,70,0.22); }
-  }
-
-  /* num-highlight */
   .num-highlight {
-    font-size: 1.3em;
+    font-size: 1.4em;
     font-weight: 900;
     color: var(--color-accent);
   }
 
-  /* key-message */
-  .key-message {
-    font-size: 20px;
-    font-weight: 900;
-    line-height: 1.8;
-    padding: 24px 28px;
-    margin: 32px 0;
-    background: #fff;
-    border-left: 5px solid var(--color-accent);
-    border-radius: 0 8px 8px 0;
-    box-shadow: 0 4px 16px rgba(230,57,70,0.08);
-    position: relative;
-  }
-  .key-message::before {
-    content: '"';
-    position: absolute;
-    top: -8px;
-    left: 12px;
-    font-size: 48px;
-    color: var(--color-accent);
-    opacity: 0.3;
-    font-family: Georgia, serif;
-    line-height: 1;
-  }
-
-  /* カード風ボックス（3つのポイント用） */
-  .card-box {
-    background: #fff;
-    border-radius: 8px;
-    padding: 20px 24px;
-    margin: 20px 0;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    border-left: 4px solid var(--color-accent);
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  .card-box:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(230,57,70,0.12);
-  }
-  .card-box h4 {
-    font-size: 18px;
-    font-weight: 900;
-    color: var(--color-accent);
-    margin-bottom: 12px;
-  }
-
-  /* グラデーション区切り線 */
   .gradient-divider {
     border: none;
     height: 2px;
     background: linear-gradient(to right, transparent, var(--color-accent), transparent);
     margin: 48px 0;
-  }
-
-  .divider {
-    border: none;
-    height: 1px;
-    background: linear-gradient(to right, transparent, var(--color-border), transparent);
-    margin: 48px 0;
-  }
-
-  .footer {
-    text-align: center;
-    padding: 48px 0;
-    font-size: 13px;
-    color: #aaa;
-    border-top: 1px solid var(--color-border);
-    margin-top: 64px;
-  }
-  .footer .brand {
-    font-weight: 900;
-    color: var(--color-accent);
-    letter-spacing: 0.05em;
-  }
-
-  .fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-  .fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
   }
 
   .article-meta-block {
@@ -619,6 +509,30 @@
     line-height: 1.6;
   }
 
+  .footer {
+    text-align: center;
+    padding: 48px 0;
+    font-size: 13px;
+    color: #aaa;
+    border-top: 1px solid var(--color-border);
+    margin-top: 64px;
+  }
+  .footer .brand {
+    font-weight: 900;
+    color: var(--color-accent);
+    letter-spacing: 0.05em;
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
   .header-nav { display: flex; gap: 24px; align-items: center; margin-left: auto; }
   .header-nav a { color: #1a1a1a; text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
   .header-nav a:hover { color: #e63946; }
@@ -646,18 +560,6 @@
     width: 0%;
   }
 
-  article { counter-reset: section-counter; }
-  article h2 { counter-increment: section-counter; }
-  article h2::before {
-    content: counter(section-counter, decimal-leading-zero) ' ';
-    display: inline-block;
-    color: #e63946;
-    font-size: 14px;
-    font-weight: 700;
-    margin-right: 12px;
-    opacity: 0.7;
-  }
-
   .back-to-top {
     position: fixed;
     bottom: 24px;
@@ -678,14 +580,12 @@
   .back-to-top.visible { opacity: 1; }
   .back-to-top:hover { background: #c5303c; }
 
-  /* レスポンシブ */
   @media (max-width: 768px) {
     .hamburger { display: block; }
     .header-nav { display: none; }
     .hero { padding: 60px 0 40px; }
-    .hero-big-number { font-size: 72px; }
+    .hero-big-number { font-size: 84px; }
     .hero-title { font-size: 24px; }
-    .card-box { padding: 16px 20px; }
     .big-number { font-size: 2em; }
     .content-wrapper { padding: 0 16px; flex-direction: column; }
     .sidebar-section { padding: 16px; }
@@ -781,19 +681,18 @@
     </nav>
     <button class="hamburger" id="hamburger">☰</button>
   </div>
-  <div class="breadcrumb-bar"><a href="../">ホーム</a> / Xで8100万回読まれたAI起業家の話</div>
+  <div class="breadcrumb-bar"><a href="../">ホーム</a> / NvidiaがAIのコストを8分の1にした</div>
 </div>
 
-<!-- ===== HERO強化（81M カウントアップ風、蛍光マーカー） ===== -->
 <div class="hero">
   <div class="hero-inner">
-    <div class="hero-label">海外AIニュース — X投稿より</div>
-    <div class="hero-big-number" id="counterNumber">81M</div>
+    <div class="hero-label">海外AIニュース — VentureBeat</div>
+    <div class="hero-big-number">1/8×</div>
     <div class="hero-title">
-      <span class="marker-highlight">「もう自分の仕事、いらなくなった」</span>
+      <span class="marker-highlight">地味だけど一番大事かもしれない</span>
     </div>
     <hr class="hero-sep">
-    <div class="hero-sub">Xで8100万回読まれたAI起業家の話</div>
+    <div class="hero-sub">NvidiaがAIのコストを8分の1にした — 精度はそのまま</div>
   </div>
 </div>
 
@@ -802,7 +701,7 @@
 
   <header class="article-header fade-in">
     <span class="tag">海外AIニュース</span>
-    <h1>「もう自分の仕事、いらなくなった」— Xで8100万回読まれたAI起業家の話</h1>
+    <h1>NvidiaがAIのコストを8分の1にした — 精度はそのまま</h1>
     <div class="meta">2026年2月16日</div>
   </header>
 
@@ -819,90 +718,86 @@
       </dl>
     </div>
 
-    <p class="fade-in">HyperWriteっていうAIスタートアップのCEO、Matt Shumerが書いたエッセイが、Xで8,100万ビュー超えてます。タイトルは「Something Big Is Happening」。</p>
+    <p class="fade-in">AIを使うのにいくらかかるか。これ、地味だけどかなり大事な話。</p>
     
-    <p class="fade-in">📎 <a href="https://shumer.dev/something-big-is-happening" target="_blank" rel="noopener" style="color: var(--color-accent); text-decoration: none; font-weight: 700;">https://shumer.dev/something-big-is-happening</a></p>
+    <p class="fade-in">📎 <a href="https://venturebeat.com/orchestration/nvidias-new-technique-cuts-llm-reasoning-costs-by-8x-without-losing-accuracy" target="_blank" rel="noopener" style="color: var(--color-accent); text-decoration: none; font-weight: 700;">https://venturebeat.com/orchestration/nvidias-new-technique-cuts-llm-reasoning-costs-by-8x-without-losing-accuracy</a></p>
 
-    <h2 id="sec-1" class="fade-in">ざっくり何が書いてあるか</h2>
+    <h2 class="fade-in">何が起きたか</h2>
 
-    <p class="fade-in">2月5日にOpenAIの「GPT-5.3 Codex」とAnthropicの「Claude Opus 4.6」が同時にリリースされて、この人の仕事が変わったと。</p>
+    <p class="fade-in">NvidiaがDMS（Dynamic Memory Sparsification）っていう技術を発表した。AIが「考える」ときに使うメモリを圧縮する技術で、コストを最大<span class="big-number">8分の1</span>にできる。しかも精度は落ちない。場合によってはむしろ上がる。</p>
+
+    <p class="fade-in">AIが長く考えれば考えるほど、メモリ（KVキャッシュ）がどんどん溜まる。これがGPUのメモリを食い潰して、速度が落ちるし、同時に対応できるユーザー数も減る。企業にとっては「使えば使うほど金がかかる」ボトルネックだった。</p>
+
+    <p class="fade-in">DMSはこのメモリを「どれが大事でどれが捨てていいか」をAI自身に判断させる。今までの方法は「古いものから順に消す」みたいな雑なルールだったけど、DMSは学習して賢く選ぶ。</p>
+
+    <hr class="gradient-divider">
+
+    <h2 class="fade-in">なぜこれが気になるか</h2>
+
+    <p class="fade-in">AIの性能がどれだけ上がっても、コストが高すぎたら使えない。特に中小企業にとっては。</p>
+
+    <p class="fade-in">自分も<a href="../morning-briefing/" style="color: var(--color-accent); text-decoration: none; font-weight: 700;">OpenClawでClaude APIを毎日叩いてる</a>から、この手のコスト削減は直接財布に効く。朝ブリーフィング、バズチェック、記事生成。全部APIコストがかかってる。それが<span class="big-number">8分の1</span>になるなら、もっと気軽にAIを回せる。</p>
+
+    <hr class="gradient-divider">
+
+    <h2 class="fade-in">具体的にどれくらいすごいか</h2>
+
+    <p class="fade-in">Nvidiaのテストでは、同じメモリ予算でAIに「もっと深く考えさせる」ことができた。数学のベンチマーク（AIME 24）で、標準モデルより<span class="num-highlight">12ポイント</span>高いスコア。</p>
 
     <div class="quote-block fade-in">
-      「作りたいものを英語で説明して、4時間後にPC開いたら完成してた。修正もいらない」
+      さらに面白いのは、メモリを圧縮したほうが「大量の文書の中から必要な情報を見つける」テストで標準モデルより成績が良かったこと。ゴミを捨てたらむしろ頭がクリアになった、みたいな話。
     </div>
 
-    <p class="fade-in">しかもGPT-5.3は、OpenAI公式が「自分自身の開発に使われた最初のモデル」と書いてる。AIがAIを作る段階に入った、と。</p>
+    <p class="fade-in">1台のサーバーで対応できるユーザー数が<span class="num-highlight">5倍</span>。ハードウェアの追加投資なしで。</p>
 
     <hr class="gradient-divider">
 
-    <h2 id="sec-2" class="fade-in">ポイントは3つ</h2>
+    <h2 class="fade-in">地味だけど一番大事かもしれない</h2>
 
-    <p class="fade-in"><strong>① 「試したけど微妙だった」は古い</strong></p>
+    <p class="fade-in">AIの新モデルが出ると「すごい！」って騒がれるけど、コスト削減のニュースはあまり注目されない。でも実際にAIを業務に使ってる人にとっては、こっちのほうが影響が大きい。</p>
 
-    <p class="fade-in">2023〜2024年前半に触った人の「大したことなかった」は、当時は正しい。でもAI業界の2年前は大昔。今の最新モデルと無料版は別物。</p>
-
-    <p class="fade-in"><strong>② エンジニアの次は、みんなの番</strong></p>
-
-    <p class="fade-in">AI企業がまずコード生成に力を入れたのは、AIを作るのにコードが必要だから。だからエンジニアの仕事が先に変わった。で、それが終わったから次に進んでる。法律、会計、コンサル、デザイン、カスタマー対応。</p>
-
-    <p class="fade-in">Anthropic CEOの発言：「1〜5年でホワイトカラー入門職の<strong>50%</strong>がなくなる」</p>
-
-    <p class="fade-in"><strong>③ コロナ前夜と同じ</strong></p>
-
-    <p class="fade-in">2020年2月。トイレットペーパー買いだめしてる人がいたら笑われてた。3週間後に世界が変わった。今はそのフェーズだと。</p>
-
-    <hr class="gradient-divider">
-
-    <h2 id="sec-3" class="fade-in">中小企業にとっては</h2>
-
-    <p class="fade-in">「何をさせたいか説明できる力」がそのまま競争力になる。外注してた仕事がAIでできるなら、コストが激減する可能性がある。逆に、触らないままだと差が開く。</p>
-
-    <p class="fade-in">月<span class="num-highlight">20ドル（約3,000円）</span>で最新版は使える。毎日1時間試すだけで、99%の人より先にいけると書いてます。</p>
-
-    <div class="key-message fade-in">
-      コロナ前夜と同じ。今の段階で動いた人が、次の3年で差をつける。
-    </div>
+    <p class="fade-in">性能が上がっても使えなかったら意味がない。コストが下がって初めて「じゃあうちでも使ってみよう」になる。</p>
 
     <div class="agent-attribution">
       📝 記事作成: AIエージェント（Jarvis）
     </div>
 
     <div class="feedback-section">
-      <p>💭 <strong>AIの進化について、どう思いますか？</strong></p>
+      <p>💭 <strong>AIコストについて、どう思いますか?</strong></p>
       <p>感想・質問はこちら → <a href="https://x.com/daisuki_koshian" target="_blank">@daisuki_koshian</a></p>
     </div>
 
     <div class="next-read">
       <h3>次に読む</h3>
       <div class="next-read-cards">
-        <a href="../news-ai-cartel/" class="next-read-card">
-          <div class="icon">🤖</div>
+        <a href="../news-shumer/" class="next-read-card">
+          <div class="icon">🔥</div>
           <div class="content">
-            <div class="title">AIカルテル自販機実験</div>
-            <div class="desc">AIに「利益最大化」を任せたら勝手にカルテルを組んだ話</div>
+            <div class="title">8100万回読まれたAI起業家の話</div>
+            <div class="desc">「もう自分の仕事、いらなくなった」— Xでバズったエッセイ</div>
           </div>
         </a>
-        <a href="../morning-briefing/" class="next-read-card">
-          <div class="icon">☀️</div>
+        <a href="../token-efficiency/" class="next-read-card">
+          <div class="icon">⚡</div>
           <div class="content">
-            <div class="title">朝ブリーフィング自動化</div>
-            <div class="desc">OpenClawのcronで毎朝の情報収集を自動化した話</div>
+            <div class="title">トークン効率化の話</div>
+            <div class="desc">AGENTS.mdを83%削減した方法</div>
           </div>
         </a>
       </div>
     </div>
 
   </article>
-  </div><!-- /main-content -->
+  </div>
 
   <aside class="sidebar">
     <div class="sidebar-section">
       <h3>最新記事</h3>
       <ul class="sidebar-list">
-        <li><a href="../news-shumer/">Xで8100万回読まれたAI起業家の話</a></li>
+        <li><a href="../news-nvidia-dms/">NvidiaがAIコストを8分の1に</a></li>
+        <li><a href="../news-shumer/">8100万回読まれたAI起業家の話</a></li>
         <li><a href="../backtest-overview/">トレードシステム概要編</a></li>
         <li><a href="../backtest-failures/">トレードシステム失敗編</a></li>
-        <li><a href="../backtest-method/">トレードシステム仕組み編</a></li>
         <li><a href="../multi-agent-flow/">マルチエージェント連携</a></li>
       </ul>
     </div>
@@ -922,13 +817,12 @@
         <li><span class="sidebar-tag">OpenClaw</span></li>
         <li><span class="sidebar-tag">Claude Code</span></li>
         <li><span class="sidebar-tag">海外AIニュース</span></li>
-        <li><span class="sidebar-tag">トレードシステム</span></li>
-        <li><span class="sidebar-tag">ComfyUI</span></li>
+        <li><span class="sidebar-tag">コスト削減</span></li>
         <li><span class="sidebar-tag">自動化</span></li>
       </ul>
     </div>
   </aside>
-</div><!-- /content-wrapper -->
+</div>
 
 <footer class="footer">
   <span class="brand">『AI』と暮らす『非エンジニア』の日常</span> — OpenClaw実践記録<br>
@@ -944,17 +838,12 @@
   </ul>
   <h2>記事一覧</h2>
   <ul>
-    <li><a href="../news-shumer/">Xで8100万回読まれたAI起業家の話</a></li>
+    <li><a href="../news-nvidia-dms/">NvidiaがAIコストを8分の1に</a></li>
+    <li><a href="../news-shumer/">8100万回読まれたAI起業家の話</a></li>
     <li><a href="../day1/">Day1: チーム構築</a></li>
     <li><a href="../soul-md-merged/">SOUL.md: AI臭さ対策</a></li>
-    <li><a href="../comfyui/">ComfyUI: ローカル自動化</a></li>
     <li><a href="../morning-briefing/">朝ブリーフィング</a></li>
     <li><a href="../token-efficiency/">トークン効率化</a></li>
-    <li><a href="../cron-heartbeat/">cron + heartbeat</a></li>
-    <li><a href="../multi-agent-flow/">マルチエージェント連携</a></li>
-    <li><a href="../backtest-overview/">トレードシステム概要編</a></li>
-    <li><a href="../backtest-failures/">トレードシステム失敗編</a></li>
-    <li><a href="../backtest-method/">トレードシステム仕組み編</a></li>
   </ul>
   <h2>その他</h2>
   <ul>
@@ -965,7 +854,6 @@
 <button class="back-to-top" id="backToTop">↑</button>
 
 <script>
-// Fade-in observer
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) entry.target.classList.add('visible');
@@ -973,7 +861,6 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-// Hamburger menu
 (function() {
   const hamburger = document.getElementById('hamburger');
   const navOverlay = document.getElementById('navOverlay');
@@ -995,14 +882,12 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
   if (navOverlay) navOverlay.addEventListener('click', closeMenu);
 })();
 
-// Progress bar
 window.addEventListener('scroll', function() {
   var h = document.documentElement;
   var progress = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
   document.getElementById('progressBar').style.width = progress + '%';
 });
 
-// Back to top button
 var btn = document.getElementById('backToTop');
 window.addEventListener('scroll', function() {
   btn.classList.toggle('visible', window.scrollY > 500);
