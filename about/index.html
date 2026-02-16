@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — 『AI』と暮らす『非エンジニア』の日常</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap');
+
+  :root {
+    --color-bg: #fafafa;
+    --color-text: #333333;
+    --color-text-light: #666666;
+    --color-accent: #e63946;
+    --color-border: #e8e8e8;
+    --color-card-bg: #ffffff;
+    --font-main: 'Noto Sans JP', sans-serif;
+    --max-width: 780px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-main);
+    color: var(--color-text);
+    background: var(--color-bg);
+    line-height: 1.9;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .header {
+    background: #fff;
+    border-bottom: 2px solid var(--color-accent);
+    padding: 12px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo {
+    font-size: 18px;
+    font-weight: 900;
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+  .breadcrumb {
+    font-size: 13px;
+    color: var(--color-text-light);
+  }
+  .breadcrumb a {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .hero {
+    position: relative;
+    background: #fff;
+    padding: 60px 0 50px;
+    overflow: hidden;
+    border-bottom: 4px solid var(--color-accent);
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 8px; height: 100%;
+    background: var(--color-accent);
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 8px; height: 100%;
+    background: var(--color-accent);
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 24px;
+    text-align: center;
+  }
+  .hero-title {
+    font-size: 48px;
+    font-weight: 900;
+    color: var(--color-text);
+    margin-bottom: 16px;
+  }
+  .hero-sub {
+    font-size: 16px;
+    color: var(--color-text-light);
+  }
+
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 60px 24px;
+  }
+
+  article h2 {
+    font-size: 28px;
+    font-weight: 900;
+    margin: 48px 0 24px 0;
+    color: var(--color-text);
+  }
+  article h2:first-of-type {
+    margin-top: 0;
+  }
+  article h3 {
+    font-size: 22px;
+    font-weight: 900;
+    margin: 32px 0 16px 0;
+    color: var(--color-text);
+  }
+  article p {
+    margin-bottom: 24px;
+    line-height: 1.9;
+    font-size: 16px;
+  }
+  article ul {
+    list-style: none;
+    margin: 24px 0;
+  }
+  article ul li {
+    padding: 8px 0 8px 24px;
+    position: relative;
+    font-size: 15px;
+  }
+  article ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 16px;
+    width: 8px;
+    height: 8px;
+    background: var(--color-accent);
+    border-radius: 50%;
+  }
+  article strong {
+    font-weight: 900;
+    color: var(--color-accent);
+  }
+  article a {
+    color: var(--color-accent);
+    text-decoration: none;
+    font-weight: 700;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+  article a:hover {
+    border-bottom-color: var(--color-accent);
+  }
+
+  .agent-card {
+    background: #fff;
+    border-radius: 8px;
+    border-left: 4px solid var(--color-accent);
+    padding: 20px 24px;
+    margin-bottom: 16px;
+  }
+  .agent-card .name {
+    font-size: 18px;
+    font-weight: 900;
+    color: var(--color-text);
+    margin-bottom: 8px;
+  }
+  .agent-card .role {
+    font-size: 14px;
+    color: var(--color-text-light);
+  }
+
+  .footer {
+    text-align: center;
+    padding: 48px 0;
+    font-size: 13px;
+    color: #aaa;
+    border-top: 1px solid var(--color-border);
+    margin-top: 64px;
+  }
+  .footer .brand {
+    font-weight: 900;
+    color: var(--color-accent);
+    letter-spacing: 0.05em;
+  }
+  .footer a {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <a href="../" class="logo">『AI』と暮らす『非エンジニア』の日常</a>
+    <div class="breadcrumb"><a href="../">ホーム</a> / About</div>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-title">About</div>
+    <div class="hero-sub">このブログについて</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <article>
+
+    <h2 class="fade-in">このブログについて</h2>
+
+    <p class="fade-in">このブログは、非エンジニアがOpenClawで5体のAIエージェントチームを組んで、業務自動化に挑戦している記録です。</p>
+
+    <p class="fade-in">設定ファイルの書き方、失敗例、トークン効率化、プロンプト設計、マルチエージェント連携など、実際に運用しながら学んだことを実践レベルで書いています。</p>
+
+    <p class="fade-in">「OpenClawを使ってみたけど、どう設定すればいいか分からない」「複数のエージェントをどう運用すればいいのか」。そんな方の参考になれば幸いです。</p>
+
+    <h2 class="fade-in">運営者</h2>
+
+    <p class="fade-in">非エンジニア、富山在住。OpenClawを使って日常業務の自動化に取り組んでいます。</p>
+
+    <p class="fade-in">プログラミング経験はほぼゼロですが、AIエージェントを活用することで、情報収集、記事執筆、画像生成、インフラ管理などを自動化しています。</p>
+
+    <h2 class="fade-in">AIエージェントチーム</h2>
+
+    <p class="fade-in">このブログは、以下の5体のエージェントチームで運営しています。</p>
+
+    <div class="agent-card fade-in">
+      <div class="name">Jarvis（司令塔）</div>
+      <div class="role">全体統括 / タスク振り分け / 進捗管理</div>
+    </div>
+
+    <div class="agent-card fade-in">
+      <div class="name">Scribe（ライター）</div>
+      <div class="role">記事執筆 / 編集 / 文章校正</div>
+    </div>
+
+    <div class="agent-card fade-in">
+      <div class="name">Analyst（リサーチ）</div>
+      <div class="role">情報収集 / 市場分析 / データ整理</div>
+    </div>
+
+    <div class="agent-card fade-in">
+      <div class="name">Pixel（画像生成）</div>
+      <div class="role">画像生成 / ComfyUI操作 / ビジュアル制作</div>
+    </div>
+
+    <div class="agent-card fade-in">
+      <div class="name">Cloud（インフラ）</div>
+      <div class="role">デプロイ / Git操作 / サーバー管理</div>
+    </div>
+
+    <h2 class="fade-in">記事の透明性</h2>
+
+    <p class="fade-in">このブログの記事は、AIエージェント（Scribe）がドラフトを執筆し、筆者が監修・最終確認を行っています。</p>
+
+    <p class="fade-in">各記事の末尾に「📝 ドラフト: AIエージェント（Scribe） / 監修: 筆者」と記載しているのは、この透明性を保つためです。</p>
+
+    <p class="fade-in">事実確認、実践手順の検証、プライバシーチェックは筆者が責任を持って行っています。</p>
+
+    <h2 class="fade-in">免責事項</h2>
+
+    <p class="fade-in">このブログで紹介している技術情報は、執筆時点のものです。OpenClawのバージョンアップやAPIの変更により、動作しなくなる可能性があります。</p>
+
+    <p class="fade-in">実際に運用する際は、公式ドキュメントを確認し、ご自身の環境でテストしてからご利用ください。</p>
+
+    <h2 class="fade-in">お問い合わせ</h2>
+
+    <p class="fade-in">X (Twitter): <a href="https://x.com/daisuki_koshian" target="_blank">@daisuki_koshian</a></p>
+
+    <p class="fade-in">質問、感想、ご指摘などお気軽にどうぞ。</p>
+
+  </article>
+
+  <footer class="footer">
+    <span class="brand">『AI』と暮らす『非エンジニア』の日常</span> — OpenClaw実践記録<br>
+    <small><a href="../">記事一覧に戻る</a></small>
+  </footer>
+
+</div>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

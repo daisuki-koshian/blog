@@ -319,6 +319,90 @@
     opacity: 1;
     transform: translateY(0);
   }
+
+  /* Article Meta Block */
+  .article-meta-block {
+    background: #f8f9fa;
+    border-left: 4px solid var(--color-accent);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin: 0 0 40px 0;
+  }
+  .article-meta-block dl {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 12px 16px;
+    margin: 0;
+  }
+  .article-meta-block dt {
+    font-size: 14px;
+    font-weight: 900;
+    color: var(--color-accent);
+  }
+  .article-meta-block dd {
+    font-size: 14px;
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  /* Agent Attribution */
+  .agent-attribution {
+    text-align: center;
+    font-size: 13px;
+    color: #999;
+    margin: 48px 0 32px 0;
+    padding: 16px 0;
+    border-top: 1px solid #f0f0f0;
+  }
+
+  /* Next Read Cards */
+  .next-read {
+    margin: 40px 0 48px 0;
+  }
+  .next-read h3 {
+    font-size: 20px;
+    font-weight: 900;
+    margin-bottom: 24px;
+    color: var(--color-text);
+  }
+  .next-read-cards {
+    display: grid;
+    gap: 16px;
+  }
+  .next-read-card {
+    background: #fff;
+    border-radius: 8px;
+    border: 2px solid #f0f0f0;
+    padding: 20px 24px;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: all 0.2s;
+  }
+  .next-read-card:hover {
+    border-color: var(--color-accent);
+    box-shadow: 0 4px 12px rgba(230, 57, 70, 0.1);
+  }
+  .next-read-card .icon {
+    font-size: 28px;
+    flex-shrink: 0;
+  }
+  .next-read-card .content {
+    flex: 1;
+  }
+  .next-read-card .title {
+    font-size: 16px;
+    font-weight: 900;
+    color: var(--color-text);
+    margin-bottom: 4px;
+  }
+  .next-read-card .desc {
+    font-size: 13px;
+    color: var(--color-text-light);
+    line-height: 1.6;
+  }
 </style>
 </head>
 <body>
@@ -357,6 +441,19 @@
   </header>
 
   <article>
+
+    <div class="article-meta-block">
+      <dl>
+        <dt>対象読者:</dt>
+        <dd>OpenClawユーザー（マルチエージェント構成に興味がある方）</dd>
+        <dt>前提:</dt>
+        <dd>OpenClaw導入済み / WSL2環境</dd>
+        <dt>所要時間:</dt>
+        <dd>約25分</dd>
+        <dt>この記事でできること:</dt>
+        <dd>5体のエージェントチーム構成の設計・設定ファイルの書き方・トークン効率化の基礎が学べる</dd>
+      </dl>
+    </div>
 
     <p class="fade-in">エージェントを5体立ち上げて、それぞれに役割を持たせて、チームとして動かす。1日でやったことを、設定ファイルの中身から失敗したポイントまで、実践レベルで全部書いていきます。</p>
 
@@ -552,6 +649,30 @@ memory_search("天気API") → 該当箇所だけ取得</pre>
     </ul>
 
     <p class="fade-in">OpenClawは柔軟性が高い分、設定の自由度も高いです。この記事の設定ファイルをコピペして、自分の環境に合わせて調整してみてください。</p>
+
+    <div class="agent-attribution">
+      📝 ドラフト: AIエージェント（Scribe） / 監修: 筆者
+    </div>
+
+    <div class="next-read">
+      <h3>次に読む</h3>
+      <div class="next-read-cards">
+        <a href="../soul-md-merged/" class="next-read-card">
+          <div class="icon">📝</div>
+          <div class="content">
+            <div class="title">SOUL.md（人格定義+AI臭さ対策）</div>
+            <div class="desc">エージェントの文体を統一し、AI臭さを消す実践テクニック</div>
+          </div>
+        </a>
+        <a href="../multi-agent-flow/" class="next-read-card">
+          <div class="icon">🔄</div>
+          <div class="content">
+            <div class="title">マルチエージェント連携</div>
+            <div class="desc">5体のエージェントがどう連携してブログを作っているか</div>
+          </div>
+        </a>
+      </div>
+    </div>
 
   </article>
 
