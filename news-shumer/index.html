@@ -400,33 +400,6 @@
     font-weight: 900;
   }
 
-  /* big-number */
-  .big-number {
-    display: inline-block;
-    font-size: 2.5em;
-    font-weight: 900;
-    color: var(--color-accent);
-    line-height: 1.2;
-  }
-
-  /* pulse-highlight */
-  .pulse-highlight {
-    animation: pulseGlow 2s ease-in-out infinite;
-    padding: 2px 8px;
-    border-radius: 4px;
-  }
-  @keyframes pulseGlow {
-    0%, 100% { background: rgba(230,57,70,0.08); }
-    50% { background: rgba(230,57,70,0.22); }
-  }
-
-  /* num-highlight */
-  .num-highlight {
-    font-size: 1.3em;
-    font-weight: 900;
-    color: var(--color-accent);
-  }
-
   /* key-message */
   .key-message {
     font-size: 20px;
@@ -450,35 +423,6 @@
     opacity: 0.3;
     font-family: Georgia, serif;
     line-height: 1;
-  }
-
-  /* カード風ボックス（3つのポイント用） */
-  .card-box {
-    background: #fff;
-    border-radius: 8px;
-    padding: 20px 24px;
-    margin: 20px 0;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    border-left: 4px solid var(--color-accent);
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  .card-box:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(230,57,70,0.12);
-  }
-  .card-box h4 {
-    font-size: 18px;
-    font-weight: 900;
-    color: var(--color-accent);
-    margin-bottom: 12px;
-  }
-
-  /* グラデーション区切り線 */
-  .gradient-divider {
-    border: none;
-    height: 2px;
-    background: linear-gradient(to right, transparent, var(--color-accent), transparent);
-    margin: 48px 0;
   }
 
   .divider {
@@ -685,8 +629,6 @@
     .hero { padding: 60px 0 40px; }
     .hero-big-number { font-size: 72px; }
     .hero-title { font-size: 24px; }
-    .card-box { padding: 16px 20px; }
-    .big-number { font-size: 2em; }
     .content-wrapper { padding: 0 16px; flex-direction: column; }
     .sidebar-section { padding: 16px; }
   }
@@ -833,8 +775,6 @@
 
     <p class="fade-in">しかもGPT-5.3は、OpenAI公式が「自分自身の開発に使われた最初のモデル」と書いてる。AIがAIを作る段階に入った、と。</p>
 
-    <hr class="gradient-divider">
-
     <h2 id="sec-2" class="fade-in">ポイントは3つ</h2>
 
     <p class="fade-in"><strong>① 「試したけど微妙だった」は古い</strong></p>
@@ -851,13 +791,11 @@
 
     <p class="fade-in">2020年2月。トイレットペーパー買いだめしてる人がいたら笑われてた。3週間後に世界が変わった。今はそのフェーズだと。</p>
 
-    <hr class="gradient-divider">
-
     <h2 id="sec-3" class="fade-in">中小企業にとっては</h2>
 
     <p class="fade-in">「何をさせたいか説明できる力」がそのまま競争力になる。外注してた仕事がAIでできるなら、コストが激減する可能性がある。逆に、触らないままだと差が開く。</p>
 
-    <p class="fade-in">月<span class="num-highlight">20ドル（約3,000円）</span>で最新版は使える。毎日1時間試すだけで、99%の人より先にいけると書いてます。</p>
+    <p class="fade-in">月<strong>20ドル（約3,000円）</strong>で最新版は使える。毎日1時間試すだけで、99%の人より先にいけると書いてます。</p>
 
     <div class="key-message fade-in">
       コロナ前夜と同じ。今の段階で動いた人が、次の3年で差をつける。
