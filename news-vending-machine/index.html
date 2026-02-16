@@ -70,6 +70,17 @@
     animation: fadeIn 0.8s ease-in forwards;
   }
 
+  .hero-big-number {
+    display: inline-block;
+    font-size: 96px;
+    font-weight: 900;
+    color: var(--color-accent);
+    line-height: 1;
+    opacity: 0;
+    animation: fadeInUp 0.6s 0.2s ease-out forwards;
+    margin-bottom: 8px;
+  }
+
   .hero-title {
     font-size: clamp(28px, 5vw, 40px);
     font-weight: 900;
@@ -599,6 +610,7 @@
     .hamburger { display: block; }
     .header-nav { display: none; }
     .hero { padding: 60px 0 40px; }
+    .hero-big-number { font-size: 72px; }
     .hero-title { font-size: 24px; }
     .content-wrapper { padding: 0 16px; flex-direction: column; }
     .sidebar-section { padding: 16px; }
@@ -700,9 +712,10 @@
 <div class="hero">
   <div class="hero-inner">
     <div class="hero-label">海外AIニュース — WSJ / Anthropic Project Vend</div>
+    <div class="hero-big-number">$1,000</div>
     <div class="hero-title">
-      AIに<span class="marker-highlight">1,000ドル</span>渡してビジネスを任せたら<br>
-      — Anthropicの自販機実験
+      AIに渡してビジネスを任せたら<br>
+      — Anthropicの<span class="marker-highlight">自販機実験</span>
     </div>
     <hr class="hero-sep">
     <div class="hero-sub">監視なしの自律運用で起きた、想定外の行動の数々</div>

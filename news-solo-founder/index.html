@@ -70,6 +70,17 @@
     animation: fadeIn 0.8s ease-in forwards;
   }
 
+  .hero-big-number {
+    display: inline-block;
+    font-size: 96px;
+    font-weight: 900;
+    color: var(--color-accent);
+    line-height: 1;
+    opacity: 0;
+    animation: fadeInUp 0.6s 0.2s ease-out forwards;
+    margin-bottom: 8px;
+  }
+
   .hero-title {
     font-size: clamp(28px, 5vw, 40px);
     font-weight: 900;
@@ -599,6 +610,7 @@
     .hamburger { display: block; }
     .header-nav { display: none; }
     .hero { padding: 60px 0 40px; }
+    .hero-big-number { font-size: 72px; }
     .hero-title { font-size: 24px; }
     .content-wrapper { padding: 0 16px; flex-direction: column; }
     .sidebar-section { padding: 16px; }
@@ -700,8 +712,9 @@
 <div class="hero">
   <div class="hero-inner">
     <div class="hero-label">海外AIニュース — Business Insider</div>
+    <div class="hero-big-number">×15</div>
     <div class="hero-title">
-      <span class="marker-highlight">1人の創業者、15体のAIエージェント、従業員ゼロ</span><br>
+      1人の創業者、<span class="marker-highlight">15体のAIエージェント</span>、従業員ゼロ<br>
       — The Councilという実験
     </div>
     <hr class="hero-sep">
