@@ -1329,22 +1329,57 @@ AI: 「HTML1枚で完結するダッシュボードを作ります」
 </script>
 
 <!-- Lightbox -->
-<div id="lightbox" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:9999;cursor:zoom-out;justify-content:center;align-items:center;">
-  <img id="lightbox-img" style="max-width:92%;max-height:92%;border-radius:8px;box-shadow:0 4px 30px rgba(0,0,0,0.5);">
-  <span style="position:absolute;top:20px;right:28px;color:#fff;font-size:36px;cursor:pointer;font-weight:300;">&times;</span>
+<style>
+  #lightbox {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    -webkit-tap-highlight-color: transparent;
+  }
+  #lightbox.active { display: flex; }
+  #lightbox img {
+    max-width: 92%;
+    max-height: 92%;
+    border-radius: 8px;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+  }
+  #lightbox .lb-close {
+    position: absolute;
+    top: 16px; right: 20px;
+    color: #fff;
+    font-size: 40px;
+    cursor: pointer;
+    line-height: 1;
+    padding: 8px;
+  }
+  .image-block img { cursor: zoom-in; }
+</style>
+<div id="lightbox">
+  <img id="lightbox-img" src="" alt="">
+  <span class="lb-close">&times;</span>
 </div>
 <script>
 (function(){
-  const lb = document.getElementById('lightbox');
-  const lbImg = document.getElementById('lightbox-img');
-  document.querySelectorAll('.image-block img').forEach(img => {
-    img.style.cursor = 'zoom-in';
-    img.addEventListener('click', () => {
-      lbImg.src = img.src;
-      lb.style.display = 'flex';
-    });
-  });
-  lb.addEventListener('click', () => { lb.style.display = 'none'; });
+  var lb = document.getElementById('lightbox');
+  var lbImg = document.getElementById('lightbox-img');
+  var imgs = document.querySelectorAll('.image-block img');
+  for (var i = 0; i < imgs.length; i++) {
+    (function(img) {
+      img.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        lbImg.src = img.src;
+        lb.classList.add('active');
+      }, false);
+    })(imgs[i]);
+  }
+  lb.addEventListener('click', function() {
+    lb.classList.remove('active');
+  }, false);
 })();
 </script>
 
