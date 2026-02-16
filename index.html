@@ -112,6 +112,7 @@
 
   .articles {
     display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 32px;
   }
 
@@ -495,6 +496,9 @@
 
   /* スマホ対応 */
   @media (max-width: 768px) {
+    .articles {
+      grid-template-columns: 1fr;
+    }
     .search-container {
       margin-bottom: 32px;
     }
