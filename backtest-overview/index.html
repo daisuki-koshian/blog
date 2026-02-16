@@ -326,6 +326,22 @@
     line-height: 1.5;
   }
 
+  /* Image blocks */
+  .image-block {
+    margin: 32px 0;
+  }
+  .image-block img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+  }
+  .image-block figcaption {
+    margin-top: 8px;
+    font-size: 13px;
+    color: #999;
+    text-align: center;
+  }
+
   @media (max-width: 768px) {
     .stats-cards {
       grid-template-columns: 1fr;
@@ -665,6 +681,16 @@
 
     <p class="fade-in">ダッシュボードはHTML1枚で完結しています。ブラウザで開けば、今どの株をいくら持っているか、いくら儲かっているか（あるいは損しているか）がひと目で分かります。</p>
 
+    <figure class="image-block fade-in">
+      <img src="dashboard-overview.jpg" alt="トレードダッシュボード概要画面" loading="lazy">
+      <figcaption>ダッシュボードの概要画面。総資産・現金・含み損益・エクイティカーブが一覧できる</figcaption>
+    </figure>
+
+    <figure class="image-block fade-in">
+      <img src="dashboard-position.jpg" alt="トレードダッシュボードポジション画面" loading="lazy">
+      <figcaption>ポジション画面。保有銘柄・取得価格・直近終値・損益が並ぶ</figcaption>
+    </figure>
+
     <hr class="divider">
 
     <h2 class="fade-in">なぜ作ろうと思ったのか</h2>
@@ -788,6 +814,11 @@ AI: 「HTML1枚で完結するダッシュボードを作ります」
     </div>
 
     <p class="fade-in">ポイントは、<span class="marker">戦略の中身もAIが自分で考えて提案してきた</span>ということです。私は「トレードシステムを作りたい」とだけ伝えて、AIがデータを分析し、複数の戦略を検証し、「これが一番いい」と判断して提案してきました。私はその提案を採用するかどうかを決めただけです。</p>
+
+    <figure class="image-block fade-in">
+      <img src="claude-code-terminal.jpg" alt="Claude Codeのターミナル画面" loading="lazy">
+      <figcaption>実際の開発画面。左にファイル構造、右にClaude Codeとの会話。AIが株価を確認し、分析結果を表形式で返してくる</figcaption>
+    </figure>
 
     <p class="fade-in">このやりとりを7日間続けた結果、28,000行のシステムができました。</p>
 
