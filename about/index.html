@@ -110,11 +110,12 @@
 
   /* 2カラムレイアウト */
   .content-wrapper {
+    justify-content: center;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 24px;
     display: flex;
-    gap: 32px;
+    gap: 48px;
     align-items: flex-start;
   }
   .main-content {
@@ -202,6 +203,7 @@
 
   @media (max-width: 1024px) {
     .content-wrapper {
+    justify-content: center;
       flex-direction: column;
     }
     .sidebar {
@@ -214,6 +216,7 @@
 
   @media (max-width: 768px) {
     .content-wrapper {
+    justify-content: center;
       padding: 0 16px;
     }
     .sidebar-section {
