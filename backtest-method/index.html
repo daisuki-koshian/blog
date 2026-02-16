@@ -635,14 +635,114 @@
     }
   }
 
+
+  /* スマホ用改行 */
+  .sp-br { display: none; }
+  @media (max-width: 768px) {
+    .sp-br { display: inline; }
+  }
+
+  /* ハンバーガーメニュー */
+  .hamburger {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: var(--color-accent);
+    cursor: pointer;
+    padding: 4px 8px;
+    line-height: 1;
+  }
+  @media (max-width: 768px) {
+    .hamburger { display: block; }
+  }
+
+  .nav-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
+    display: none;
+  }
+  .nav-overlay.open { display: block; }
+
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 320px;
+    height: 100%;
+    background: #fff;
+    box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+    z-index: 9999;
+    overflow-y: auto;
+    transition: right 0.3s ease;
+    padding: 24px;
+  }
+  .nav-menu.open { right: 0; }
+
+  .nav-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 32px;
+    color: var(--color-text);
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+  }
+
+  .nav-menu h2 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 20px 0;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--color-accent);
+  }
+
+  .nav-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px 0;
+  }
+
+  .nav-menu li {
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-menu li::before {
+    display: none;
+  }
+
+  .nav-menu a {
+    display: block;
+    padding: 10px 0;
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: 15px;
+    transition: color 0.2s;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .nav-menu a:hover {
+    color: var(--color-accent);
+  }
+
 </style>
 </head>
 <body>
 
 <div class="header">
   <div class="header-inner">
-    <a href="../" class="logo">『AI』と暮らす『非エンジニア』の日常</a>
+    <a href="../" class="logo">『<span style="color:#e63946">AI</span>』と暮らす<br class="sp-br">『<span style="color:#e63946">非エンジニア</span>』の日常</a>
     <div class="breadcrumb"><a href="../">ホーム</a> / トレードシステム仕組み編</div>
+    <button class="hamburger" id="hamburger">☰</button>
   </div>
 </div>
 
@@ -1138,5 +1238,56 @@
 </section>
 
 <!-- Analytics: 解析サービス導入時にここにスクリプトを追加 -->
+
+<div class="nav-overlay" id="navOverlay"></div>
+<nav class="nav-menu" id="navMenu">
+  <button class="nav-close" id="navClose">✕</button>
+  <h2>メニュー</h2>
+  <ul>
+    <li><a href="../">🏠 ホーム</a></li>
+  </ul>
+  <h2>記事一覧</h2>
+  <ul>
+    <li><a href="../day1/">Day1: チーム構築</a></li>
+    <li><a href="../soul-md-merged/">SOUL.md: AI臭さ対策</a></li>
+    <li><a href="../comfyui/">ComfyUI: ローカル自動化</a></li>
+    <li><a href="../morning-briefing/">朝ブリーフィング</a></li>
+    <li><a href="../token-efficiency/">トークン効率化</a></li>
+    <li><a href="../cron-heartbeat/">cron + heartbeat</a></li>
+    <li><a href="../multi-agent-flow/">マルチエージェント連携</a></li>
+    <li><a href="../backtest-overview/">トレードシステム概要編</a></li>
+    <li><a href="../backtest-failures/">トレードシステム失敗編</a></li>
+    <li><a href="../backtest-method/">トレードシステム仕組み編</a></li>
+  </ul>
+  <h2>その他</h2>
+  <ul>
+    <li><a href="../about/">About</a></li>
+  </ul>
+</nav>
+
+
+<script>
+(function() {
+  const hamburger = document.getElementById('hamburger');
+  const navOverlay = document.getElementById('navOverlay');
+  const navMenu = document.getElementById('navMenu');
+  const navClose = document.getElementById('navClose');
+
+  function openMenu() {
+    navOverlay.classList.add('open');
+    navMenu.classList.add('open');
+  }
+
+  function closeMenu() {
+    navOverlay.classList.remove('open');
+    navMenu.classList.remove('open');
+  }
+
+  if (hamburger) hamburger.addEventListener('click', openMenu);
+  if (navClose) navClose.addEventListener('click', closeMenu);
+  if (navOverlay) navOverlay.addEventListener('click', closeMenu);
+})();
+</script>
+
 </body>
 </html>
