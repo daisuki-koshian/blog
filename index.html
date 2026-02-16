@@ -404,6 +404,59 @@
     color: #bbb;
   }
 
+  /* Home sections */
+  .home-sections {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin: 48px 0;
+    padding-top: 32px;
+    border-top: 1px solid var(--color-border);
+  }
+  .home-section-title {
+    font-size: 18px;
+    font-weight: 900;
+    color: var(--color-text);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--color-accent);
+    display: inline-block;
+  }
+  .home-section-list {
+    list-style: none;
+  }
+  .home-section-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .home-section-list a {
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s;
+  }
+  .home-section-list a:hover {
+    color: var(--color-accent);
+  }
+  .new-badge {
+    font-size: 10px;
+    font-weight: 700;
+    color: #fff;
+    background: var(--color-accent);
+    padding: 1px 6px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+  @media (max-width: 768px) {
+    .home-sections {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+  }
+
   .footer {
     text-align: center;
     padding: 48px 0;
@@ -700,6 +753,28 @@
       </div>
     </a>
 
+  </div>
+
+  <!-- Popular & Latest -->
+  <div class="home-sections">
+    <div class="home-section">
+      <h3 class="home-section-title">🔥 人気記事</h3>
+      <ul class="home-section-list">
+        <li><a href="soul-md-merged/">SOUL.mdの書き方 — AI臭さを消す実践ガイド</a></li>
+        <li><a href="token-efficiency/">AGENTS.mdを83%削減した話</a></li>
+        <li><a href="backtest-overview/">非エンジニアがAIに28,000行のトレードシステムを作らせた話</a></li>
+      </ul>
+    </div>
+    <div class="home-section">
+      <h3 class="home-section-title">🆕 最新記事</h3>
+      <ul class="home-section-list">
+        <li><a href="backtest-overview/">トレードシステム概要編</a><span class="new-badge">NEW</span></li>
+        <li><a href="backtest-failures/">トレードシステム失敗編</a><span class="new-badge">NEW</span></li>
+        <li><a href="backtest-method/">トレードシステム仕組み編</a><span class="new-badge">NEW</span></li>
+        <li><a href="multi-agent-flow/">マルチエージェント連携フロー</a></li>
+        <li><a href="cron-heartbeat/">cronとheartbeat使い分け</a></li>
+      </ul>
+    </div>
   </div>
 
   <footer class="footer">
