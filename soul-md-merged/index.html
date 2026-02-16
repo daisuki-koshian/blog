@@ -53,7 +53,7 @@
     color: #1a1a1a;
     text-decoration: none;
   }
-  .breadcrumb {
+  .breadcrumb-old {
     font-size: 13px;
     color: var(--color-text-light);
   }
@@ -390,6 +390,120 @@
     background: linear-gradient(transparent 60%, rgba(230,57,70,0.15) 60%);
   }
 
+  /* キーメッセージ — 記事の核心 */
+  .key-message {
+    font-size: 20px;
+    font-weight: 900;
+    line-height: 1.8;
+    padding: 24px 28px;
+    margin: 32px 0;
+    background: #fff;
+    border-left: 5px solid var(--color-accent);
+    border-radius: 0 8px 8px 0;
+    box-shadow: 0 4px 16px rgba(230,57,70,0.08);
+    position: relative;
+  }
+  .key-message::before {
+    content: '"';
+    position: absolute;
+    top: -8px;
+    left: 12px;
+    font-size: 48px;
+    color: var(--color-accent);
+    opacity: 0.3;
+    font-family: Georgia, serif;
+    line-height: 1;
+  }
+
+  /* コールアウトボックス — 気づき・注意 */
+  .callout-box {
+    padding: 20px 24px;
+    margin: 28px 0;
+    background: #fff8f0;
+    border-left: 4px solid #ffa940;
+    border-radius: 0 6px 6px 0;
+    font-size: 15px;
+    line-height: 1.9;
+  }
+  .callout-box.info {
+    background: #f0f7ff;
+    border-left-color: #4a90d9;
+  }
+  .callout-box.danger {
+    background: #fff5f5;
+    border-left-color: var(--color-accent);
+  }
+  .callout-box strong {
+    color: #1a1a1a;
+  }
+
+  /* 引用ブロック — 印象的なフレーズ */
+  .quote-block {
+    position: relative;
+    padding: 28px 32px 28px 48px;
+    margin: 36px 0;
+    background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+    border-radius: 8px;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.9;
+    color: #333;
+  }
+  .quote-block::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(to bottom, var(--color-accent), transparent);
+    border-radius: 4px;
+  }
+
+  /* CTAボタン */
+  .cta-btn {
+    display: inline-block;
+    padding: 14px 36px;
+    background: var(--color-accent);
+    color: #fff;
+    font-weight: 700;
+    font-size: 15px;
+    border-radius: 6px;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 12px rgba(230,57,70,0.3);
+  }
+  .cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(230,57,70,0.4);
+  }
+  .cta-btn::before {
+    display: block;
+    position: absolute;
+    top: -50%;
+    left: -30%;
+    transform: rotate(30deg);
+    width: 70px;
+    height: 100px;
+    content: '';
+    background-image: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.4), rgba(255,255,255,0));
+    animation: btn-shine 3s infinite linear;
+  }
+  @keyframes btn-shine {
+    0% { left: -30%; }
+    15% { left: 120%; }
+    100% { left: 120%; }
+  }
+
+  /* 数字ハイライト */
+  .num-highlight {
+    font-size: 1.3em;
+    font-weight: 900;
+    color: var(--color-accent);
+  }
+
   blockquote {
     border-left: 4px solid var(--color-accent);
     padding: 16px 20px;
@@ -543,7 +657,7 @@
     
       font-size: 16px;
     }
-    .breadcrumb {
+    .breadcrumb-old {
       font-size: 11px;
     }
     .hero {
@@ -679,6 +793,7 @@
   }
   @media (max-width: 768px) {
     .hamburger { display: block; }
+    .header-nav { display: none; }
   }
 
   .nav-overlay {
@@ -764,11 +879,16 @@
 
 <div class="header">
   <div class="header-inner">
-    <a href="../" class="logo">『<span style="color:#e63946">AI</span>』と暮らす<br class="sp-br">『<span style="color:#e63946">非エンジニア</span>』<br class="sp-br">&emsp;の日常</a>
-    <div class="breadcrumb"><a href="../">ホーム</a> / SOUL.md</div>
+    <a href="../" class="logo">『<span style="color:#e63946">AI</span>』と暮らす『<span style="color:#e63946">非エンジニア</span>』の日常</a>
+    <nav class="header-nav">
+      <a href="../">Home</a>
+      <a href="../about/">About</a>
+      <a href="https://x.com/daisuki_koshian" target="_blank" rel="noopener" title="X (Twitter)">𝕏</a>
+    </nav>
     <button class="hamburger" id="hamburger">☰</button>
   </div>
 </div>
+<div class="breadcrumb-bar"><a href="../">ホーム</a> / SOUL.md</div>
 
 <div class="hero">
   <div class="hero-grid"></div>
@@ -836,7 +956,7 @@
 
     <p class="fade-in">汎用的なシステムプロンプトが「基礎体力」なら、<code>SOUL.md</code>は「スタイル」や「哲学」に近いです。ここを書き込むことで、エージェントは初めて「あなた専用」になります。</p>
 
-    <p class="fade-in">そして、SOUL.mdに<strong>文体ルールやNGワードを書き込むことで、AI臭さを消すことができます</strong>。</p>
+    <div class="key-message fade-in">SOUL.mdに文体ルールやNGワードを書き込むことで、AI臭さを消すことができます。</div>
 
     <hr class="divider">
 
@@ -860,9 +980,7 @@
 端的に。必要なときだけ丁寧に。</pre>
     </div>
 
-    <p class="fade-in">たったこれだけ。6行。</p>
-
-    <p class="fade-in">でもこの6行があるだけで、Jarvisの応答は劇的に変わりました。「いい質問ですね」というクッション言葉が消え、「調べましたが、該当する情報はありませんでした」ではなく「見つからなかった。別の角度で探す?」と返してくるようになりました。</p>
+    <div class="callout-box info fade-in"><strong>たった<span class="num-highlight">6行</span>でエージェントが変わる:</strong> この6行があるだけで、Jarvisの応答は劇的に変わりました。「いい質問ですね」というクッション言葉が消え、「調べましたが、該当する情報はありませんでした」ではなく「見つからなかった。別の角度で探す?」と返してくるようになりました。</div>
 
     <p class="fade-in">意見を持つようにもなりました。「このメール、返信した方がいいですか?」と聞くと、「内容が薄いので無視していい。時間の無駄」と言い切ります。以前は「ご判断にお任せします」と逃げていたのに。</p>
 
@@ -1411,7 +1529,7 @@
     
       font-size: 16px;
     }
-    .breadcrumb {
+    .breadcrumb-old {
       font-size: 11px;
     }
     .hero {
@@ -1547,6 +1665,7 @@
   }
   @media (max-width: 768px) {
     .hamburger { display: block; }
+    .header-nav { display: none; }
   }
 
   .nav-overlay {
