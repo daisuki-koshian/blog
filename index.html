@@ -115,6 +115,21 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 32px;
   }
+  .card-hidden { display: none; }
+  .load-more-wrap { text-align: center; margin: 36px 0; }
+  .load-more-btn {
+    display: inline-block;
+    padding: 14px 40px;
+    background: #fff;
+    color: #e63946;
+    font-weight: 700;
+    font-size: 15px;
+    border: 2px solid #e63946;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+  .load-more-btn:hover { background: #e63946; color: #fff; }
 
   .article-card {
     background: #fff;
@@ -850,7 +865,7 @@
       </div>
     </a>
 
-    <a href="morning-briefing/" class="article-card fade-in">
+    <a href="morning-briefing/" class="article-card fade-in card-hidden">
       <div class="article-card-thumb thumb-morning">
         <div class="thumb-num">7</div>
         <div class="thumb-label">AM BRIEFING</div>
@@ -866,7 +881,7 @@
       </div>
     </a>
 
-    <a href="token-efficiency/" class="article-card fade-in">
+    <a href="token-efficiency/" class="article-card fade-in card-hidden">
       <div class="article-card-thumb thumb-token">
         <div class="thumb-num">83</div>
         <div class="thumb-percent">%</div>
@@ -882,7 +897,7 @@
       </div>
     </a>
 
-    <a href="cron-heartbeat/" class="article-card fade-in">
+    <a href="cron-heartbeat/" class="article-card fade-in card-hidden">
       <div class="article-card-thumb thumb-cron">
         <div class="thumb-title">cron<br><span class="vs">vs</span><br>beat</div>
       </div>
@@ -896,7 +911,7 @@
       </div>
     </a>
 
-    <a href="multi-agent-flow/" class="article-card fade-in">
+    <a href="multi-agent-flow/" class="article-card fade-in card-hidden">
       <div class="article-card-thumb thumb-multi">
         <div class="thumb-num">5</div>
         <div class="thumb-label">AGENTS FLOW</div>
@@ -912,6 +927,10 @@
       </div>
     </a>
 
+  </div>
+
+  <div class="load-more-wrap">
+    <button class="load-more-btn" id="loadMore">もっと読む</button>
   </div>
 
   <!-- Popular & Latest -->
@@ -1078,5 +1097,16 @@ btn.addEventListener('click', function() {
 </script>
 
 <button class="back-to-top" id="backToTop">↑</button>
+<script>
+(function() {
+  var btn = document.getElementById('loadMore');
+  if (btn) btn.addEventListener('click', function() {
+    document.querySelectorAll('.card-hidden').forEach(function(el) {
+      el.classList.remove('card-hidden');
+    });
+    btn.style.display = 'none';
+  });
+})();
+</script>
 </body>
 </html>
