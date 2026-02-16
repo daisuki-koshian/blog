@@ -518,11 +518,21 @@
 <body>
 
 <div class="hero">
-  <div class="hero-title">『AI』と暮らす『非エンジニア』の日常</div>
+  <div class="hero-title">『AI』と暮らす<br>『非エンジニア』の日常</div>
   <div class="hero-sub">OpenClaw実践記録 — やったこと全部書く</div>
 </div>
 
 <div class="container">
+
+  <!-- Search Bar -->
+  <div class="search-container">
+    <input 
+      type="text" 
+      id="searchBox" 
+      class="search-box" 
+      placeholder="記事を検索（タイトル・説明・タグ）"
+    />
+  </div>
 
   <!-- Start Here Section -->
   <section class="start-here">
@@ -684,18 +694,86 @@
   <footer class="footer">
     <span class="brand">『AI』と暮らす『非エンジニア』の日常</span> — OpenClaw × Claude<br>
     <small>AIエージェントチーム構築の記録</small><br>
-    <small style="margin-top: 12px; display: inline-block;"><a href="about/" style="color: #e63946; text-decoration: none;">About</a></small>
+    <div class="footer-links">
+      <small><a href="about/">About</a></small>
+      <small><a href="feed.xml">RSS</a></small>
+    </div>
   </footer>
 
 </div>
 
 <script>
+  // Fade-in animation
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) entry.target.classList.add('visible');
     });
   }, { threshold: 0.1 });
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Search functionality
+  const articlesData = [
+    {
+      title: '1日で5体のエージェントチームを作った話 — 設定ファイルから失敗例まで全部書く',
+      desc: 'Jarvis、Analyst、Scribe、Cloud、Pixelの5体構成。openclaw.jsonの実例、SOUL.mdの書き方、トークン効率化の3つの手、ハマったポイントまで実践レベルで全公開。',
+      tag: 'OpenClaw実践',
+      url: 'day1/'
+    },
+    {
+      title: 'SOUL.mdの書き方 — AI臭さを消す実践ガイド',
+      desc: 'エージェントを作ったけど、毎回答え方がブレる。文体が統一されない。AI臭い文章が出てくる。そんな悩みを解決する「SOUL.md」の実践ガイド。Jarvis vs Scribeの実例比較、Satoruからのダメ出し実録、NGワード集、AI臭さを消す5つのテクニックまで全公開。',
+      tag: 'OpenClaw実践',
+      url: 'soul-md-merged/'
+    },
+    {
+      title: 'ComfyUIローカル自動化 — クラウド課金から卒業する',
+      desc: 'Midjourney、DALL-Eの月額課金に疲れた？ローカルで動かせば電気代以外タダ。何枚でも生成し放題。ComfyUIのインストールからFlux2導入、API自動化、Telegram連携まで全部書く。',
+      tag: '画像生成',
+      url: 'comfyui/'
+    },
+    {
+      title: 'OpenClawで朝ブリーフィングを自動化した話',
+      desc: '毎朝7時に天気予報、傘判定、市場情報がTelegramに届く。OpenClawのcron機能と気象庁API、Web検索を組み合わせた朝のルーティン自動化。プロンプト設計から実際の運用まで。',
+      tag: '自動化実践',
+      url: 'morning-briefing/'
+    },
+    {
+      title: 'AGENTS.mdを83%削減した話 — OpenClawのトークン効率化',
+      desc: 'AGENTS.md 4,800字→823字、SOUL.md 1,200字→149字。APIコストを5分の1にした実践記録。XMLタグ構造化、memory_search活用、offset/limit部分読みの具体的な方法。',
+      tag: 'コスト削減',
+      url: 'token-efficiency/'
+    },
+    {
+      title: 'cronとheartbeat、どう使い分ける？ — OpenClawの定期実行ガイド',
+      desc: '時間ベースのcronとポーリング型のheartbeat、どちらを使うべきか？実例を交えた判断基準、設定方法、よくある失敗例とトラブルシューティング。HEARTBEAT.mdの書き方も解説。',
+      tag: 'OpenClaw実践',
+      url: 'cron-heartbeat/'
+    },
+    {
+      title: '5体のAIエージェントが実際どう連携してるか — マルチエージェントの裏側',
+      desc: 'Jarvis、Scribe、Analyst、Pixel、Cloudの5体構成。sessions_spawnとsessions_sendによる連携、SOUL.mdの重要性、X投稿作成からブログ公開までの実際のワークフロー。執筆者: Scribe',
+      tag: 'マルチエージェント',
+      url: 'multi-agent-flow/'
+    }
+  ];
+
+  const searchBox = document.getElementById('searchBox');
+  const articleCards = document.querySelectorAll('.article-card');
+
+  searchBox.addEventListener('input', (e) => {
+    const query = e.target.value.toLowerCase();
+    
+    articleCards.forEach((card, index) => {
+      const data = articlesData[index];
+      const searchableText = `${data.title} ${data.desc} ${data.tag}`.toLowerCase();
+      
+      if (searchableText.includes(query)) {
+        card.style.display = 'flex';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
 </script>
 
 <!-- Analytics: 解析サービス導入時にここにスクリプトを追加 -->
