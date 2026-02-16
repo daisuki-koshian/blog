@@ -516,5 +516,76 @@ response = urllib.request.urlopen(req)</pre>
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 </script>
 
+<style>
+  .code-copy-button {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-family: var(--font-main, 'Noto Sans JP', sans-serif);
+    background: rgba(255, 255, 255, 0.9);
+    color: #666;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 10;
+  }
+  .code-copy-button:hover {
+    background: #fff;
+    color: #e63946;
+    border-color: #e63946;
+    box-shadow: 0 2px 4px rgba(230, 57, 70, 0.1);
+  }
+  .code-copy-button.copied {
+    background: #e63946;
+    color: #fff;
+    border-color: #e63946;
+  }
+  pre {
+    position: relative;
+  }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // ページ内のすべての<pre>要素を取得
+  const preBlocks = document.querySelectorAll('pre');
+  
+  preBlocks.forEach(function(pre) {
+    // コピーボタンを作成
+    const button = document.createElement('button');
+    button.className = 'code-copy-button';
+    button.textContent = 'コピー';
+    
+    // ボタンクリック時の処理
+    button.addEventListener('click', function() {
+      // <pre>内のテキストを取得（<code>タグがあればその中身）
+      const code = pre.querySelector('code') || pre;
+      const text = code.textContent;
+      
+      // クリップボードにコピー
+      navigator.clipboard.writeText(text).then(function() {
+        // フィードバック表示
+        button.textContent = 'Copied!';
+        button.classList.add('copied');
+        
+        // 1.5秒後に元に戻す
+        setTimeout(function() {
+          button.textContent = 'コピー';
+          button.classList.remove('copied');
+        }, 1500);
+      }).catch(function(err) {
+        console.error('コピーに失敗しました:', err);
+      });
+    });
+    
+    // ボタンを<pre>に追加
+    pre.appendChild(button);
+  });
+});
+</script>
+
 </body>
 </html>
