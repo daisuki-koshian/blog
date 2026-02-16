@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>あの8100万ビューのエッセイ、「前提が間違ってる」とFortuneが反論した | 『AI』と暮らす『非エンジニア』の日常</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap');
+
+  :root {
+    --color-bg: #fafafa;
+    --color-text: #333333;
+    --color-text-light: #666666;
+    --color-accent: #e63946;
+    --color-border: #e8e8e8;
+    --color-card-bg: #ffffff;
+    --font-main: 'Noto Sans JP', sans-serif;
+    --max-width: 780px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-main);
+    color: var(--color-text);
+    background: var(--color-bg);
+    line-height: 1.9;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .header {
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    padding: 12px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo { color: #1a1a1a; text-decoration: none; font-size: 16px; font-weight: 900; }
+
+  .hero {
+    position: relative;
+    background: #fff;
+    padding: 80px 0 60px;
+    overflow: hidden;
+    border-bottom: 2px solid var(--color-accent);
+  }
+  .hero-inner {
+    position: relative;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .hero-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: #999;
+    margin-bottom: 24px;
+    letter-spacing: 0.05em;
+    opacity: 0;
+    animation: fadeIn 0.8s ease-in forwards;
+  }
+
+  .hero-title {
+    font-size: clamp(24px, 5vw, 36px);
+    font-weight: 900;
+    color: #333;
+    line-height: 1.4;
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: fadeInUp 0.8s 0.3s ease-out forwards;
+    position: relative;
+  }
+  .hero-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(to right, var(--color-accent), transparent);
+    display: block;
+  }
+
+  .marker-highlight {
+    background: linear-gradient(transparent 60%, rgba(230,57,70,0.25) 60%);
+    padding: 2px 4px;
+  }
+
+  .hero-sep {
+    width: 80px;
+    height: 3px;
+    background: var(--color-accent);
+    margin: 28px 0 20px 0;
+    border: none;
+    opacity: 0;
+    animation: slideIn 0.6s 0.6s ease-out forwards;
+  }
+
+  .hero-sub {
+    font-size: 16px;
+    font-weight: 500;
+    color: #666;
+    line-height: 1.6;
+    opacity: 0;
+    animation: fadeIn 0.8s 0.9s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; width: 0; }
+    to { opacity: 1; width: 80px; }
+  }
+
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .content-wrapper {
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    gap: 64px;
+    align-items: flex-start;
+  }
+  .main-content {
+    flex: 1;
+    max-width: 780px;
+  }
+  .sidebar {
+    width: 280px;
+    flex-shrink: 0;
+    position: sticky;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    top: 80px;
+  }
+  .sidebar::-webkit-scrollbar { display: none; }
+  .sidebar-section {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .sidebar-section h3 {
+    font-size: 14px;
+    font-weight: 900;
+    color: var(--color-text);
+    margin: 0 0 16px 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+  }
+  .sidebar-section h3::after {
+    display: none;
+  }
+  .sidebar-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .sidebar-list li {
+    padding: 0;
+    margin-bottom: 12px;
+  }
+  .sidebar-list li::before {
+    display: none;
+  }
+  .sidebar-list a {
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: 13px;
+    line-height: 1.6;
+    display: block;
+    transition: color 0.2s;
+  }
+  .sidebar-list a:hover {
+    color: var(--color-accent);
+  }
+  .sidebar-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .sidebar-tags li {
+    margin: 0;
+    padding: 0;
+  }
+  .sidebar-tags li::before {
+    display: none;
+  }
+  .sidebar-tag {
+    display: inline-block;
+    padding: 4px 12px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--color-accent);
+    background: #fff;
+    border: 1px solid var(--color-accent);
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .sidebar-tag:hover {
+    background: var(--color-accent);
+    color: #fff;
+  }
+
+  @media (max-width: 1024px) {
+    .content-wrapper {
+      justify-content: center;
+      flex-direction: column;
+    }
+    .sidebar {
+      width: 100%;
+      position: static;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+  }
+
+  .article-header {
+    padding: 48px 0 32px;
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: 48px;
+  }
+  .article-header .tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+  }
+  .article-header h1 {
+    font-size: 32px;
+    font-weight: 900;
+    line-height: 1.4;
+    margin-bottom: 16px;
+  }
+  .article-header .meta {
+    font-size: 14px;
+    color: var(--color-text-light);
+  }
+
+  article p {
+    margin-bottom: 1.8em;
+    font-size: 16px;
+  }
+
+  article h2 {
+    position: relative;
+    font-size: 22px;
+    font-weight: 900;
+    padding: 16px 20px;
+    margin: 56px 0 28px;
+    background: #fff;
+    border-left: 5px solid var(--color-accent);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    border-radius: 0 4px 4px 0;
+  }
+  article h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 5px;
+    width: 60px;
+    height: 3px;
+    background: var(--color-accent);
+    border-radius: 2px;
+  }
+
+  article h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 36px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--color-border);
+    position: relative;
+  }
+  article h3::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: var(--color-accent);
+  }
+
+  article ul {
+    margin: 16px 0 24px 0;
+    padding: 0;
+    list-style: none;
+  }
+  article ul li {
+    padding: 6px 0 6px 20px;
+    position: relative;
+    font-size: 15px;
+  }
+  article ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 14px;
+    width: 8px;
+    height: 8px;
+    background: var(--color-accent);
+    border-radius: 50%;
+  }
+
+  article strong {
+    font-weight: 900;
+    color: var(--color-accent);
+  }
+
+  .card-box {
+    background: #fff;
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin: 24px 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border-left: 4px solid var(--color-accent);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .card-box:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(230,57,70,0.12);
+  }
+  .card-box h4 {
+    font-size: 18px;
+    font-weight: 900;
+    color: var(--color-accent);
+    margin-bottom: 12px;
+  }
+
+  .big-number {
+    display: inline-block;
+    font-size: 2.8em;
+    font-weight: 900;
+    color: var(--color-accent);
+    line-height: 1.2;
+  }
+
+  .key-message {
+    font-size: 20px;
+    font-weight: 900;
+    line-height: 1.8;
+    padding: 28px 32px;
+    margin: 36px 0;
+    background: #fff;
+    border-left: 5px solid var(--color-accent);
+    border-radius: 0 8px 8px 0;
+    box-shadow: 0 4px 16px rgba(230,57,70,0.08);
+    position: relative;
+  }
+  .key-message::before {
+    content: '"';
+    position: absolute;
+    top: -8px;
+    left: 12px;
+    font-size: 48px;
+    color: var(--color-accent);
+    opacity: 0.3;
+    font-family: Georgia, serif;
+    line-height: 1;
+  }
+
+  .gradient-divider {
+    border: none;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--color-accent), transparent);
+    margin: 48px 0;
+  }
+
+  .article-meta-block {
+    background: #f8f9fa;
+    border-left: 4px solid var(--color-accent);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin: 0 0 40px 0;
+  }
+  .article-meta-block dl {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 12px 16px;
+    margin: 0;
+  }
+  .article-meta-block dt {
+    font-size: 14px;
+    font-weight: 900;
+    color: var(--color-accent);
+  }
+  .article-meta-block dd {
+    font-size: 14px;
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  .agent-attribution {
+    text-align: center;
+    font-size: 13px;
+    color: #999;
+    margin: 48px 0 32px 0;
+    padding: 16px 0;
+    border-top: 1px solid #f0f0f0;
+  }
+
+  .feedback-section {
+    background: #fff;
+    border: 1px solid #f0f0f0;
+    border-left: 3px solid var(--color-accent);
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin: 32px 0;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+  .feedback-section p {
+    margin: 0 0 8px 0;
+    color: var(--color-text-light);
+  }
+  .feedback-section p:last-child {
+    margin-bottom: 0;
+  }
+  .feedback-section a {
+    color: var(--color-accent);
+    text-decoration: none;
+    font-weight: 700;
+  }
+  .feedback-section a:hover {
+    text-decoration: underline;
+  }
+
+  .next-read {
+    margin: 40px 0 48px 0;
+  }
+  .next-read h3 {
+    font-size: 20px;
+    font-weight: 900;
+    margin-bottom: 24px;
+    color: var(--color-text);
+  }
+  .next-read-cards {
+    display: grid;
+    gap: 16px;
+  }
+  .next-read-card {
+    background: #fff;
+    border-radius: 8px;
+    border: 2px solid #f0f0f0;
+    padding: 20px 24px;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: all 0.2s;
+  }
+  .next-read-card:hover {
+    border-color: var(--color-accent);
+    box-shadow: 0 4px 12px rgba(230, 57, 70, 0.1);
+  }
+  .next-read-card .icon {
+    font-size: 28px;
+    flex-shrink: 0;
+  }
+  .next-read-card .content {
+    flex: 1;
+  }
+  .next-read-card .title {
+    font-size: 16px;
+    font-weight: 900;
+    color: var(--color-text);
+    margin-bottom: 4px;
+  }
+  .next-read-card .desc {
+    font-size: 13px;
+    color: var(--color-text-light);
+    line-height: 1.6;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 48px 0;
+    font-size: 13px;
+    color: #aaa;
+    border-top: 1px solid var(--color-border);
+    margin-top: 64px;
+  }
+  .footer .brand {
+    font-weight: 900;
+    color: var(--color-accent);
+    letter-spacing: 0.05em;
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .header-nav { display: flex; gap: 24px; align-items: center; margin-left: auto; }
+  .header-nav a { color: #1a1a1a; text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+  .header-nav a:hover { color: #e63946; }
+  .breadcrumb-bar { max-width: 1200px; margin: 0 auto; padding: 6px 24px; font-size: 13px; color: #999; }
+  .breadcrumb-bar a { color: #e63946; text-decoration: none; }
+  .hamburger {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: var(--color-accent);
+    cursor: pointer;
+    padding: 4px 8px;
+    line-height: 1;
+  }
+
+  .progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: #e63946;
+    z-index: 9999;
+    transition: width 0.1s linear;
+    width: 0%;
+  }
+
+  .back-to-top {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 44px;
+    height: 44px;
+    background: #e63946;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .back-to-top.visible { opacity: 1; }
+  .back-to-top:hover { background: #c5303c; }
+
+  @media (max-width: 768px) {
+    .hamburger { display: block; }
+    .header-nav { display: none; }
+    .hero { padding: 60px 0 40px; }
+    .hero-title { font-size: 22px; }
+    .big-number { font-size: 2.2em; }
+    .card-box { padding: 16px 20px; }
+    .content-wrapper { padding: 0 16px; flex-direction: column; }
+    .sidebar-section { padding: 16px; }
+  }
+
+  .nav-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
+    display: none;
+  }
+  .nav-overlay.open { display: block; }
+
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 320px;
+    height: 100%;
+    background: #fff;
+    box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+    z-index: 9999;
+    transition: right 0.3s ease;
+    padding: 24px;
+  }
+  .nav-menu.open { right: 0; }
+
+  .nav-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 32px;
+    color: var(--color-text);
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+  }
+
+  .nav-menu h2 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 20px 0;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .nav-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px 0;
+  }
+
+  .nav-menu li {
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-menu li::before {
+    display: none;
+  }
+
+  .nav-menu a {
+    display: block;
+    padding: 10px 0;
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: 15px;
+    transition: color 0.2s;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .nav-menu a:hover {
+    color: var(--color-accent);
+  }
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+
+<div class="header">
+  <div class="header-inner">
+    <a href="../" class="logo">『<span style="color:#e63946">AI</span>』と暮らす『<span style="color:#e63946">非エンジニア</span>』の日常</a>
+    <nav class="header-nav">
+      <a href="../">Home</a>
+      <a href="../about/">About</a>
+      <a href="https://x.com/daisuki_koshian" target="_blank" rel="noopener" title="X (Twitter)">𝕏</a>
+    </nav>
+    <button class="hamburger" id="hamburger">☰</button>
+  </div>
+  <div class="breadcrumb-bar"><a href="../">ホーム</a> / Fortuneが反論した</div>
+</div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">海外AIニュース — Fortune / Mashable</div>
+    <div class="hero-title">
+      <span class="marker-highlight">両方読んで、自分で判断する</span>
+    </div>
+    <hr class="hero-sep">
+    <div class="hero-sub">あの8100万ビューのエッセイ、「前提が間違ってる」とFortuneが反論した</div>
+  </div>
+</div>
+
+<div class="content-wrapper">
+  <div class="main-content">
+
+  <header class="article-header fade-in">
+    <span class="tag">海外AIニュース</span>
+    <h1>あの8100万ビューのエッセイ、「前提が間違ってる」とFortuneが反論した</h1>
+    <div class="meta">2026年2月16日</div>
+  </header>
+
+  <article>
+
+    <div class="article-meta-block">
+      <dl>
+        <dt>最終更新:</dt>
+        <dd>2026年2月16日</dd>
+        <dt>カテゴリ:</dt>
+        <dd>海外AIニュース</dd>
+        <dt>読了時間:</dt>
+        <dd>約4分</dd>
+      </dl>
+    </div>
+
+    <p class="fade-in"><a href="../news-shumer/" style="color: var(--color-accent); text-decoration: none; font-weight: 700;">先日紹介したMatt Shumerの「Something Big Is Happening」</a>。あれに対して、Fortuneが真正面から反論記事を出した。</p>
+    
+    <p class="fade-in">📎 <a href="https://fortune.com/2026/02/12/matt-shumers-viral-blog-about-ais-looming-impact-on-knowledge-workers-is-based-on-flawed-assumptions/" target="_blank" rel="noopener" style="color: var(--color-accent); text-decoration: none; font-weight: 700;">https://fortune.com/2026/02/12/matt-shumers-viral-blog-about-ais-looming-impact-on-knowledge-workers-is-based-on-flawed-assumptions/</a></p>
+
+    <p class="fade-in">Mashableも「AI業界のチキン・リトル問題」として取り上げてる。</p>
+
+    <p class="fade-in">📎 <a href="https://mashable.com/article/viral-something-big-is-coming-essay-artificial-intelligence-warning" target="_blank" rel="noopener" style="color: var(--color-accent); text-decoration: none; font-weight: 700;">https://mashable.com/article/viral-something-big-is-coming-essay-artificial-intelligence-warning</a></p>
+
+    <hr class="gradient-divider">
+
+    <h2 class="fade-in">Fortuneの主張</h2>
+
+    <p class="fade-in">記事を書いたのはFortuneのAI担当記者Jeremy Kahn。AI関連の書籍も出してる人で、「AIが仕事を変える」こと自体は否定してない。ただ、Shumerの「コーディングで起きたことが、他の全ての職種で1〜5年以内に起きる」という主張には問題があると。</p>
+
+    <p class="fade-in">反論のポイントは3つ。</p>
+
+    <div class="card-box fade-in">
+      <h4>① コーディングと他の仕事は違う</h4>
+      <p>コードには「コンパイルできるかどうか」「テストに通るかどうか」という明確な基準がある。だからAIの自動化が進みやすかった。</p>
+      <p style="margin-top: 12px;">でも法律、医療、マーケティングには「正解」がない。良い契約書かどうか、良い治療方針かどうか、専門家同士でも意見が分かれる。OpenAIのベンチマーク（GDPval）でも、人間の専門家の評価は<span class="big-number">71%</span>しか一致しなかった。</p>
+    </div>
+
+    <div class="card-box fade-in">
+      <h4>② 企業には「精度以外」のハードルがある</h4>
+      <p>AIの出力が3回に1回間違ってる可能性があったら、ほとんどの企業は導入できない。コンプライアンス、監査対応、ガバナンス。特に規制の厳しい業界（金融、医療、法律）では、「だいたい合ってる」じゃ通らない。</p>
+    </div>
+
+    <div class="card-box fade-in">
+      <h4>③ 煽りすぎ</h4>
+      <p>Shumer自身はAIスタートアップのCEO。AIがすごいと言えば言うほど、自分のビジネスに有利になる立場。Fortune記者はこれを「<span class="marker-highlight">fearmongering（恐怖を煽る行為）</span>」と表現してる。</p>
+    </div>
+
+    <hr class="gradient-divider">
+
+    <h2 class="fade-in">自分はどう思うか</h2>
+
+    <p class="fade-in">正直、両方わかる。</p>
+
+    <p class="fade-in">Shumerの言ってることは「方向性としては合ってる」と思う。AIがどんどんできることを増やしてるのは事実。<a href="../multi-agent-flow/" style="color: var(--color-accent); text-decoration: none; font-weight: 700;">自分もOpenClawで毎日AIに仕事を任せてて</a>、半年前と今では全然違う。</p>
+
+    <p class="fade-in">でもFortuneの指摘も的を射てる。コーディングが自動化できたからといって、法律相談や医療判断が同じスピードで自動化されるかは別問題。「コードが通るかどうか」と「この契約書で大丈夫か」は、判断の難しさがまるで違う。</p>
+
+    <p class="fade-in">結局、真実はたぶん中間にある。「1〜5年で50%の仕事がなくなる」は言い過ぎかもしれない。でも「まだ大丈夫」と思って何もしないのもリスク。</p>
+
+    <p class="fade-in">一番危ないのは、どちらかの極端に振れること。バズった記事だけ読んで「終わりだ」と焦るのも、反論だけ読んで「大げさだ」と安心するのも、どっちも間違い。</p>
+
+    <div class="key-message fade-in">
+      両方読んで、自分で判断する。それが一番。
+    </div>
+
+    <div class="agent-attribution">
+      📝 記事作成: AIエージェント（Jarvis）
+    </div>
+
+    <div class="feedback-section">
+      <p>💭 <strong>あなたはどう思いますか？</strong></p>
+      <p>感想・質問はこちら → <a href="https://x.com/daisuki_koshian" target="_blank">@daisuki_koshian</a></p>
+    </div>
+
+    <div class="next-read">
+      <h3>次に読む</h3>
+      <div class="next-read-cards">
+        <a href="../news-shumer/" class="next-read-card">
+          <div class="icon">🔥</div>
+          <div class="content">
+            <div class="title">8100万回読まれたAI起業家の話</div>
+            <div class="desc">Matt Shumerの「Something Big Is Happening」全文</div>
+          </div>
+        </a>
+        <a href="../news-nvidia-dms/" class="next-read-card">
+          <div class="icon">💰</div>
+          <div class="content">
+            <div class="title">NvidiaがAIコストを8分の1に</div>
+            <div class="desc">地味だけど一番大事かもしれないニュース</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+  </article>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <h3>最新記事</h3>
+      <ul class="sidebar-list">
+        <li><a href="../news-shumer-rebuttal/">Fortuneが反論した</a></li>
+        <li><a href="../news-nvidia-dms/">NvidiaがAIコストを8分の1に</a></li>
+        <li><a href="../news-shumer/">8100万回読まれたAI起業家の話</a></li>
+        <li><a href="../backtest-overview/">トレードシステム概要編</a></li>
+        <li><a href="../multi-agent-flow/">マルチエージェント連携</a></li>
+      </ul>
+    </div>
+    
+    <div class="sidebar-section">
+      <h3>人気記事</h3>
+      <ul class="sidebar-list">
+        <li><a href="../soul-md-merged/">SOUL.mdの書き方</a></li>
+        <li><a href="../token-efficiency/">AGENTS.mdを83%削減した話</a></li>
+        <li><a href="../backtest-overview/">非エンジニアがAIに28,000行のトレードシステムを作らせた話</a></li>
+      </ul>
+    </div>
+    
+    <div class="sidebar-section">
+      <h3>タグ</h3>
+      <ul class="sidebar-tags">
+        <li><span class="sidebar-tag">OpenClaw</span></li>
+        <li><span class="sidebar-tag">Claude Code</span></li>
+        <li><span class="sidebar-tag">海外AIニュース</span></li>
+        <li><span class="sidebar-tag">批判的思考</span></li>
+        <li><span class="sidebar-tag">AI倫理</span></li>
+      </ul>
+    </div>
+  </aside>
+</div>
+
+<footer class="footer">
+  <span class="brand">『AI』と暮らす『非エンジニア』の日常</span> — OpenClaw実践記録<br>
+  <small><a href="../" style="color: #e63946; text-decoration: none;">記事一覧に戻る</a></small>
+</footer>
+
+<div class="nav-overlay" id="navOverlay"></div>
+<nav class="nav-menu" id="navMenu">
+  <button class="nav-close" id="navClose">✕</button>
+  <h2>メニュー</h2>
+  <ul>
+    <li><a href="../">🏠 ホーム</a></li>
+  </ul>
+  <h2>記事一覧</h2>
+  <ul>
+    <li><a href="../news-shumer-rebuttal/">Fortuneが反論した</a></li>
+    <li><a href="../news-nvidia-dms/">NvidiaがAIコストを8分の1に</a></li>
+    <li><a href="../news-shumer/">8100万回読まれたAI起業家の話</a></li>
+    <li><a href="../day1/">Day1: チーム構築</a></li>
+    <li><a href="../soul-md-merged/">SOUL.md: AI臭さ対策</a></li>
+    <li><a href="../morning-briefing/">朝ブリーフィング</a></li>
+    <li><a href="../token-efficiency/">トークン効率化</a></li>
+  </ul>
+  <h2>その他</h2>
+  <ul>
+    <li><a href="../about/">About</a></li>
+  </ul>
+</nav>
+
+<button class="back-to-top" id="backToTop">↑</button>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+(function() {
+  const hamburger = document.getElementById('hamburger');
+  const navOverlay = document.getElementById('navOverlay');
+  const navMenu = document.getElementById('navMenu');
+  const navClose = document.getElementById('navClose');
+
+  function openMenu() {
+    navOverlay.classList.add('open');
+    navMenu.classList.add('open');
+  }
+
+  function closeMenu() {
+    navOverlay.classList.remove('open');
+    navMenu.classList.remove('open');
+  }
+
+  if (hamburger) hamburger.addEventListener('click', openMenu);
+  if (navClose) navClose.addEventListener('click', closeMenu);
+  if (navOverlay) navOverlay.addEventListener('click', closeMenu);
+})();
+
+window.addEventListener('scroll', function() {
+  var h = document.documentElement;
+  var progress = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+  document.getElementById('progressBar').style.width = progress + '%';
+});
+
+var btn = document.getElementById('backToTop');
+window.addEventListener('scroll', function() {
+  btn.classList.toggle('visible', window.scrollY > 500);
+});
+btn.addEventListener('click', function() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+</script>
+
+</body>
+</html>
