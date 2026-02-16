@@ -1039,47 +1039,58 @@
 
 <script>
   // タブ切り替え機能
-  const tabBtns = document.querySelectorAll('.tab-btn');
-  const articleCards = document.querySelectorAll('.article-card');
-  const loadMoreBtn = document.getElementById('loadMore');
-  
-  // タブクリック時の処理
-  tabBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const targetTab = btn.dataset.tab;
-      
-      // タブのアクティブ状態を切り替え
-      tabBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      
-      // 記事カードの表示/非表示を切り替え
-      articleCards.forEach(card => {
-        const cardCategory = card.dataset.category;
-        if (cardCategory === targetTab) {
+  (function() {
+    var tabBtns = document.querySelectorAll('.tab-btn');
+    var cards = document.querySelectorAll('.article-card');
+    var loadMoreBtn = document.getElementById('loadMore');
+    var currentTab = 'blog';
+
+    function showTab(tab) {
+      currentTab = tab;
+      tabBtns.forEach(function(b) { b.classList.remove('active'); });
+      document.querySelector('.tab-btn[data-tab="' + tab + '"]').classList.add('active');
+
+      cards.forEach(function(card) {
+        card.classList.remove('card-hidden');
+        if (card.dataset.category === tab) {
           card.style.display = '';
-          card.classList.remove('card-hidden');
         } else {
           card.style.display = 'none';
         }
       });
-      
-      // 「もっと読む」ボタンをリセット（全カード表示）
+
+      // 「もっと読む」はブログタブのみ、6件超で表示
       if (loadMoreBtn) {
-        loadMoreBtn.style.display = 'block';
-        loadMoreBtn.textContent = 'もっと読む';
+        var visibleCount = 0;
+        cards.forEach(function(card) {
+          if (card.dataset.category === tab) visibleCount++;
+        });
+        if (tab === 'blog' && visibleCount > 6) {
+          var blogIndex = 0;
+          cards.forEach(function(card) {
+            if (card.dataset.category === 'blog') {
+              blogIndex++;
+              if (blogIndex > 6) {
+                card.classList.add('card-hidden');
+              }
+            }
+          });
+          loadMoreBtn.style.display = 'block';
+        } else {
+          loadMoreBtn.style.display = 'none';
+        }
       }
+    }
+
+    tabBtns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        showTab(btn.dataset.tab);
+      });
     });
-  });
-  
-  // ページ読み込み時にデフォルトで「ブログ」タブを表示
-  window.addEventListener('DOMContentLoaded', () => {
-    articleCards.forEach(card => {
-      const cardCategory = card.dataset.category;
-      if (cardCategory !== 'blog') {
-        card.style.display = 'none';
-      }
-    });
-  });
+
+    // 初期表示
+    showTab('blog');
+  })();
 
   // Fade-in animation
   const observer = new IntersectionObserver((entries) => {
@@ -1165,20 +1176,24 @@
     }
   ];
 
-  const searchBox = document.getElementById('searchBox');
-  const articleCards = document.querySelectorAll('.article-card');
+  var searchBox = document.getElementById('searchBox');
+  var searchCards = document.querySelectorAll('.article-card');
 
-  searchBox.addEventListener('input', (e) => {
-    const query = e.target.value.toLowerCase();
+  searchBox.addEventListener('input', function(e) {
+    var query = e.target.value.toLowerCase();
     
-    articleCards.forEach((card, index) => {
-      const data = articlesData[index];
-      const searchableText = `${data.title} ${data.desc} ${data.tag}`.toLowerCase();
+    searchCards.forEach(function(card, index) {
+      var data = articlesData[index];
+      if (!data) return;
+      var searchableText = (data.title + ' ' + data.desc + ' ' + data.tag).toLowerCase();
       
       if (!query) {
+        // 検索クリア時はタブ状態に戻す
+        var activeTab = document.querySelector('.tab-btn.active');
+        var tab = activeTab ? activeTab.dataset.tab : 'blog';
+        card.style.display = card.dataset.category === tab ? '' : 'none';
+      } else if (searchableText.indexOf(query) !== -1) {
         card.style.display = '';
-      } else if (searchableText.includes(query)) {
-        card.style.display = 'flex';
       } else {
         card.style.display = 'none';
       }
