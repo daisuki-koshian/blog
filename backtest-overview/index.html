@@ -285,6 +285,56 @@
     background: linear-gradient(transparent 60%, rgba(230,57,70,0.15) 60%);
   }
 
+  /* Stats Cards */
+  .stats-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin: 32px 0;
+  }
+  .stat-card {
+    background: #fff;
+    border: 1px solid #e8e8e8;
+    border-radius: 12px;
+    padding: 28px 20px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    transition: transform 0.2s;
+  }
+  .stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  }
+  .stat-value {
+    font-size: 48px;
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+  .stat-value.positive { color: #e63946; }
+  .stat-value.neutral { color: #1a1a1a; }
+  .stat-value.negative { color: #666; }
+  .stat-label {
+    font-size: 15px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 6px;
+  }
+  .stat-desc {
+    font-size: 12px;
+    color: #999;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 768px) {
+    .stats-cards {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .stat-card { padding: 20px 16px; }
+    .stat-value { font-size: 36px; }
+  }
+
   .footer {
     text-align: center;
     padding: 48px 0;
@@ -637,11 +687,23 @@
 
     <p class="fade-in">結果は以下の通りです：</p>
 
-    <ul class="fade-in">
-      <li><strong>年率リターン</strong>: +31%</li>
-      <li><strong>シャープレシオ</strong>: 1.12（リスクに対するリターンの効率を示す指標。1.0以上なら良好とされる）</li>
-      <li><strong>最大ドローダウン</strong>: -27%（最も大きく下落したときの損失幅）</li>
-    </ul>
+    <div class="stats-cards fade-in">
+      <div class="stat-card">
+        <div class="stat-value positive">+31%</div>
+        <div class="stat-label">年率リターン</div>
+        <div class="stat-desc">過去5年間の平均</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value neutral">1.12</div>
+        <div class="stat-label">シャープレシオ</div>
+        <div class="stat-desc">リスクに対するリターンの効率<br>1.0以上で良好</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value negative">-27%</div>
+        <div class="stat-label">最大ドローダウン</div>
+        <div class="stat-desc">最も大きく下落した時の損失幅<br>200万→146万相当</div>
+      </div>
+    </div>
 
     <p class="fade-in">数字だけ見ると魅力的ですが、これはあくまで過去のデータに対する結果です。<span class="marker">未来の相場で同じ結果が出る保証は一切ありません。</span></p>
 
