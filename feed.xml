@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>『AI』と暮らす『非エンジニア』の日常</title>
+    <link>https://mjnm21021-oss.github.io</link>
+    <description>OpenClaw実践記録 — やったこと全部書く</description>
+    <language>ja</language>
+    <atom:link href="https://mjnm21021-oss.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    
+    <item>
+      <title>5体のAIエージェントが実際どう連携してるか — マルチエージェントの裏側</title>
+      <link>https://mjnm21021-oss.github.io/blog/multi-agent-flow/</link>
+      <description>5体のAIエージェントが実際どう連携してるか</description>
+      <pubDate>Sat, 01 Feb 2026 00:00:00 +0900</pubDate>
+      <guid>https://mjnm21021-oss.github.io/blog/multi-agent-flow/</guid>
+    </item>
+    
+    <item>
+      <title>cronとheartbeat、どう使い分ける？ — OpenClawの定期実行ガイド</title>
+      <link>https://mjnm21021-oss.github.io/blog/cron-heartbeat/</link>
+      <description>cronとheartbeat、どう使い分ける？</description>
+      <pubDate>Sat, 01 Feb 2026 00:00:00 +0900</pubDate>
+      <guid>https://mjnm21021-oss.github.io/blog/cron-heartbeat/</guid>
+    </item>
+    
+    <item>
+      <title>AGENTS.mdを83%削減した話 — OpenClawのトークン効率化</title>
+      <link>https://mjnm21021-oss.github.io/blog/token-efficiency/</link>
+      <description>AGENTS.mdを83%削減した話</description>
+      <pubDate>Sat, 01 Feb 2026 00:00:00 +0900</pubDate>
+      <guid>https://mjnm21021-oss.github.io/blog/token-efficiency/</guid>
+    </item>
+    
+    <item>
+      <title>OpenClawで朝ブリーフィングを自動化した話</title>
+      <link>https://mjnm21021-oss.github.io/blog/morning-briefing/</link>
+      <description>OpenClawで朝ブリーフィングを自動化した話</description>
+      <pubDate>Sat, 01 Feb 2026 00:00:00 +0900</pubDate>
+      <guid>https://mjnm21021-oss.github.io/blog/morning-briefing/</guid>
+    </item>
+    
+    <item>
+      <title>ComfyUIローカル自動化 — クラウド課金から卒業する</title>
+      <link>https://mjnm21021-oss.github.io/blog/comfyui/</link>
+      <description>ComfyUIローカル自動化</description>
+      <pubDate>Sat, 01 Feb 2026 00:00:00 +0900</pubDate>
+      <guid>https://mjnm21021-oss.github.io/blog/comfyui/</guid>
+    </item>
+    
+    <item>
+      <title>SOUL.mdの書き方 — AI臭さを消す実践ガイド</title>
+      <link>https://mjnm21021-oss.github.io/blog/soul-md-merged/</link>
+      <description>SOUL.mdの書き方 — AI臭さを消す実践ガイド</description>
+      <pubDate>Sat, 01 Feb 2026 00:00:00 +0900</pubDate>
+      <guid>https://mjnm21021-oss.github.io/blog/soul-md-merged/</guid>
+    </item>
+    
+    <item>
+      <title>1日で5体のエージェントチームを作った話 — 設定ファイルから失敗例まで全部書く</title>
+      <link>https://mjnm21021-oss.github.io/blog/day1/</link>
+      <description>1日で5体のエージェントチームを作った話</description>
+      <pubDate>Sat, 01 Feb 2026 00:00:00 +0900</pubDate>
+      <guid>https://mjnm21021-oss.github.io/blog/day1/</guid>
+    </item>
+    
+  </channel>
+</rss>
