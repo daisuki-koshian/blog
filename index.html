@@ -1254,16 +1254,30 @@
 <script>
   // Typewriter animation
   (function() {
-    var text = '『AIと暮らす』の日常';
+    var parts = [
+      {text: '『', color: ''},
+      {text: 'AI', color: '#e63946'},
+      {text: '』と暮らす『', color: ''},
+      {text: '非エンジニア', color: '#e63946'},
+      {text: '』の日常', color: ''}
+    ];
     var typewriterEl = document.getElementById('typewriterText');
     var cursorEl = document.getElementById('cursor');
     var heroSubEl = document.getElementById('heroSub');
-    var index = 0;
+    var partIdx = 0, charIdx = 0;
+    var currentSpan = null;
 
     function typeWriter() {
-      if (index < text.length) {
-        typewriterEl.textContent += text.charAt(index);
-        index++;
+      if (partIdx < parts.length) {
+        var p = parts[partIdx];
+        if (charIdx === 0) {
+          currentSpan = document.createElement('span');
+          if (p.color) currentSpan.style.color = p.color;
+          typewriterEl.appendChild(currentSpan);
+        }
+        currentSpan.textContent += p.text.charAt(charIdx);
+        charIdx++;
+        if (charIdx >= p.text.length) { partIdx++; charIdx = 0; }
         setTimeout(typeWriter, 100);
       } else {
         setTimeout(function() {
