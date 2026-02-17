@@ -181,11 +181,14 @@
   /* タブナビゲーション */
   .tabs-nav {
     display: flex;
-    gap: 12px;
+    gap: 8px;
     margin-bottom: 32px;
-    border-bottom: 2px solid #eee;
+    padding: 6px;
+    background: #f0f0f0;
+    border-radius: 12px;
   }
   .tab-btn {
+    flex: 1;
     padding: 12px 24px;
     background: none;
     border: none;
@@ -193,16 +196,17 @@
     font-weight: 700;
     color: #999;
     cursor: pointer;
-    border-bottom: 3px solid transparent;
-    margin-bottom: -2px;
-    transition: color 0.2s, border-color 0.2s;
+    border-radius: 8px;
+    transition: all 0.25s ease;
   }
   .tab-btn:hover {
     color: #666;
+    background: rgba(255,255,255,0.5);
   }
   .tab-btn.active {
     color: var(--color-accent);
-    border-bottom-color: var(--color-accent);
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   }
 
   .articles {
