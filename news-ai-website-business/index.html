@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIでサイトを自動生成して売る。海外で静かに広がってる副業モデルの中身 | 『AI』と暮らす『非エンジニア』の日常</title>
+<meta property="og:type" content="article">
+<meta property="og:title" content="AIでサイトを自動生成して売る。海外で静かに広がってる副業モデルの中身">
+<meta property="og:description" content="AIでローカルビジネスのサイトを5分で生成して先に見せてから営業。初期$299〜$500＋月額課金。海外で実績が出始めているモデルの中身を整理する。">
+<meta property="og:url" content="https://daisuki-koshian.github.io/blog/news-ai-website-business/">
+<meta property="og:image" content="https://daisuki-koshian.github.io/blog/assets/ogp-default.png">
+<meta property="og:site_name" content="AIと暮らす">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@daisuki_koshian">
+<meta name="twitter:title" content="AIでサイトを自動生成して売る。海外で静かに広がってる副業モデルの中身">
+<meta name="twitter:description" content="AIでローカルビジネスのサイトを5分で生成して先に見せてから営業。初期$299〜$500＋月額課金。海外で実績が出始めているモデルの中身を整理する。">
+<meta name="twitter:image" content="https://daisuki-koshian.github.io/blog/assets/ogp-default.png">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap');
+
+  :root {
+    --color-bg: #fafafa;
+    --color-text: #333333;
+    --color-text-light: #666666;
+    --color-accent: #e63946;
+    --color-border: #e8e8e8;
+    --color-card-bg: #ffffff;
+    --font-main: 'Noto Sans JP', sans-serif;
+    --max-width: 780px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-main);
+    color: var(--color-text);
+    background: var(--color-bg);
+    line-height: 1.9;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .header {
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    padding: 12px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo { color: #1a1a1a; text-decoration: none; font-size: 16px; font-weight: 900; }
+
+  .hero {
+    position: relative;
+    background: #fff;
+    padding: 80px 0 60px;
+    overflow: hidden;
+    border-bottom: 2px solid var(--color-accent);
+  }
+  .hero-inner {
+    position: relative;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .hero-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: #999;
+    margin-bottom: 24px;
+    letter-spacing: 0.05em;
+    opacity: 0;
+    animation: fadeIn 0.8s ease-in forwards;
+  }
+
+  .hero-big-number {
+    display: inline-block;
+    font-size: 96px;
+    font-weight: 900;
+    color: var(--color-accent);
+    line-height: 1;
+    opacity: 0;
+    animation: fadeInUp 0.6s 0.2s ease-out forwards;
+    margin-bottom: 8px;
+  }
+
+  .hero-title {
+    font-size: clamp(28px, 5vw, 40px);
+    font-weight: 900;
+    color: #333;
+    line-height: 1.4;
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: fadeInUp 0.8s 0.3s ease-out forwards;
+  }
+
+  .marker-highlight {
+    background: linear-gradient(transparent 60%, rgba(230,57,70,0.25) 60%);
+    padding: 2px 4px;
+  }
+
+  .hero-sep {
+    width: 80px;
+    height: 3px;
+    background: var(--color-accent);
+    margin: 20px 0;
+    border: none;
+    opacity: 0;
+    animation: slideIn 0.6s 0.6s ease-out forwards;
+  }
+
+  .hero-sub {
+    font-size: 16px;
+    font-weight: 500;
+    color: #666;
+    line-height: 1.6;
+    opacity: 0;
+    animation: fadeIn 0.8s 0.8s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; width: 0; }
+    to { opacity: 1; width: 80px; }
+  }
+
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .content-wrapper {
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    gap: 64px;
+    align-items: flex-start;
+  }
+  .main-content {
+    flex: 1;
+    max-width: 780px;
+  }
+  .sidebar {
+    width: 280px;
+    flex-shrink: 0;
+    position: sticky;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    top: 80px;
+  }
+  .sidebar::-webkit-scrollbar { display: none; }
+  .sidebar-section {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .sidebar-section h3 {
+    font-size: 14px;
+    font-weight: 900;
+    color: var(--color-text);
+    margin: 0 0 16px 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+  }
+  .sidebar-section h3::after {
+    display: none;
+  }
+  .sidebar-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .sidebar-list li {
+    padding: 0;
+    margin-bottom: 12px;
+  }
+  .sidebar-list li::before {
+    display: none;
+  }
+  .sidebar-list a {
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: 13px;
+    line-height: 1.6;
+    display: block;
+    transition: color 0.2s;
+  }
+  .sidebar-list a:hover {
+    color: var(--color-accent);
+  }
+  .sidebar-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .sidebar-tags li {
+    margin: 0;
+    padding: 0;
+  }
+  .sidebar-tags li::before {
+    display: none;
+  }
+  .sidebar-tag {
+    display: inline-block;
+    padding: 4px 12px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--color-accent);
+    background: #fff;
+    border: 1px solid var(--color-accent);
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .sidebar-tag:hover {
+    background: var(--color-accent);
+    color: #fff;
+  }
+
+  @media (max-width: 1024px) {
+    .content-wrapper {
+      justify-content: center;
+      flex-direction: column;
+    }
+    .sidebar {
+      width: 100%;
+      position: static;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+  }
+
+  .article-header {
+    padding: 48px 0 32px;
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: 48px;
+  }
+  .article-header .tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+  }
+  .article-header h1 {
+    font-size: 32px;
+    font-weight: 900;
+    line-height: 1.4;
+    margin-bottom: 16px;
+  }
+  .article-header .meta {
+    font-size: 14px;
+    color: var(--color-text-light);
+  }
+
+  article p {
+    margin-bottom: 1.8em;
+    font-size: 16px;
+  }
+
+  article h2 {
+    position: relative;
+    font-size: 22px;
+    font-weight: 900;
+    padding: 16px 20px;
+    margin: 56px 0 28px;
+    background: #fff;
+    border-left: 5px solid var(--color-accent);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    border-radius: 0 4px 4px 0;
+  }
+  article h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 5px;
+    width: 60px;
+    height: 3px;
+    background: var(--color-accent);
+    border-radius: 2px;
+  }
+
+  article h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 36px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--color-border);
+    position: relative;
+  }
+  article h3::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: var(--color-accent);
+  }
+
+  article ul {
+    margin: 16px 0 24px 0;
+    padding: 0;
+    list-style: none;
+  }
+  article ul li {
+    padding: 6px 0 6px 20px;
+    position: relative;
+    font-size: 15px;
+  }
+  article ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 14px;
+    width: 8px;
+    height: 8px;
+    background: var(--color-accent);
+    border-radius: 50%;
+  }
+
+  article strong {
+    font-weight: 900;
+    color: var(--color-accent);
+  }
+
+  .quote-block {
+    position: relative;
+    padding: 28px 32px 28px 48px;
+    margin: 36px 0;
+    background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+    border-radius: 8px;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.9;
+    color: #333;
+  }
+  .quote-block::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(to bottom, var(--color-accent), transparent);
+    border-radius: 4px;
+  }
+
+  .callout-box {
+    padding: 20px 24px;
+    margin: 28px 0;
+    background: #fff8f0;
+    border-left: 4px solid #ffa940;
+    border-radius: 0 6px 6px 0;
+    font-size: 15px;
+    line-height: 1.9;
+  }
+  .callout-box.info {
+    background: #f0f8ff;
+    border-left-color: #4a90e2;
+  }
+  .callout-box.danger {
+    background: #fff5f5;
+    border-left-color: var(--color-accent);
+  }
+  .callout-box strong {
+    color: #1a1a1a;
+    font-weight: 900;
+  }
+
+  .key-message {
+    font-size: 20px;
+    font-weight: 900;
+    line-height: 1.8;
+    padding: 24px 28px;
+    margin: 32px 0;
+    background: #fff;
+    border-left: 5px solid var(--color-accent);
+    border-radius: 0 8px 8px 0;
+    box-shadow: 0 4px 16px rgba(230,57,70,0.08);
+    position: relative;
+  }
+  .key-message::before {
+    content: '"';
+    position: absolute;
+    top: -8px;
+    left: 12px;
+    font-size: 48px;
+    color: var(--color-accent);
+    opacity: 0.3;
+    font-family: Georgia, serif;
+    line-height: 1;
+  }
+
+  .divider {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--color-border), transparent);
+    margin: 48px 0;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 48px 0;
+    font-size: 13px;
+    color: #aaa;
+    border-top: 1px solid var(--color-border);
+    margin-top: 64px;
+  }
+  .footer .brand {
+    font-weight: 900;
+    color: var(--color-accent);
+    letter-spacing: 0.05em;
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .article-meta-block {
+    background: #f8f9fa;
+    border-left: 4px solid var(--color-accent);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin: 0 0 40px 0;
+  }
+  .article-meta-block dl {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 12px 16px;
+    margin: 0;
+  }
+  .article-meta-block dt {
+    font-size: 14px;
+    font-weight: 900;
+    color: var(--color-accent);
+  }
+  .article-meta-block dd {
+    font-size: 14px;
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  .agent-attribution {
+    text-align: center;
+    font-size: 13px;
+    color: #999;
+    margin: 48px 0 32px 0;
+    padding: 16px 0;
+    border-top: 1px solid #f0f0f0;
+  }
+
+  .feedback-section {
+    background: #fff;
+    border: 1px solid #f0f0f0;
+    border-left: 3px solid var(--color-accent);
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin: 32px 0;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+  .feedback-section p {
+    margin: 0 0 8px 0;
+    color: var(--color-text-light);
+  }
+  .feedback-section p:last-child {
+    margin-bottom: 0;
+  }
+  .feedback-section a {
+    color: var(--color-accent);
+    text-decoration: none;
+    font-weight: 700;
+  }
+  .feedback-section a:hover {
+    text-decoration: underline;
+  }
+
+  .next-read {
+    margin: 40px 0 48px 0;
+  }
+  .next-read h3 {
+    font-size: 20px;
+    font-weight: 900;
+    margin-bottom: 24px;
+    color: var(--color-text);
+  }
+  .next-read-cards {
+    display: grid;
+    gap: 16px;
+  }
+  .next-read-card {
+    background: #fff;
+    border-radius: 8px;
+    border: 2px solid #f0f0f0;
+    padding: 20px 24px;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: all 0.2s;
+  }
+  .next-read-card:hover {
+    border-color: var(--color-accent);
+    box-shadow: 0 4px 12px rgba(230, 57, 70, 0.1);
+  }
+  .next-read-card .icon {
+    font-size: 28px;
+    flex-shrink: 0;
+  }
+  .next-read-card .content {
+    flex: 1;
+  }
+  .next-read-card .title {
+    font-size: 16px;
+    font-weight: 900;
+    color: var(--color-text);
+    margin-bottom: 4px;
+  }
+  .next-read-card .desc {
+    font-size: 13px;
+    color: var(--color-text-light);
+    line-height: 1.6;
+  }
+
+  .header-nav { display: flex; gap: 24px; align-items: center; margin-left: auto; }
+  .header-nav a { color: #1a1a1a; text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+  .header-nav a:hover { color: #e63946; }
+  .breadcrumb-bar { max-width: 1200px; margin: 0 auto; padding: 6px 24px; font-size: 13px; color: #999; }
+  .breadcrumb-bar a { color: #e63946; text-decoration: none; }
+  .hamburger {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: var(--color-accent);
+    cursor: pointer;
+    padding: 4px 8px;
+    line-height: 1;
+  }
+
+  .progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: #e63946;
+    z-index: 9999;
+    transition: width 0.1s linear;
+    width: 0%;
+  }
+
+  article { counter-reset: section-counter; }
+  article h2 { counter-increment: section-counter; }
+  article h2::before {
+    content: counter(section-counter, decimal-leading-zero) ' ';
+    display: inline-block;
+    color: #e63946;
+    font-size: 14px;
+    font-weight: 700;
+    margin-right: 12px;
+    opacity: 0.7;
+  }
+
+  .back-to-top {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 44px;
+    height: 44px;
+    background: #e63946;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .back-to-top.visible { opacity: 1; }
+  .back-to-top:hover { background: #c5303c; }
+
+  @media (max-width: 768px) {
+    .hamburger { display: block; }
+    .header-nav { display: none; }
+    .hero { padding: 60px 0 40px; }
+    .hero-big-number { font-size: 72px; }
+    .hero-title { font-size: 24px; }
+    .content-wrapper { padding: 0 16px; flex-direction: column; }
+    .sidebar-section { padding: 16px; }
+  }
+
+  .nav-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
+    display: none;
+  }
+  .nav-overlay.open { display: block; }
+
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 320px;
+    height: 100%;
+    background: #fff;
+    box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+    z-index: 9999;
+    transition: right 0.3s ease;
+    padding: 24px;
+  }
+  .nav-menu.open { right: 0; }
+
+  .nav-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 32px;
+    color: var(--color-text);
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+  }
+
+  .nav-menu h2 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 20px 0;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .nav-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px 0;
+  }
+
+  .nav-menu li {
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-menu li::before {
+    display: none;
+  }
+
+  .nav-menu a {
+    display: block;
+    padding: 10px 0;
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: 15px;
+    transition: color 0.2s;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .nav-menu a:hover {
+    color: var(--color-accent);
+  }
+
+  /* Scroll animations */
+  .fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-in-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Enhanced hover for boxes */
+  .callout-box, .quote-block, .key-message {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .callout-box:hover, .quote-block:hover, .key-message:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  }
+
+  .share-buttons {
+    margin: 40px 0;
+    padding: 24px;
+    background: #fafafa;
+    border-radius: 8px;
+    text-align: center;
+  }
+  .share-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #666;
+    margin-bottom: 16px;
+  }
+  .share-buttons-inner {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  }
+  .share-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  .share-btn-x:hover {
+    background: #000;
+    color: #fff;
+    border-color: #000;
+  }
+  .share-btn-hatena:hover {
+    background: #00A4DE;
+    color: #fff;
+    border-color: #00A4DE;
+  }
+  .share-icon {
+    font-size: 18px;
+  }
+
+  .related-articles {
+    margin: 48px 0;
+    padding: 32px;
+    background: #fafafa;
+    border-radius: 8px;
+  }
+  .related-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 24px;
+    text-align: center;
+  }
+  .related-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+  }
+  .related-card {
+    display: block;
+    padding: 16px;
+    background: #fff;
+    border-left: 3px solid #e63946;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #333;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  }
+  .related-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  .related-card-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .related-card-desc {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.6;
+  }
+  @media (max-width: 768px) {
+    .related-cards {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .breadcrumb {
+    font-size: 12px;
+    color: #999;
+    padding: 8px 24px;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+  }
+  .breadcrumb a {
+    color: #e63946;
+    text-decoration: none;
+  }
+  .breadcrumb a:hover {
+    text-decoration: underline;
+  }
+  .breadcrumb .current {
+    color: #333;
+  }
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+
+<div class="header">
+  <div class="header-inner">
+    <a href="../" class="logo">『<span style="color:#e63946">AI</span>』と暮らす『<span style="color:#e63946">非エンジニア</span>』の日常</a>
+    <nav class="header-nav">
+      <a href="../">Home</a>
+      <a href="../about/">About</a>
+      <a href="https://x.com/daisuki_koshian" target="_blank" rel="noopener" title="X (Twitter)">𝕏</a>
+    </nav>
+    <button class="hamburger" id="hamburger">☰</button>
+  </div>
+  <div class="breadcrumb-bar"><a href="../">ホーム</a> / AIでサイトを自動生成して売る</div>
+</div>
+
+<!-- パンくずリスト -->
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="../">Home</a> &gt; <span>海外AI</span> &gt; <span class="current">AIでサイトを自動生成して売る</span>
+</nav>
+
+<!-- Schema.org BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://daisuki-koshian.github.io/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "海外AI",
+      "item": "https://daisuki-koshian.github.io/blog/#"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "AIでサイトを自動生成して売る",
+      "item": "https://daisuki-koshian.github.io/blog/news-ai-website-business/"
+    }
+  ]
+}
+</script>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">海外AIニュース — X / Reddit / AIfire.co</div>
+    <div class="hero-big-number">$30K</div>
+    <div class="hero-title">
+      AIでサイトを自動生成して売る。<br>
+      <span class="marker-highlight">海外で静かに広がってる副業モデル</span>の中身
+    </div>
+    <hr class="hero-sep">
+    <div class="hero-sub">AIサイト自動生成 × ローカルビジネス × 月額課金</div>
+  </div>
+</div>
+
+<div class="reading-time" style="font-size: 13px; color: #999; text-align: center; margin: 24px 0; padding: 12px; background: #f9f9f9; border-radius: 4px;">
+  ⏱ 約7分で読めます
+</div>
+
+<div class="content-wrapper">
+  <div class="main-content">
+
+  <header class="article-header fade-in">
+    <span class="tag">海外AIニュース</span>
+    <h1>AIでサイトを自動生成して売る。海外で静かに広がってる副業モデルの中身</h1>
+    <div class="meta">2026年2月17日</div>
+  </header>
+
+  <article>
+
+    <div class="article-meta-block">
+      <dl>
+        <dt>最終更新:</dt>
+        <dd>2026年2月17日</dd>
+        <dt>カテゴリ:</dt>
+        <dd>海外AIニュース</dd>
+        <dt>読了時間:</dt>
+        <dd>約7分</dd>
+      </dl>
+    </div>
+
+    <p class="fade-in">ローカルビジネスの約70%は、まともなウェブサイトを持っていない。これはアメリカでも、日本でも、同じくらいの数字だと言われている。</p>
+
+    <p class="fade-in">美容室、歯科、税理士事務所。看板はあっても、Googleで検索すると情報が古いか、サイト自体が存在しない。この「空白地帯」を狙って、AIツールでサイトを自動生成してから営業するモデルが、海外のXやRedditで少しずつ話題になってきた。</p>
+
+    <p class="fade-in">大げさに煽るつもりはない。実態を整理する。</p>
+
+    <h2 id="sec-model">ビジネスモデルの構造</h2>
+
+    <p class="fade-in">流れ自体はシンプルだ。</p>
+
+    <ol class="fade-in" style="margin: 16px 0 24px 24px; padding: 0; list-style: decimal;">
+      <li style="padding: 6px 0; font-size: 15px;">Googleマップや地域検索でサイトが貧弱なビジネスを探す</li>
+      <li style="padding: 6px 0; font-size: 15px;">AIツールで5〜10分でデモサイトを生成する</li>
+      <li style="padding: 6px 0; font-size: 15px;">そのURLを添えて「御社向けに試作しました」と連絡する</li>
+      <li style="padding: 6px 0; font-size: 15px;">成約したら初期費用＋月額保守で契約する</li>
+    </ol>
+
+    <p class="fade-in">「先に作ってから見せる」というのがポイントで、従来の「提案だけして断られる」スタイルと違う。相手はすでに完成品を目の前にしているので、判断がしやすい。</p>
+
+    <div class="callout-box info fade-in">
+      <strong>なぜ月額課金なのか</strong><br>
+      初期費用だけで終わらせず、ホスティング・更新・サポートをセットにして月額$59〜$200を継続課金する。10件契約できれば、それだけで月$590〜$2,000の固定収入になる。
+    </div>
+
+    <h2 id="sec-cases">海外の実例</h2>
+
+    <h3>$30K/月の計算式（理論値）</h3>
+
+    <p class="fade-in">XのポストでOpenClawを使ったローカルビジネスへの自動サイト生成ビジネスが紹介されている。提示されている計算式はこうだ。</p>
+
+    <div class="quote-block fade-in">
+      1日100件メール ×　成約率2% × 単価$499 × 30日<br>
+      = 月間60件 × $499 ≒ <strong>$29,940</strong>
+    </div>
+
+    <p class="fade-in">ただし、これは完全な理論値だ。1日100件のコールドメールを継続的に送れる体制が必要で、成約率2%というのも楽観寄りの想定だと思う。現実にはもっと低い数字になる可能性が高い。それでも「計算式として成立する」こと自体に意味はある。</p>
+
+    <h3>Reddit「7日で3件売れた」の実録</h3>
+
+    <p class="fade-in">Redditにはより地に足のついた報告がある。あるユーザーが7日間で3件の契約を取った際の数字はこうだ。</p>
+
+    <div class="callout-box fade-in">
+      <strong>実際の数字</strong><br>
+      初期費用：$299 ／ 月額：$59<br>
+      成約率：DM 20〜30件で 1〜2件<br>
+      サイト生成ツール：loveable.dev（1件あたり約10分）<br>
+      10件契約で月$590の継続収入
+    </div>
+
+    <p class="fade-in">$30Kには遠い。でも「副業の最初の一歩」としては現実的な数字だ。月$590は大したことがないように見えるが、毎月積み上がっていく構造は悪くない。</p>
+
+    <h3>AIfire.coの「醜いサイトを狙え」戦略</h3>
+
+    <p class="fade-in">AIfire.coというメディアが公開しているガイドには、ターゲット選定に関する実践的な指針がある。</p>
+
+    <div class="quote-block fade-in">
+      デザインが古い、または存在しないサイトを持つ会計士・弁護士・歯科医を狙え。高単価サービス業は、新規顧客1人の価値が数万円以上になる。サイト改善の費用対効果を説明しやすい。
+    </div>
+
+    <p class="fade-in">Replitを使ってサイトを生成し、デプロイまで5分。費用感は初期$500＋月額$100〜200。価格が少し高めだが、弁護士や歯科クラスなら難しくない水準だという。</p>
+
+    <h2 id="sec-tools">必要なツール</h2>
+
+    <p class="fade-in">主に使われているのは以下のツールだ。</p>
+
+    <ul class="fade-in">
+      <li><strong>Replit</strong> — コードを書かずにサイトを生成・デプロイできる。無料枠あり</li>
+      <li><strong>loveable.dev</strong> — プロンプトを入力するだけで完成度の高いサイトが出る</li>
+      <li><strong>Stripe</strong> — 月額課金の決済処理。設定は数十分でできる</li>
+      <li><strong>Google Maps / Yelp</strong> — ターゲットとなるローカルビジネスを探す起点</li>
+    </ul>
+
+    <p class="fade-in">日本向けには、OpenClawとPuppeteerを組み合わせてGoogleマップから情報を収集し、サイト生成まで自動化するフローも考えられる。決済はStripeでそのまま使える。</p>
+
+    <h2 id="sec-targets">狙うべき業種</h2>
+
+    <p class="fade-in">海外の事例を見ると、ターゲットは共通している。</p>
+
+    <ul class="fade-in">
+      <li>会計士・税理士</li>
+      <li>弁護士・司法書士</li>
+      <li>歯科・整骨院</li>
+      <li>美容室・ネイルサロン</li>
+      <li>不動産業者</li>
+    </ul>
+
+    <p class="fade-in">共通点は「新規顧客1人の価値が高い」こと。不動産なら1件の紹介で数十万円が動く。そういう業種にとって、月額$59〜$200は小さな投資だ。逆に、薄利の小売業や飲食店は難しい。サイトが改善されても、それが売上に直結しにくい。</p>
+
+    <h2 id="sec-challenges">現実的な壁</h2>
+
+    <p class="fade-in">このモデルには、見えにくいコストがある。</p>
+
+    <div class="callout-box danger fade-in">
+      <strong>見落とされがちな問題</strong><br>
+      <ul style="margin: 8px 0 0 16px; list-style: disc;">
+        <li style="padding: 4px 0; font-size: 14px;">成約率が低い。コールドDM/メールで反応が返ってくる割合は数%以下</li>
+        <li style="padding: 4px 0; font-size: 14px;">サポートコストが積み上がる。「更新してほしい」「メールが来ない」といった問い合わせが月額課金ごとに発生する</li>
+        <li style="padding: 4px 0; font-size: 14px;">同じことをやる人が増えている。差別化しないと価格競争になる</li>
+        <li style="padding: 4px 0; font-size: 14px;">AIが生成したサイトの品質管理が必要。そのままでは粗さが出る</li>
+      </ul>
+    </div>
+
+    <p class="fade-in">「先に作って見せる」アプローチは成約率を上げる効果があるが、作業量も増える。10件作って1件しか売れなければ、コストが先行する。最初のうちは数字が出るまで時間がかかる。</p>
+
+    <h2 id="sec-japan">日本市場はどうか</h2>
+
+    <p class="fade-in">私の見立てでは、日本市場はまだ空いている。</p>
+
+    <p class="fade-in">海外の事例はほとんどコールドメールか英語のDMで成約している。日本では対面や電話での営業の方が通りやすい場面が多い。地元の商工会やビジネス交流会で顔を知ってから提案するだけで、成約率は海外のコールドメールより高くなるはずだ。</p>
+
+    <div class="key-message fade-in">
+      ツールが民主化されている今、差がつくのは「誰に」「どう見せるか」の部分だ。技術的な参入障壁はほぼない。
+    </div>
+
+    <p class="fade-in">私自身もこれをこれから試してみる予定だ。Redditの「7日3件」のような結果が日本で再現できるかどうか、進捗はここで書いていく。</p>
+
+    <hr class="divider">
+
+    <div class="agent-attribution">
+      📝 記事作成: AIエージェント（Jarvis）
+    </div>
+
+    <div class="feedback-section">
+      <p>💭 <strong>このモデル、日本でも試してみたい方はいますか？</strong></p>
+      <p>感想・進捗はこちら → <a href="https://x.com/daisuki_koshian" target="_blank">@daisuki_koshian</a></p>
+    </div>
+
+    <!-- SNSシェアボタン -->
+    <div class="share-buttons">
+      <p class="share-title">この記事をシェア</p>
+      <div class="share-buttons-inner">
+        <a href="https://twitter.com/intent/tweet?url=https%3A//daisuki-koshian.github.io/blog/news-ai-website-business/&text=AI%E3%81%A7%E3%82%B5%E3%82%A4%E3%83%88%E3%82%92%E8%87%AA%E5%8B%95%E7%94%9F%E6%88%90%E3%81%97%E3%81%A6%E5%A3%B2%E3%82%8B%E3%80%82%E6%B5%B7%E5%A4%96%E3%81%A7%E9%9D%99%E3%81%8B%E3%81%AB%E5%BA%83%E3%81%8C%E3%81%A3%E3%81%A6%E3%82%8B%E5%89%AF%E6%A5%AD%E3%83%A2%E3%83%87%E3%83%AB%E3%81%AE%E4%B8%AD%E8%BA%AB&via=daisuki_koshian"
+           target="_blank" rel="noopener" class="share-btn share-btn-x">
+          <span class="share-icon">𝕏</span> Xでシェア
+        </a>
+        <a href="https://b.hatena.ne.jp/entry/https%3A//daisuki-koshian.github.io/blog/news-ai-website-business/"
+           target="_blank" rel="noopener" class="share-btn share-btn-hatena">
+          <span class="share-icon">B!</span> はてブ
+        </a>
+      </div>
+    </div>
+
+    <!-- 関連記事 -->
+    <div class="related-articles">
+      <h3 class="related-title">関連記事</h3>
+      <div class="related-cards">
+        <a href="../news-solo-founder/" class="related-card">
+          <div class="related-card-title">1人の創業者、15体のAIエージェント、従業員ゼロ</div>
+          <div class="related-card-desc">フロリダの防衛テック創業者がAIエージェントだけで会社を回している話</div>
+        </a>
+        <a href="../news-vending-machine/" class="related-card">
+          <div class="related-card-title">AIに1,000ドル渡してビジネスを任せたら</div>
+          <div class="related-card-desc">Anthropicの自販機実験 — 監視なしの自律運用で起きたこと</div>
+        </a>
+        <a href="../news-tiktok-clipping/" class="related-card">
+          <div class="related-card-title">顔なし・フォロワーなし・商品なしで月72万円</div>
+          <div class="related-card-desc">TikTokクリッピングという稼ぎ方の実録</div>
+        </a>
+      </div>
+    </div>
+
+  </article>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <h3>最新記事</h3>
+      <ul class="sidebar-list">
+        <li><a href="../news-ai-website-business/">AIでサイトを自動生成して売る</a></li>
+        <li><a href="../news-solo-founder/">1人の創業者、15体のAIエージェント</a></li>
+        <li><a href="../news-tiktok-clipping/">顔なし・フォロワーなし・月72万円</a></li>
+        <li><a href="../news-vending-machine/">AIに1,000ドル渡してビジネスを任せたら</a></li>
+        <li><a href="../news-ai-cartel/">AIカルテル自販機実験</a></li>
+      </ul>
+    </div>
+
+    <div class="sidebar-section">
+      <h3>人気記事</h3>
+      <ul class="sidebar-list">
+        <li><a href="../soul-md-merged/">SOUL.mdの書き方</a></li>
+        <li><a href="../token-efficiency/">AGENTS.mdを83%削減した話</a></li>
+        <li><a href="../backtest-overview/">非エンジニアがAIに28,000行のトレードシステムを作らせた話</a></li>
+      </ul>
+    </div>
+
+    <div class="sidebar-section">
+      <h3>タグ</h3>
+      <ul class="sidebar-tags">
+        <li><span class="sidebar-tag">副業</span></li>
+        <li><span class="sidebar-tag">AI自動化</span></li>
+        <li><span class="sidebar-tag">海外AIニュース</span></li>
+        <li><span class="sidebar-tag">月額課金</span></li>
+        <li><span class="sidebar-tag">ローカルビジネス</span></li>
+        <li><span class="sidebar-tag">OpenClaw</span></li>
+      </ul>
+    </div>
+  </aside>
+</div>
+
+<footer class="footer">
+  <span class="brand">『AI』と暮らす『非エンジニア』の日常</span> — OpenClaw実践記録<br>
+  <small><a href="../" style="color: #e63946; text-decoration: none;">記事一覧に戻る</a></small>
+</footer>
+
+<div class="nav-overlay" id="navOverlay"></div>
+<nav class="nav-menu" id="navMenu">
+  <button class="nav-close" id="navClose">✕</button>
+  <h2>メニュー</h2>
+  <ul>
+    <li><a href="../">🏠 ホーム</a></li>
+  </ul>
+  <h2>記事一覧</h2>
+  <ul>
+    <li><a href="../news-ai-website-business/">AIでサイトを自動生成して売る</a></li>
+    <li><a href="../news-solo-founder/">1人の創業者、15体のAIエージェント</a></li>
+    <li><a href="../news-vending-machine/">AIに1,000ドル渡してビジネスを任せたら</a></li>
+    <li><a href="../news-ai-cartel/">AIカルテル自販機実験</a></li>
+    <li><a href="../news-shumer/">Xで8100万回読まれたAI起業家の話</a></li>
+    <li><a href="../day1/">Day1: チーム構築</a></li>
+    <li><a href="../soul-md-merged/">SOUL.md: AI臭さ対策</a></li>
+    <li><a href="../comfyui/">ComfyUI: ローカル自動化</a></li>
+    <li><a href="../morning-briefing/">朝ブリーフィング</a></li>
+    <li><a href="../token-efficiency/">トークン効率化</a></li>
+    <li><a href="../cron-heartbeat/">cron + heartbeat</a></li>
+    <li><a href="../multi-agent-flow/">マルチエージェント連携</a></li>
+    <li><a href="../backtest-overview/">トレードシステム概要編</a></li>
+    <li><a href="../backtest-failures/">トレードシステム失敗編</a></li>
+    <li><a href="../backtest-method/">トレードシステム仕組み編</a></li>
+  </ul>
+  <h2>その他</h2>
+  <ul>
+    <li><a href="../about/">About</a></li>
+  </ul>
+</nav>
+
+<button class="back-to-top" id="backToTop">↑</button>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+(function() {
+  const hamburger = document.getElementById('hamburger');
+  const navOverlay = document.getElementById('navOverlay');
+  const navMenu = document.getElementById('navMenu');
+  const navClose = document.getElementById('navClose');
+
+  function openMenu() {
+    navOverlay.classList.add('open');
+    navMenu.classList.add('open');
+  }
+
+  function closeMenu() {
+    navOverlay.classList.remove('open');
+    navMenu.classList.remove('open');
+  }
+
+  if (hamburger) hamburger.addEventListener('click', openMenu);
+  if (navClose) navClose.addEventListener('click', closeMenu);
+  if (navOverlay) navOverlay.addEventListener('click', closeMenu);
+})();
+
+window.addEventListener('scroll', function() {
+  var h = document.documentElement;
+  var progress = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+  document.getElementById('progressBar').style.width = progress + '%';
+});
+
+var btn = document.getElementById('backToTop');
+window.addEventListener('scroll', function() {
+  btn.classList.toggle('visible', window.scrollY > 500);
+});
+btn.addEventListener('click', function() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+</script>
+
+<script data-goatcounter="https://daisuki-koshian.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
+<script>
+// Scroll fadeIn
+(function(){
+    var targets = document.querySelectorAll('h2, pre, .callout-box, .quote-block, .key-message');
+    targets.forEach(function(el){ el.classList.add('fade-in-up'); });
+    var observer = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+            if(e.isIntersecting){
+                e.target.classList.add('visible');
+                observer.unobserve(e.target);
+            }
+        });
+    }, {threshold: 0.1});
+    targets.forEach(function(el){ observer.observe(el); });
+})();
+</script>
+
+</body>
+</html>
