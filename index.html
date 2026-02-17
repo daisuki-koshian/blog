@@ -62,7 +62,9 @@
     font-weight: 900;
     margin-bottom: 16px;
     min-height: 120px;
+    text-align: center;
   }
+  .hero-title .mobile-br { display: none; }
   .hero-title .typewriter {
     display: inline-block;
   }
@@ -638,8 +640,9 @@
       font-size: 28px;
       margin-bottom: 12px;
       padding: 0 16px;
-      min-height: 80px;
+      min-height: 100px;
     }
+    .hero-title .mobile-br { display: inline; }
     .hero-sub {
       font-size: 14px;
       padding: 0 16px;
@@ -1257,7 +1260,9 @@
     var parts = [
       {text: '『', color: ''},
       {text: 'AI', color: '#e63946'},
-      {text: '』と暮らす『', color: ''},
+      {text: '』と暮らす', color: ''},
+      {text: '\n', color: '', br: true},
+      {text: '『', color: ''},
       {text: '非エンジニア', color: '#e63946'},
       {text: '』の日常', color: ''}
     ];
@@ -1270,6 +1275,14 @@
     function typeWriter() {
       if (partIdx < parts.length) {
         var p = parts[partIdx];
+        if (p.br) {
+          var br = document.createElement('br');
+          br.className = 'mobile-br';
+          typewriterEl.appendChild(br);
+          partIdx++; charIdx = 0;
+          setTimeout(typeWriter, 100);
+          return;
+        }
         if (charIdx === 0) {
           currentSpan = document.createElement('span');
           if (p.color) currentSpan.style.color = p.color;
